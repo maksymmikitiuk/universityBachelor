@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="500.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.RootActivityController">
+    <children>
+        <Pane fx:id="draggablepanel" minHeight="29.0" minWidth="500.0" prefHeight="29.0" prefWidth="500.0" styleClass="shadow" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label fx:id="closewindow" layoutX="474.0" layoutY="3.0" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="close-window" visible="false" />
+            </children>
+        </Pane>
+        <AnchorPane fx:id="loginPane" maxWidth="1000.0" minWidth="954.0" prefHeight="471.0" prefWidth="1000.0" styleClass="background_color" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-500.0" AnchorPane.topAnchor="29.0">
+            <children>
+                <Pane layoutY="526.0" prefHeight="74.0" prefWidth="600.0" styleClass="opacity_pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <children>
+                        <GridPane layoutX="-1.0" prefHeight="74.0" prefWidth="1000.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <GridPane>
+                                    <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="451.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label fx:id="createUserLabel" styleClass="pane_label" text="Створити нового користувача?" />
+                                    </children>
+                                </GridPane>
+                                <GridPane GridPane.columnIndex="1">
+                                    <columnConstraints>
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="66.0" minWidth="66.0" prefWidth="66.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="369.0" minWidth="10.0" prefWidth="369.0" />
+                                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="66.0" minWidth="8.0" prefWidth="8.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Label fx:id="backToLogin" prefHeight="40.0" prefWidth="40.0">
+                                            <styleClass>
+                                                <String fx:value="pane_button" />
+                                                <String fx:value="close" />
+                                            </styleClass>
+                                        </Label>
+                                        <Label fx:id="createUser" prefHeight="40.0" prefWidth="40.0" GridPane.columnIndex="2">
+                                            <styleClass>
+                                                <String fx:value="check" />
+                                                <String fx:value="pane_button" />
+                                            </styleClass>
+                                        </Label>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </GridPane>
+                    </children>
+                </Pane>
+                <Pane layoutY="523.0" prefHeight="3.0" prefWidth="600.0" styleClass="shadow" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <Pane layoutY="12.0" prefHeight="382.0" prefWidth="1000.0" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="12.0">
+                    <children>
+                        <GridPane layoutY="51.0" prefHeight="291.0" prefWidth="500.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="137.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <TextField fx:id="username" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Логін" styleClass="field" />
+                                <PasswordField fx:id="password" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Пароль" styleClass="field" GridPane.rowIndex="1" />
+                                <TextField fx:id="passwordtext" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Пароль" styleClass="field" GridPane.rowIndex="1" />
+                                <Button fx:id="login" mnemonicParsing="false" prefHeight="48.0" prefWidth="208.0" text="Вхід" GridPane.rowIndex="2" />
+                                <Pane fx:id="setvisiblepassword" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="set-visible-password" GridPane.rowIndex="1">
+                                    <GridPane.margin>
+                                        <Insets left="250.0" />
+                                    </GridPane.margin>
+                                </Pane>
+                            </children>
+                        </GridPane>
+                        <GridPane layoutX="500.0" prefHeight="365.0" prefWidth="500.0">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <TextField fx:id="newfname" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Ім'я" styleClass="field" />
+                                <TextField fx:id="newmname" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Прізвище" styleClass="field" GridPane.rowIndex="1" />
+                                <TextField fx:id="newlname" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="По-батькові" styleClass="field" GridPane.rowIndex="2" />
+                                <TextField fx:id="newusername" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Логін" styleClass="field" GridPane.rowIndex="3" />
+                                <PasswordField fx:id="newpassword" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Пароль" styleClass="field" GridPane.rowIndex="4" />
+                        <TextField fx:id="newpasswordtext" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Пароль" styleClass="field" GridPane.rowIndex="4" />
+                                <Pane fx:id="setvisiblenewpassword" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="set-visible-password" GridPane.rowIndex="4">
+                                    <GridPane.margin>
+                                        <Insets left="250.0" />
+                                    </GridPane.margin>
+                                </Pane>
+                                <PasswordField fx:id="newrepassword" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Повторіть пароль" styleClass="field" GridPane.rowIndex="5" />
+                        <TextField fx:id="newrepasswordtext" maxHeight="50.0" maxWidth="300.0" minHeight="50.0" minWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Повторіть пароль" styleClass="field" GridPane.rowIndex="5" />
+                                <Pane fx:id="setvisiblenewrepassword" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="set-visible-password" GridPane.rowIndex="5">
+                                    <GridPane.margin>
+                                        <Insets left="250.0" />
+                                    </GridPane.margin>
+                                </Pane>
+                            </children>
+                        </GridPane>
+                    </children>
+                </Pane>
+            </children>
+            <effect>
+                <DropShadow height="1.0" radius="0.0" width="0.0" />
+            </effect>
+        </AnchorPane>
+      <Pane fx:id="error" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane layoutX="9.0" layoutY="134.0" prefHeight="233.0" prefWidth="483.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="14.0" layoutY="13.0" text="Не вдається увійти." textFill="#2196f3">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="39.0" text="Будь ласка, перевірте, чи правильно введені логін та пароль." textAlignment="JUSTIFY" textFill="#2196f3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="48.0" layoutY="67.0" text="੦ Можливо, натиснута клавіша CAPS-lock?" textAlignment="JUSTIFY" textFill="#2196f3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="48.0" layoutY="98.0" prefHeight="40.0" prefWidth="427.0" text="੦ Можливо, у Вас увімкнена неправильна розкладка? (російська або англійська)" textAlignment="JUSTIFY" textFill="#2196f3" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="48.0" layoutY="142.0" prefHeight="40.0" prefWidth="427.0" text="੦ Спробуйте набрати свій пароль в текстовому редакторі і скопіювати в графу «Пароль»" textAlignment="JUSTIFY" textFill="#2196f3" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ok" alignment="CENTER" contentDisplay="CENTER" layoutX="428.0" layoutY="179.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50%; -fx-border-radius: 50%;" styleClass="ok" text="OK" textAlignment="CENTER" textFill="#2196f3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

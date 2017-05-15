@@ -1,0 +1,33 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/university?characterEncoding=UTF-8</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.username">root</property>
+        <property name="show_sql">true</property>
+        <mapping class="com.university.db.entity.ChairsEntity"/>
+        <mapping class="com.university.db.entity.DiplomaformEntity"/>
+        <mapping class="com.university.db.entity.DiplomasubjectsEntity"/>
+        <mapping class="com.university.db.entity.DiplomatypeEntity"/>
+        <mapping class="com.university.db.entity.DocumentregistrationEntity"/>
+        <mapping class="com.university.db.entity.DocumenttypeEntity"/>
+        <mapping class="com.university.db.entity.GroupsEntity"/>
+        <mapping class="com.university.db.entity.QualificationlevelEntity"/>
+        <mapping class="com.university.db.entity.StructureofthediplomaEntity"/>
+        <mapping class="com.university.db.entity.StudentsEntity"/>
+        <mapping class="com.university.db.entity.TeachersEntity"/>
+        <mapping class="com.university.db.entity.UsersEntity"/>
+        <mapping class="com.university.db.entity.DiplomamarksEntity"/>
+        <mapping class="com.university.db.entity.GroupformEntity"/>
+        <mapping class="com.university.db.entity.GrouptypeEntity"/>
+        <mapping class="com.university.db.entity.MarksEntity"/>
+        <mapping class="com.university.db.entity.ЕxceptionsEntity"/>
+        <mapping class="com.university.db.entity.TypeOwnerMarkEntity"/>
+        <mapping class="com.university.db.entity.DictionaryEntity"/>
+    </session-factory>
+</hibernate-configuration>

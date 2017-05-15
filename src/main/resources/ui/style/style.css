@@ -1,0 +1,305 @@
+.background_color {
+    -fx-background-color: #2196F3;
+}
+
+.opacity_pane {
+    -fx-background-color: rgba(21, 101, 192, 0.5);
+}
+
+.shadow {
+    -fx-background-color: rgba(21, 101, 192, 0.2);
+}
+
+.wrork-place-background {
+    -fx-background-color: white;
+}
+
+.combo-box {
+    -fx-border-radius: 30;
+    -fx-border-width: 2px;
+    -fx-background-radius: 30;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    /*-fx-padding: 5 5 5 5;*/
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, white;
+}
+
+.field {
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-padding: 10 20 10 20;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-prompt-text-fill: #64B5F6;
+    -fx-border-width: 2px;
+}
+
+.button {
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-color: rgba(21, 101, 192, 0.7);
+    -fx-text-fill: #BBDEFB;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+
+.button_create {
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-color: green;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+
+.button_cancel {
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-color: #ff3a28;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-text-fill: #FFEB3B;
+}
+
+.pane_label {
+    -fx-text-fill: #BBDEFB;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+
+.pane_label:hover {
+    -fx-text-fill: #FFEB3B;
+}
+
+.pane_button {
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}
+
+.check {
+    -fx-background-image: url("../img/check.png");
+    -fx-cursor: hand;
+}
+
+.close {
+    -fx-background-image: url("../img/close.png");
+    -fx-cursor: hand;
+}
+
+.pane_button:hover {
+    -fx-background-color: #2196F3;
+}
+
+.false_field {
+    -fx-border-color: #ff5338;
+}
+
+.true_field {
+    -fx-border-color: transparent;
+}
+
+.close-window {
+    -fx-background-image: url("../img/window-close.png");
+    -fx-cursor: hand;
+}
+
+.close-window:hover {
+    -fx-background-image: url("../img/window-close-hover.png");
+}
+
+.minimize-window {
+    -fx-background-image: url("../img/window-close-hover.png");
+}
+
+.minimize-window:hover {
+    -fx-background-image: url("../img/window-close-hover.png");
+}
+
+.maximized-window {
+    -fx-background-image: url("../img/window-close-hover.png");
+}
+
+.maximized-window:hover {
+    -fx-background-image: url("../img/window-close-hover.png");
+}
+
+.set-visible-password {
+    -fx-cursor: hand;
+}
+
+.ok:hover {
+    -fx-background-color: #BBDEFB;
+    -fx-cursor: hand;
+}
+
+.label-on-exit-form {
+    -fx-text-fill: #2196F3;
+    -fx-font-size: 16px;
+}
+
+.white-text {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.ok:hover {
+    -fx-background-color: #BBDEFB;
+    -fx-cursor: hand;
+}
+
+/*Main activity*/
+.main-user {
+    -fx-border-color: white;
+    -fx-border-width: 1 0 0 0;
+    -fx-border-insets: 0 5 0 5;
+}
+
+.main-menu-item {
+    -fx-border-color: rgba(21, 101, 192, 0.7);
+    -fx-border-width: 0 0 0 0;
+}
+
+.main-menu-item-down{
+    -fx-border-color: rgba(21, 101, 192, 0.7);
+    -fx-border-width: 0 0 0 0;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-cursor: hand;
+}
+
+.main-menu-item-down:hover{
+    -fx-background-color: rgba(21, 101, 192, 0.7);
+    -fx-border-width: 0 0 0 0;
+}
+
+.main-menu-item:hover {
+    -fx-background-color: rgba(21, 101, 192, 0.7);
+    -fx-cursor: hand;
+}
+
+.main-menu-item-selected {
+    -fx-border-width: 0 0 0 5;
+}
+
+.main-menu-item-chair-icon{
+    -fx-background-image: url("../img/chair_24.png");
+}
+
+.main-menu-item-document-icon{
+    -fx-background-image: url("../img/document_24.png");
+}
+
+.main-menu-item-group-icon{
+    -fx-background-image: url("../img/group_24.png");
+}
+
+.main-menu-item-subject-icon{
+    -fx-background-image: url("../img/subject_24.png");
+}
+
+.main-user-setting-icon {
+    -fx-background-image: url("../img/settings_24.png");
+}
+
+.main-user-icon {
+    -fx-background-image: url("../img/account_24.png");
+}
+
+.main-menu-item-user-icon {
+    -fx-background-image: url("../img/user_24.png");
+}
+
+.main-menu-item-student-icon {
+    -fx-background-image: url("../img/student_24.png");
+}
+
+.main-menu-item-professor-icon {
+    -fx-background-image: url("../img/professor_24.png");
+}
+
+.filter-pane {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(21, 101, 192, 0.7);
+}
+
+.filer {
+    -fx-background-color: #1E8CE7;
+}
+
+.add_button {
+    -fx-background-color: #1d8010;
+}
+
+.add_button_label {
+    -fx-background-image: url("../img/plus.png");
+}
+
+.hide {
+    -fx-background-image: url("../img/arrow-right-drop-circle-outline.png");
+}
+
+.hide:hover {
+    -fx-background-image: url("../img/arrow-right-drop-circle.png");
+}
+
+.show {
+    -fx-background-image: url("../img/filter-outline.png");
+}
+
+.show:hover {
+    -fx-background-image: url("../img/filter.png");
+}
+
+.clear-filter {
+
+    -fx-text-fill: transparent;
+    -fx-cursor: hand;
+    -fx-background-image: url("../img/filter-remove-outline-30.png");
+    -fx-background-position: right top, center;
+    -fx-background-repeat: no-repeat;
+}
+
+.clear-filter:hover {
+    -fx-text-fill: white;
+    -fx-background-image: url("../img/filter-remove-30.png");
+}
+
+.clear-one-filter{
+    -fx-background-image: url("../img/filter-remove-outline-20.png");
+    -fx-background-position: right top, center;
+    -fx-background-repeat: no-repeat;
+    -fx-cursor: hand;
+}
+
+.clear-one-filter:hover{
+    -fx-background-image: url("../img/filter-remove-20.png");
+}
+
+.delete-dialog-background{
+    -fx-background-color: rgba(0, 0, 0, 0.7);;
+}
+
+.tab-pane:top *.tab-header-background {
+    -fx-background-color: rgba(21, 101, 192, 0.7);
+}
+
+.tab{
+    -fx-background-color:   -fx-background;
+    -fx-background: #1E8CE7 ;
+}
+
+.tab:hover{
+    -fx-background: rgba(255, 235, 59, 0.58);
+}
+
+.tab:selected{
+    -fx-background: white;
+}
+
+.hover-menu{
+    -fx-background-color: rgba(21, 101, 192, 0.7);
+}
