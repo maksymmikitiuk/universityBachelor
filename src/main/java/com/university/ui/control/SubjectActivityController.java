@@ -5,10 +5,7 @@ import com.university.Antiplagiarism.CheckAntiplagiarism;
 import com.university.comboBox.FillComboBox;
 import com.university.db.control.DiplomaMarksController;
 import com.university.db.control.MarksController;
-import com.university.db.entity.DiplomamarksEntity;
-import com.university.db.entity.DiplomasubjectsEntity;
-import com.university.db.entity.MarksEntity;
-import com.university.db.entity.StudentsEntity;
+import com.university.db.entity.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -24,7 +21,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -73,21 +69,69 @@ public class SubjectActivityController implements Initializable {
         selectCurator.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                getData();
+                Stage stage = new Stage();
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/getData.fxml"));
+                    stage.setScene(new Scene((Pane) loader.load()));
+                    GetDataController controller = loader.<GetDataController>getController();
+                    controller.setStage(stage);
+                    controller.setVisible(1);
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.initOwner(selectCurator.getScene().getWindow());
+                    stage.centerOnScreen();
+                    stage.showAndWait();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    diplomasubjects.setCurator((TeachersEntity) stage.getUserData());
+                    curator.setText(diplomasubjects.getCurator().getLfmName());
+                }
             }
         });
 
         selectReviewer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                Stage stage = new Stage();
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/getData.fxml"));
+                    stage.setScene(new Scene((Pane) loader.load()));
+                    GetDataController controller = loader.<GetDataController>getController();
+                    controller.setStage(stage);
+                    controller.setVisible(1);
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.initOwner(selectCurator.getScene().getWindow());
+                    stage.centerOnScreen();
+                    stage.showAndWait();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    diplomasubjects.setReviewer((TeachersEntity) stage.getUserData());
+                    reviewer.setText(diplomasubjects.getReviewer().getLfmName());
+                }
             }
         });
 
         selectStudent.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                Stage stage = new Stage();
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/getData.fxml"));
+                    stage.setScene(new Scene((Pane) loader.load()));
+                    GetDataController controller = loader.<GetDataController>getController();
+                    controller.setStage(stage);
+                    controller.setVisible(0);
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.initOwner(selectStudent.getScene().getWindow());
+                    stage.centerOnScreen();
+                    stage.showAndWait();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    diplomasubjects.setStudent((StudentsEntity) stage.getUserData());
+                    student.setText(diplomasubjects.getStudent().getLfmiddleName());
+                }
             }
         });
 
@@ -201,25 +245,5 @@ public class SubjectActivityController implements Initializable {
 //        diplomasubjects.setIdreviewer();
 //        diplomasubjects.setIdstudent();
 //        diplomasubjects.setPlag(Float.parseFloat(plagiat.getText()));
-    }
-
-    private Object getData() {
-        Stage stage = new Stage();
-        try {
-            stage.initStyle(StageStyle.DECORATED);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/getData.fxml"));
-            Scene scene = new Scene((Pane) loader.load());
-            stage.setScene(scene);
-            GetDataController controller = loader.<GetDataController>getController();
-            controller.setStage(stage);
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(create.getScene().getWindow());
-            stage.centerOnScreen();
-            stage.setResizable(false);
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return stage.getUserData();
     }
 }

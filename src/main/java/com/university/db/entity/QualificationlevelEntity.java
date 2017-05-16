@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by maksymmikitiuk on 5/7/17.
  */
 @Entity
-@Table(name = "qualificationlevel", schema = "university", catalog = "")
+@Table(name = "qualificationlevel", schema = "university")
 public class QualificationlevelEntity {
     private int idqualificationLevel;
     private String name;
@@ -49,5 +49,10 @@ public class QualificationlevelEntity {
         int result = idqualificationLevel;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="664.0" minWidth="965.0" prefHeight="860.0" prefWidth="1135.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.MainActivityController">
     <children>
         <AnchorPane fx:id="HEADER" layoutX="-26.0" layoutY="-31.0" maxHeight="55.0" minHeight="24.0" prefHeight="24.0" prefWidth="991.0" styleClass="shadow" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -121,7 +113,7 @@
                 <Label fx:id="STUDENT_P_FILTER_SHOW" layoutX="853.0" layoutY="14.0" opacity="0.0" prefHeight="25.0" prefWidth="25.0" styleClass="show" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0" />
                 <AnchorPane fx:id="STUDENT_P_FILTER" layoutX="652.0" layoutY="4.0" prefHeight="836.0" prefWidth="232.0" styleClass="filer" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <AnchorPane layoutX="6.0" layoutY="52.0" prefHeight="115.0" prefWidth="220.0" styleClass="filter-pane">
+                        <AnchorPane layoutX="6.0" layoutY="52.0" prefHeight="124.0" prefWidth="220.0" styleClass="filter-pane">
                             <children>
                                 <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Група" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
                                     <font>
@@ -143,7 +135,7 @@
                                 <Label fx:id="STUDENT_P_FILTER_CHAIRS_CLEAR" layoutX="167.0" layoutY="58.0" prefHeight="30.0" prefWidth="12.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="64.0" />
                             </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="5.0" layoutY="282.0" prefHeight="115.0" prefWidth="221.0" styleClass="filter-pane">
+                        <AnchorPane layoutX="5.0" layoutY="282.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane">
                             <children>
                                 <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Т" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
                                     <font>
@@ -154,7 +146,7 @@
                                 <Label fx:id="STUDENT_P_FILTER_GROUPTYPE_CLEAR" layoutX="188.0" layoutY="58.0" prefHeight="20.0" prefWidth="20.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="64.0" />
                             </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="6.0" layoutY="397.0" prefHeight="115.0" prefWidth="221.0" styleClass="filter-pane">
+                        <AnchorPane layoutX="6.0" layoutY="397.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane">
                             <children>
                                 <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="К" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
                                     <font>
