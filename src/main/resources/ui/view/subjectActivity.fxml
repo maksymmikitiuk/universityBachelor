@@ -2,27 +2,9 @@
 
 <!--<?import com.jfoenix.controls.*?>-->
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.*?>
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import java.net.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.String?>
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-
+<?import javafx.scene.text.*?>
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="500.0" prefHeight="500.0" prefWidth="753.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.SubjectActivityController">
    <children>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -55,9 +37,9 @@
                         </Label>
                         <TextField fx:id="curator" editable="false" layoutX="89.0" layoutY="229.0" prefHeight="40.0" prefWidth="651.0" styleClass="field" AnchorPane.leftAnchor="89.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="249.0" />
                         <Button fx:id="selectCurator" layoutX="650.0" layoutY="253.0" mnemonicParsing="false" text="Обрати" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="253.0" />
-                        <TextField fx:id="reviewer" editable="false" layoutX="157.0" layoutY="279.0" prefHeight="40.0" prefWidth="583.0" styleClass="field" AnchorPane.leftAnchor="157.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="299.0" />
+                        <TextField fx:id="reviewer" editable="false" layoutX="111.0" layoutY="279.0" prefHeight="40.0" prefWidth="629.0" styleClass="field" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="299.0" />
                         <Button fx:id="selectReviewer" layoutX="650.0" layoutY="303.0" mnemonicParsing="false" text="Обрати" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="303.0" />
-                        <Label layoutX="14.0" layoutY="309.0" text="Какой-то штрих" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="309.0">
+                        <Label layoutX="14.0" layoutY="309.0" text="Рецензент" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="309.0">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -68,14 +50,14 @@
                            </font>
                         </Label>
                         <TextField fx:id="plagiat" editable="false" layoutX="111.0" layoutY="149.0" prefHeight="40.0" prefWidth="110.0" styleClass="field" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="149.0" />
-                        <Label layoutX="255.0" layoutY="159.0" text="Форма роботи" textFill="WHITE" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="159.0">
+                        <Label layoutX="255.0" layoutY="159.0" text="Тип роботи" textFill="WHITE" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="159.0">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="diplomaForm" layoutX="380.0" layoutY="149.0" prefHeight="38.0" prefWidth="222.0" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="149.0" />
-                        <ComboBox fx:id="diplomaType" layoutX="122.0" layoutY="99.0" prefHeight="38.0" prefWidth="617.0" />
-                        <Label layoutX="14.0" layoutY="110.0" text="Тип роботи" textFill="WHITE">
+                        <ComboBox fx:id="diplomaType" disable="true" layoutX="356.0" layoutY="149.0" prefHeight="38.0" prefWidth="384.0" AnchorPane.leftAnchor="356.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="149.0" />
+                        <ComboBox fx:id="diplomaForm" disable="true" layoutX="146.0" layoutY="99.0" prefHeight="38.0" prefWidth="593.0" />
+                        <Label layoutX="14.0" layoutY="110.0" text="Форма роботи" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

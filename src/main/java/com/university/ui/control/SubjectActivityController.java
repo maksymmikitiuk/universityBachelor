@@ -83,8 +83,10 @@ public class SubjectActivityController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
-                    diplomasubjects.setCurator((TeachersEntity) stage.getUserData());
-                    curator.setText(diplomasubjects.getCurator().getLfmName());
+                    if (stage.getUserData() != null) {
+                        diplomasubjects.setCurator((TeachersEntity) stage.getUserData());
+                        curator.setText(diplomasubjects.getCurator().getLfmName());
+                    }
                 }
             }
         });
@@ -106,8 +108,10 @@ public class SubjectActivityController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
-                    diplomasubjects.setReviewer((TeachersEntity) stage.getUserData());
-                    reviewer.setText(diplomasubjects.getReviewer().getLfmName());
+                    if (stage.getUserData() != null) {
+                        diplomasubjects.setReviewer((TeachersEntity) stage.getUserData());
+                        reviewer.setText(diplomasubjects.getReviewer().getLfmName());
+                    }
                 }
             }
         });
@@ -129,8 +133,12 @@ public class SubjectActivityController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
-                    diplomasubjects.setStudent((StudentsEntity) stage.getUserData());
-                    student.setText(diplomasubjects.getStudent().getLfmiddleName());
+                    if (stage.getUserData() != null) {
+                        diplomasubjects.setStudent((StudentsEntity) stage.getUserData());
+                        student.setText(diplomasubjects.getStudent().getLfmiddleName());
+                        diplomaForm.setDisable(false);
+                        new FillComboBox(diplomaForm).fillDiplomaForm(diplomasubjects.getStudent().getIdgroups().getIdqualificationLevel());
+                    }
                 }
             }
         });
@@ -146,6 +154,8 @@ public class SubjectActivityController implements Initializable {
                     if (!checkAntiplagiarism.getSubjects().isEmpty()) {
                         System.out.println("Plagiat epta!");
                         create.setDisable(true);
+                    } else {
+                        create.setDisable(false);
                     }
 
                     diplomasubjects.setTag(tagSubject);
@@ -166,6 +176,16 @@ public class SubjectActivityController implements Initializable {
                     points.setText("100");
 
                 fillMarks();
+            }
+        });
+
+        diplomaForm.valueProperty().addListener(new ChangeListener<DiplomaformEntity>() {
+            @Override
+            public void changed(ObservableValue ov, DiplomaformEntity t, DiplomaformEntity t1) {
+                if (diplomaForm.getValue() != null) {
+                    diplomaType.setDisable(false);
+                    new FillComboBox(diplomaType).fillDiplomaType((DiplomaformEntity) diplomaForm.getValue());
+                }
             }
         });
     }
@@ -222,6 +242,8 @@ public class SubjectActivityController implements Initializable {
         new FillComboBox(diplomaForm).fillDiplomaForm(diploma.getStudent().getIdgroups().getIdqualificationLevel());
         diplomaType.getSelectionModel().select(diploma.getType());
         diplomaForm.getSelectionModel().select(diploma.getType().getForm());
+        diplomaForm.setDisable(false);
+        diplomaType.setDisable(false);
     }
 
     private void fillFinish() {

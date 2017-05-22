@@ -4,7 +4,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="486.0" prefHeight="500.0" prefWidth="588.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.SettingsController">
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="441.0" minWidth="486.0" prefHeight="482.0" prefWidth="588.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.SettingsController">
     <children>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
@@ -14,27 +15,95 @@
                     </content>
                 </Tab>
                 <Tab text="Оцінки">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="422.0" prefWidth="588.0">
                      <children>
-                        <TableView fx:id="marks" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="461.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-                          <columns>
-                            <TableColumn fx:id="nationalscale" prefWidth="171.0" text="Національна шкала" />
-                            <TableColumn fx:id="nationalscalenumber" minWidth="1.0" prefWidth="221.0" text="Національна шкала(число)" />
-                              <TableColumn fx:id="ects" prefWidth="50.0" text="ECTS" />
-                              <TableColumn fx:id="pointsfrom" prefWidth="52.0" text="Від" />
-                              <TableColumn fx:id="pointsto" prefWidth="49.0" text="До" />
-                          </columns>
-                        </TableView>
-                     </children>
+                        <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="560.0" styleClass="shadow" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                           <children>
+                              <Label layoutX="23.0" layoutY="4.0" text="Національна" textFill="WHITE" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="4.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="49.0" layoutY="22.0" text="шкала" textFill="WHITE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="22.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="165.0" layoutY="22.0" text="шкала (число)" textFill="WHITE" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="22.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="172.0" layoutY="4.0" text="Національна" textFill="WHITE" AnchorPane.leftAnchor="172.0" AnchorPane.topAnchor="4.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="314.0" layoutY="14.0" text="ECTS" textFill="WHITE" AnchorPane.leftAnchor="314.0" AnchorPane.topAnchor="14.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
                         </AnchorPane>
-                    </content>
+                        <TextField fx:id="ns0" alignment="CENTER" layoutX="14.0" layoutY="72.0" prefHeight="40.0" prefWidth="153.0" styleClass="field" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="72.0" />
+                        <TextField fx:id="ns1" alignment="CENTER" layoutX="14.0" layoutY="119.0" prefHeight="40.0" prefWidth="153.0" styleClass="field" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="119.0" />
+                        <TextField fx:id="ns2" alignment="CENTER" layoutX="14.0" layoutY="166.0" prefHeight="40.0" prefWidth="153.0" styleClass="field" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="166.0" />
+                        <TextField fx:id="ns3" alignment="CENTER" layoutX="14.0" layoutY="213.0" prefHeight="40.0" prefWidth="153.0" styleClass="field" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="213.0" />
+                        <TextField fx:id="ns4" alignment="CENTER" layoutX="14.0" layoutY="260.0" prefHeight="40.0" prefWidth="153.0" styleClass="field" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="260.0" />
+                        <TextField fx:id="ns5" alignment="CENTER" layoutX="14.0" layoutY="307.0" prefHeight="40.0" prefWidth="153.0" styleClass="field" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="307.0" />
+                        <TextField fx:id="ns6" alignment="CENTER" layoutX="14.0" layoutY="354.0" prefHeight="40.0" prefWidth="153.0" styleClass="field" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="354.0" />
+                        <TextField fx:id="nsn6" alignment="CENTER" layoutX="203.0" layoutY="354.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="354.0" />
+                        <TextField fx:id="nsn5" alignment="CENTER" layoutX="203.0" layoutY="307.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="307.0" />
+                        <TextField fx:id="nsn4" alignment="CENTER" layoutX="203.0" layoutY="260.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="260.0" />
+                        <TextField fx:id="nsn3" alignment="CENTER" layoutX="203.0" layoutY="213.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="213.0" />
+                        <TextField fx:id="nsn2" alignment="CENTER" layoutX="203.0" layoutY="166.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="166.0" />
+                        <TextField fx:id="nsn1" alignment="CENTER" layoutX="203.0" layoutY="119.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="119.0" />
+                        <TextField fx:id="t0" alignment="CENTER" layoutX="203.0" layoutY="72.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="495.0" AnchorPane.topAnchor="72.0" />
+                        <TextField fx:id="ects0" alignment="CENTER" layoutX="313.0" layoutY="72.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="313.0" AnchorPane.topAnchor="72.0" />
+                        <TextField fx:id="ects1" alignment="CENTER" layoutX="313.0" layoutY="119.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="313.0" AnchorPane.topAnchor="119.0" />
+                        <TextField fx:id="ects2" alignment="CENTER" layoutX="313.0" layoutY="166.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="313.0" AnchorPane.topAnchor="166.0" />
+                        <TextField fx:id="ects3" alignment="CENTER" layoutX="313.0" layoutY="213.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="313.0" AnchorPane.topAnchor="213.0" />
+                        <TextField fx:id="ects4" alignment="CENTER" layoutX="313.0" layoutY="260.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="313.0" AnchorPane.topAnchor="260.0" />
+                        <TextField fx:id="ects5" alignment="CENTER" layoutX="313.0" layoutY="307.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="313.0" AnchorPane.topAnchor="307.0" />
+                        <TextField fx:id="ects6" alignment="CENTER" layoutX="313.0" layoutY="354.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="313.0" AnchorPane.topAnchor="354.0" />
+                        <TextField fx:id="f6" alignment="CENTER" layoutX="404.0" layoutY="354.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="354.0" />
+                        <TextField fx:id="f5" alignment="CENTER" layoutX="404.0" layoutY="307.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="307.0" />
+                        <TextField fx:id="f4" alignment="CENTER" layoutX="404.0" layoutY="260.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="260.0" />
+                        <TextField fx:id="f3" alignment="CENTER" layoutX="404.0" layoutY="213.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="213.0" />
+                        <TextField fx:id="f2" alignment="CENTER" layoutX="404.0" layoutY="166.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="166.0" />
+                        <TextField fx:id="f1" alignment="CENTER" layoutX="404.0" layoutY="119.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="119.0" />
+                        <TextField fx:id="f0" alignment="CENTER" layoutX="404.0" layoutY="72.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="404.0" AnchorPane.topAnchor="72.0" />
+                        <Label layoutX="425.0" layoutY="28.0" text="Від" textFill="WHITE" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="28.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="t6" alignment="CENTER" layoutX="495.0" layoutY="354.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="354.0" />
+                        <TextField fx:id="t5" alignment="CENTER" layoutX="495.0" layoutY="307.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="307.0" />
+                        <TextField fx:id="t4" alignment="CENTER" layoutX="495.0" layoutY="260.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="260.0" />
+                        <TextField fx:id="t3" alignment="CENTER" layoutX="495.0" layoutY="213.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="213.0" />
+                        <TextField fx:id="t2" alignment="CENTER" layoutX="495.0" layoutY="166.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="166.0" />
+                        <TextField fx:id="t1" alignment="CENTER" layoutX="495.0" layoutY="119.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.topAnchor="119.0" />
+                        <TextField fx:id="nsn0" alignment="CENTER" layoutX="203.0" layoutY="72.0" prefHeight="40.0" prefWidth="70.0" styleClass="field" AnchorPane.leftAnchor="203.0" AnchorPane.topAnchor="72.0" />
+                        <Label layoutX="518.0" layoutY="28.0" text="До" textFill="WHITE" AnchorPane.leftAnchor="518.0" AnchorPane.topAnchor="28.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="id0" layoutX="5.0" layoutY="428.0" visible="false" />
+                        <TextField fx:id="id1" layoutX="5.0" layoutY="428.0" visible="false" />
+                        <TextField fx:id="id2" layoutX="5.0" layoutY="428.0" visible="false" />
+                        <TextField fx:id="id3" layoutX="5.0" layoutY="428.0" visible="false" />
+                        <TextField fx:id="id4" layoutX="5.0" layoutY="428.0" visible="false" />
+                        <TextField fx:id="id5" layoutX="5.0" layoutY="428.0" visible="false" />
+                        <TextField fx:id="id6" layoutX="5.0" layoutY="428.0" visible="false" />
+                        <Button fx:id="save_mark" layoutX="468.0" layoutY="406.0" mnemonicParsing="false" text="Зберегти" />
+                     </children></AnchorPane>
+               </content>
                 </Tab>
-                <Tab text="Файли">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="467.0" prefWidth="639.0" />
-                    </content>
-                </Tab>
+                <Tab text="Файли" />
             </tabs>
         </TabPane>
     </children>

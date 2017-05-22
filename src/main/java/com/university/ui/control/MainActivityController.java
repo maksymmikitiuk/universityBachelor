@@ -858,6 +858,8 @@ public class MainActivityController implements Initializable {
     public static boolean DELETE;
     public AnchorPane HEADER;
 
+    public Label settings;
+
     //Текущий пользователь
     public Label currentUser_username;
     public Pane currentUserSettings;
@@ -886,6 +888,13 @@ public class MainActivityController implements Initializable {
         SUBJECT_P.setVisible(true);
         prefMenu.getStyleClass().add("hover-menu");
 
+        settings.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                setting();
+            }
+        });
+
         initCurrentUser();
 
         initMenu();
@@ -903,6 +912,7 @@ public class MainActivityController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
+            stage.setResizable(false);
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -992,6 +1002,21 @@ public class MainActivityController implements Initializable {
                 openSettingsUser(dbController.currentUser.getIdusers());
             }
         });
+    }
+
+    private void setting() {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/settingsActivity.fxml"));
+            stage.setScene(new Scene((Pane) loader.load()));
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(SEARCH.getScene().getWindow());
+            stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public MainActivityController() {
