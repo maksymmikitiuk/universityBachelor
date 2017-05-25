@@ -70,7 +70,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="marksTable" layoutX="14.0" layoutY="14.0" prefHeight="260.0" prefWidth="713.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                        <TableView fx:id="marksTable" layoutX="14.0" layoutY="44.0" prefHeight="236.0" prefWidth="713.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="44.0">
                           <columns>
                             <TableColumn fx:id="marksTableOwner" prefWidth="75.0" />
                             <TableColumn fx:id="marksTableTypeOwner" prefWidth="75.0" text="Тип" />
@@ -105,6 +105,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="ects" editable="false" layoutX="656.0" layoutY="312.0" prefHeight="40.0" prefWidth="66.0" styleClass="field" />
+                        <Button fx:id="addMarks" layoutX="647.0" layoutY="6.0" mnemonicParsing="false" text="Додати" />
                      </children>
                   </AnchorPane>
               </content>

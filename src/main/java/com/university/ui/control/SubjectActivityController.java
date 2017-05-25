@@ -5,11 +5,14 @@ import com.university.Antiplagiarism.CheckAntiplagiarism;
 import com.university.comboBox.FillComboBox;
 import com.university.db.control.DiplomaMarksController;
 import com.university.db.control.MarksController;
+import com.university.db.control.TeacherController;
+import com.university.db.control.TypeOwnerMarkController;
 import com.university.db.entity.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,7 +20,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -32,22 +38,23 @@ import java.util.regex.Pattern;
  * Created by maksymmikitiuk on 5/4/17.
  */
 public class SubjectActivityController implements Initializable {
-    public Button create, cancel, selectStudent, selectCurator, selectReviewer;
+    public Button create, cancel, selectStudent, selectCurator, selectReviewer, addMarks;
     public TextArea subject;
     public TextField plagiat, student, curator, reviewer, ects, points, nationalScale;
     public ComboBox diplomaType, diplomaForm;
     private DiplomasubjectsEntity diplomasubjects = new DiplomasubjectsEntity();
     private StudentsEntity newStudent;
     private MarksEntity totalMarks;
+    private ObservableList<DiplomamarksEntity> diplomamarks;
 
     @FXML
     TableView<DiplomamarksEntity> marksTable;
     @FXML
-    TableColumn<DiplomamarksEntity, String> marksTableOwner;
+    TableColumn<MarksEntity, TeachersEntity> marksTableOwner;
     @FXML
-    TableColumn<DiplomamarksEntity, String> marksTableTypeOwner;
+    TableColumn<MarksEntity, TypeOwnerMarkEntity> marksTableTypeOwner;
     @FXML
-    TableColumn<DiplomamarksEntity, String> marksTablePoint;
+    TableColumn<MarksEntity, Integer> marksTablePoint;
     @FXML
     TableColumn<DiplomamarksEntity, String> marksTableScale;
     @FXML
@@ -188,28 +195,80 @@ public class SubjectActivityController implements Initializable {
                 }
             }
         });
+
+        addMarks.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DiplomamarksEntity dm = new DiplomamarksEntity();
+                dm.setId_diploma(diplomasubjects);
+                dm.setPoint(0);
+                dm.setMark(new MarksEntity());
+                diplomamarks.add(dm);
+                marksTable.getItems().add(dm);
+            }
+        });
     }
 
     private void updateMarksTable() {
         marksTable.getItems().clear();
-        marksTable.getItems().addAll(FXCollections.<DiplomamarksEntity>observableArrayList(new DiplomaMarksController()
-                .getDiplomaMarksById(diplomasubjects)));
+        diplomamarks = FXCollections.<DiplomamarksEntity>observableArrayList(new DiplomaMarksController().getDiplomaMarksById(diplomasubjects));
+        marksTable.getItems().addAll(diplomamarks);
     }
 
     private void initMarksTable() {
+        marksTable.setEditable(true);
+
         marksTableOwner.setCellValueFactory(new PropertyValueFactory("owner"));
+        ObservableList<TeachersEntity> teachersList = FXCollections.observableList(new TeacherController().getAllTeacher());
+        marksTableOwner.setCellFactory(ComboBoxTableCell.<MarksEntity, TeachersEntity>forTableColumn(teachersList));
+
         marksTableTypeOwner.setCellValueFactory(new PropertyValueFactory("typeOwner"));
-        marksTablePoint.setCellValueFactory(new PropertyValueFactory("point"));
+        ObservableList<TypeOwnerMarkEntity> typeOwnerList = FXCollections.observableList(new TypeOwnerMarkController().getAllType());
+        marksTableTypeOwner.setCellFactory(ComboBoxTableCell.<MarksEntity, TypeOwnerMarkEntity>forTableColumn(typeOwnerList));
+        marksTableTypeOwner.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<MarksEntity, TypeOwnerMarkEntity>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<MarksEntity, TypeOwnerMarkEntity> event) {
+                        System.out.println(event.getNewValue());
+                    }
+                }
+        );
+
+        Callback<TableColumn<MarksEntity, Integer>, TableCell<MarksEntity, Integer>> cellFactory =
+                new Callback<TableColumn<MarksEntity, Integer>, TableCell<MarksEntity, Integer>>() {
+                    public EditingCell call(TableColumn p) {
+                        return new EditingCell();
+                    }
+                };
+
+        marksTablePoint.setCellValueFactory(new PropertyValueFactory<MarksEntity, Integer>("point"));
+        marksTablePoint.setCellFactory(cellFactory);
+        marksTablePoint.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<MarksEntity, Integer>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<MarksEntity, Integer> event) {
+                        int value = (event.getNewValue() > 100) ? 100 : event.getNewValue();
+                        marksTable.getSelectionModel().getSelectedItem().setPoint(value);
+                        marksTable.getSelectionModel().getSelectedItem().setMark(new MarksController().getMarksByPoints(value));
+                        diplomamarks.clear();
+                        diplomamarks.addAll(marksTable.getItems());
+                        marksTable.refresh();
+                    }
+                });
+
+
         marksTableEcts.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DiplomamarksEntity, String>, ObservableValue<String>>() {
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<DiplomamarksEntity, String> p) {
+            public ObservableValue<String> call
+                    (TableColumn.CellDataFeatures<DiplomamarksEntity, String> p) {
                 return new SimpleStringProperty(p.getValue().getMark().getEcts());
             }
         });
 
         marksTableScale.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DiplomamarksEntity, String>, ObservableValue<String>>() {
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<DiplomamarksEntity, String> p) {
+            public ObservableValue<String> call
+                    (TableColumn.CellDataFeatures<DiplomamarksEntity, String> p) {
                 return new SimpleStringProperty(p.getValue().getMark().getNationalscale()
                         + " (" + p.getValue().getMark().getNationalscalenumber() + ")");
             }
@@ -267,5 +326,75 @@ public class SubjectActivityController implements Initializable {
 //        diplomasubjects.setIdreviewer();
 //        diplomasubjects.setIdstudent();
 //        diplomasubjects.setPlag(Float.parseFloat(plagiat.getText()));
+    }
+}
+
+class EditingCell extends TableCell<MarksEntity, Integer> {
+
+    private TextField textField;
+
+    public EditingCell() {
+    }
+
+    @Override
+    public void startEdit() {
+        super.startEdit();
+
+        if (textField == null) {
+            createTextField();
+        }
+
+        setGraphic(textField);
+        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        textField.selectAll();
+    }
+
+    @Override
+    public void cancelEdit() {
+        super.cancelEdit();
+
+        setText(String.valueOf(getItem()));
+        setContentDisplay(ContentDisplay.TEXT_ONLY);
+    }
+
+    @Override
+    public void updateItem(Integer item, boolean empty) {
+        super.updateItem(item, empty);
+
+        if (empty) {
+            setText(null);
+            setGraphic(null);
+        } else {
+            if (isEditing()) {
+                if (textField != null) {
+                    textField.setText(getString());
+                }
+                setGraphic(textField);
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+            } else {
+                setText(getString());
+                setContentDisplay(ContentDisplay.TEXT_ONLY);
+            }
+        }
+    }
+
+    private void createTextField() {
+        textField = new TextField(getString());
+        textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
+        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent t) {
+                if (t.getCode() == KeyCode.ENTER) {
+                    commitEdit(Integer.valueOf(textField.getText()));
+                } else if (t.getCode() == KeyCode.ESCAPE) {
+                    cancelEdit();
+                }
+            }
+        });
+    }
+
+    private String getString() {
+        return getItem() == null ? "" : getItem().toString();
     }
 }
