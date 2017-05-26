@@ -37,4 +37,23 @@ public class TypeOwnerMarkController {
         }
         return list;
     }
+
+    public TypeOwnerMarkEntity getFinish() {
+        Session session = getFactory().openSession();
+        Transaction tx = null;
+        List<TypeOwnerMarkEntity> list = null;
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(TypeOwnerMarkEntity.class).add(
+                    Restrictions.eq("type", "FINISH")
+            );
+            list = criteria.list();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return list.get(0);
+    }
 }

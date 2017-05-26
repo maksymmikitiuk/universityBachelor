@@ -56,4 +56,22 @@ public class DiplomaMarksController {
         }
         return list;
     }
+
+    public Boolean isFind(int id) {
+        Session session = getFactory().openSession();
+        Transaction tx = null;
+        List<DiplomamarksEntity> list = null;
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(DiplomamarksEntity.class)
+                    .add(Restrictions.eq("iddiplomaMarks", id));
+            list = criteria.list();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return !list.isEmpty();
+    }
 }

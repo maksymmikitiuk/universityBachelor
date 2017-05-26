@@ -19,7 +19,6 @@ public class DiplomasubjectsEntity {
     private TeachersEntity reviewer;
     private StudentsEntity student;
     private DiplomatypeEntity type;
-    private DiplomamarksEntity marks;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
@@ -49,16 +48,6 @@ public class DiplomasubjectsEntity {
 
     public void setReviewer(TeachersEntity reviewer) {
         this.reviewer = reviewer;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "mark_id")
-    public DiplomamarksEntity getMarks() {
-        return marks;
-    }
-
-    public void setMarks(DiplomamarksEntity marks) {
-        this.marks = marks;
     }
 
     @ManyToOne
@@ -113,7 +102,7 @@ public class DiplomasubjectsEntity {
     }
 
     @Basic
-    @Column(name = "plag")
+    @Column(name = "plag", columnDefinition="Decimal(10,2) default '0.00'")
     public BigDecimal getPlag() {
         return plag;
     }

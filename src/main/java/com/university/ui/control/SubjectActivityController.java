@@ -3,10 +3,7 @@ package com.university.ui.control;
 import com.university.Antiplagiarism.Antiplagiarism;
 import com.university.Antiplagiarism.CheckAntiplagiarism;
 import com.university.comboBox.FillComboBox;
-import com.university.db.control.DiplomaMarksController;
-import com.university.db.control.MarksController;
-import com.university.db.control.TeacherController;
-import com.university.db.control.TypeOwnerMarkController;
+import com.university.db.control.*;
 import com.university.db.entity.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -34,9 +31,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-/**
- * Created by maksymmikitiuk on 5/4/17.
- */
 public class SubjectActivityController implements Initializable {
     public Button create, cancel, selectStudent, selectCurator, selectReviewer, addMarks;
     public TextArea subject;
@@ -44,7 +38,7 @@ public class SubjectActivityController implements Initializable {
     public ComboBox diplomaType, diplomaForm;
     private DiplomasubjectsEntity diplomasubjects = new DiplomasubjectsEntity();
     private StudentsEntity newStudent;
-    private MarksEntity totalMarks;
+    private DiplomamarksEntity totalMarks = new DiplomamarksEntity();
     private ObservableList<DiplomamarksEntity> diplomamarks;
 
     @FXML
@@ -199,12 +193,26 @@ public class SubjectActivityController implements Initializable {
         addMarks.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DiplomamarksEntity dm = new DiplomamarksEntity();
-                dm.setId_diploma(diplomasubjects);
-                dm.setPoint(0);
-                dm.setMark(new MarksEntity());
-                diplomamarks.add(dm);
-                marksTable.getItems().add(dm);
+                Stage stage = new Stage();
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/addMark.fxml"));
+                    stage.setScene(new Scene((Pane) loader.load()));
+                    AddMarkController controller = loader.<AddMarkController>getController();
+                    controller.setStage(stage);
+                    controller.setDiplomasubjects(diplomasubjects);
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.initOwner(addMarks.getScene().getWindow());
+                    stage.centerOnScreen();
+                    stage.setResizable(false);
+                    stage.showAndWait();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (stage.getUserData() != null) {
+                        marksTable.getItems().add((DiplomamarksEntity) stage.getUserData());
+                        marksTable.refresh();
+                    }
+                }
             }
         });
     }
@@ -221,6 +229,17 @@ public class SubjectActivityController implements Initializable {
         marksTableOwner.setCellValueFactory(new PropertyValueFactory("owner"));
         ObservableList<TeachersEntity> teachersList = FXCollections.observableList(new TeacherController().getAllTeacher());
         marksTableOwner.setCellFactory(ComboBoxTableCell.<MarksEntity, TeachersEntity>forTableColumn(teachersList));
+        marksTableOwner.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<MarksEntity, TeachersEntity>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<MarksEntity, TeachersEntity> event) {
+                        marksTable.getSelectionModel().getSelectedItem().setOwner(event.getNewValue());
+                        diplomamarks.clear();
+                        diplomamarks.addAll(marksTable.getItems());
+                        marksTable.refresh();
+                    }
+                }
+        );
 
         marksTableTypeOwner.setCellValueFactory(new PropertyValueFactory("typeOwner"));
         ObservableList<TypeOwnerMarkEntity> typeOwnerList = FXCollections.observableList(new TypeOwnerMarkController().getAllType());
@@ -229,7 +248,10 @@ public class SubjectActivityController implements Initializable {
                 new EventHandler<TableColumn.CellEditEvent<MarksEntity, TypeOwnerMarkEntity>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<MarksEntity, TypeOwnerMarkEntity> event) {
-                        System.out.println(event.getNewValue());
+                        marksTable.getSelectionModel().getSelectedItem().setTypeOwner(event.getNewValue());
+                        diplomamarks.clear();
+                        diplomamarks.addAll(marksTable.getItems());
+                        marksTable.refresh();
                     }
                 }
         );
@@ -277,9 +299,13 @@ public class SubjectActivityController implements Initializable {
 
     private void fillMarks() {
         if (Pattern.matches("\\d+", points.getText())) {
-            totalMarks = new MarksController().getMarksByPoints(Integer.valueOf(points.getText()));
-            ects.setText(totalMarks.getEcts());
-            nationalScale.setText(totalMarks.getNationalscale() + " (" + totalMarks.getNationalscalenumber() + ")");
+            MarksEntity m = new MarksController().getMarksByPoints(Integer.valueOf(points.getText()));
+            ects.setText(m.getEcts());
+            nationalScale.setText(m.getNationalscale() + " (" + m.getNationalscalenumber() + ")");
+            totalMarks.setTypeOwner(new TypeOwnerMarkController().getFinish());
+            totalMarks.setPoint(Integer.valueOf(points.getText()));
+            totalMarks.setMark(m);
+            totalMarks.setId_diploma(diplomasubjects);
         }
     }
 
@@ -303,29 +329,50 @@ public class SubjectActivityController implements Initializable {
         diplomaForm.getSelectionModel().select(diploma.getType().getForm());
         diplomaForm.setDisable(false);
         diplomaType.setDisable(false);
+
+        create.setText("Зберегти");
     }
 
     private void fillFinish() {
         DiplomamarksEntity diplomamarks = new DiplomaMarksController().getFinish(diplomasubjects);
+        if(diplomamarks.getPoint() != null){
         points.setText(diplomamarks.getPoint().toString());
-        totalMarks = new MarksController().getMarksByPoints(Integer.valueOf(points.getText()));
-        ects.setText(totalMarks.getEcts());
-        nationalScale.setText(totalMarks.getNationalscale() + " (" + totalMarks.getNationalscalenumber() + ")");
+        MarksEntity m = new MarksController().getMarksByPoints(Integer.valueOf(points.getText()));
+        ects.setText(m.getEcts());
+        nationalScale.setText(m.getNationalscale() + " (" + m.getNationalscalenumber() + ")");
+        totalMarks = diplomamarks;}
     }
 
     private void createSubject() {
-        String tagSubject = new Antiplagiarism().getTagSubject(subject.getText());
-        if (!new CheckAntiplagiarism(tagSubject).getSubjects().isEmpty())
-            return;
-//        diplomasubjects.setSubject(subject.getText());
-//        diplomasubjects.setTag(tagSubject);
-//        diplomasubjects.setDefencediploma((Timestamp) new Date());
-//        diplomasubjects.setIdcurator();
-//        diplomasubjects.setIddiplomaMarks();
-//        diplomasubjects.setIddiplomaType();
-//        diplomasubjects.setIdreviewer();
-//        diplomasubjects.setIdstudent();
-//        diplomasubjects.setPlag(Float.parseFloat(plagiat.getText()));
+        //add subject
+        diplomasubjects.setType((DiplomatypeEntity) diplomaType.getSelectionModel().getSelectedItem());
+        if (create.getText().equals("Зберегти"))
+            new dbController().update(diplomasubjects);
+        else
+            new dbController().create(diplomasubjects);
+
+        //add mark
+        for (DiplomamarksEntity mark : marksTable.getItems()) {
+            mark.setId_diploma(diplomasubjects);
+            if(new DiplomaMarksController().isFind(mark.getIddiplomaMarks()))
+                new dbController().update(mark);
+            else
+                new dbController().create(mark);
+        }
+
+        //add total mark
+        if (totalMarks.getPoint() != null) {
+            totalMarks.setId_diploma(diplomasubjects);
+            if(new DiplomaMarksController().isFind(totalMarks.getIddiplomaMarks()))
+                new dbController().update(totalMarks);
+            else
+                new dbController().create(totalMarks);
+        }
+
+        //add file
+
+
+        create.getScene().getWindow().hide();
     }
 }
 

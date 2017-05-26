@@ -16,6 +16,7 @@ public class DiplomamarksEntity {
     private DiplomasubjectsEntity id_diploma;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "iddiplomaMarks")
     public int getIddiplomaMarks() {
         return iddiplomaMarks;

@@ -62,7 +62,7 @@ public class FillComboBox {
         });
     }
 
-    public void fillGroupForm(){
+    public void fillGroupForm() {
         comboBox.setItems(FXCollections.observableArrayList(new GroupTypeController().getAllGroupType()));
         comboBox.setCellFactory(new Callback<ListView<GrouptypeEntity>, ListCell<GrouptypeEntity>>() {
 
@@ -84,7 +84,7 @@ public class FillComboBox {
         });
     }
 
-    public void fillQualificationLevel(){
+    public void fillQualificationLevel() {
         comboBox.setItems(FXCollections.observableArrayList(new QualificationLevelController().getAllQualificationLevel()));
         comboBox.setCellFactory(new Callback<ListView<QualificationlevelEntity>, ListCell<QualificationlevelEntity>>() {
 
@@ -138,6 +138,28 @@ public class FillComboBox {
                         super.updateItem(item, empty);
                         if (!empty) {
                             setText(item.getName());
+                            setGraphic(null);
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
+    }
+
+    public void fillTeacherType() {
+        comboBox.setItems(FXCollections.observableArrayList(new TypeOwnerMarkController().getAllType()));
+        comboBox.setCellFactory(new Callback<ListView<TypeOwnerMarkEntity>, ListCell<TypeOwnerMarkEntity>>() {
+
+            @Override
+            public ListCell<TypeOwnerMarkEntity> call(ListView<TypeOwnerMarkEntity> param) {
+                return new ListCell<TypeOwnerMarkEntity>() {
+                    @Override
+                    public void updateItem(TypeOwnerMarkEntity item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty) {
+                            setText(item.getType());
                             setGraphic(null);
                         } else {
                             setText(null);

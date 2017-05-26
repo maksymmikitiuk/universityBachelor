@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="281.0" prefWidth="572.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.AddMarkController">
+   <children>
+      <TextField fx:id="teacher" editable="false" layoutX="147.0" layoutY="18.0" prefHeight="40.0" prefWidth="411.0" styleClass="field" AnchorPane.leftAnchor="147.0" AnchorPane.topAnchor="18.0" />
+      <Button fx:id="selectTeacher" layoutX="468.0" layoutY="22.0" mnemonicParsing="false" text="Обрати" AnchorPane.leftAnchor="468.0" AnchorPane.topAnchor="22.0" />
+      <Label layoutX="13.0" layoutY="27.0" text="Перевіряючий" textFill="WHITE" AnchorPane.leftAnchor="21.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="type" layoutX="63.0" layoutY="73.0" prefHeight="38.0" prefWidth="291.0" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="73.0" />
+      <Label layoutX="21.0" layoutY="81.0" text="Тип" textFill="WHITE" AnchorPane.leftAnchor="21.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="ects" editable="false" layoutX="488.0" layoutY="134.0" prefHeight="40.0" prefWidth="66.0" styleClass="field" AnchorPane.leftAnchor="488.0" AnchorPane.topAnchor="134.0" />
+      <Label layoutX="334.0" layoutY="144.0" prefHeight="20.0" prefWidth="149.0" text=", за шкалою ECTS" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="113.0" layoutY="188.0" prefHeight="20.0" prefWidth="221.0" text="за національною шкалою" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nationalScale" editable="false" layoutX="337.0" layoutY="178.0" prefHeight="40.0" prefWidth="219.0" styleClass="field" />
+      <TextField fx:id="points" layoutX="246.0" layoutY="134.0" prefHeight="40.0" prefWidth="84.0" styleClass="field" AnchorPane.topAnchor="134.0" />
+      <Label layoutX="114.0" layoutY="144.0" prefHeight="20.0" prefWidth="135.0" text="кількість балів" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="ok" layoutX="132.0" layoutY="237.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="110.0" text="OK" AnchorPane.bottomAnchor="12.0" />
+      <Button fx:id="cancel" layoutX="331.0" layoutY="237.0" mnemonicParsing="false" text="Скасувати" AnchorPane.bottomAnchor="12.0" />
+   </children>
+</AnchorPane>
