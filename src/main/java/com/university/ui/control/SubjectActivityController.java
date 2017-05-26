@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -345,6 +346,8 @@ public class SubjectActivityController implements Initializable {
 
     private void createSubject() {
         //add subject
+        diplomasubjects.setPlag((diplomasubjects.getPlag() == null)? BigDecimal.valueOf(0.00) :diplomasubjects.getPlag());
+
         diplomasubjects.setType((DiplomatypeEntity) diplomaType.getSelectionModel().getSelectedItem());
         if (create.getText().equals("Зберегти"))
             new dbController().update(diplomasubjects);
