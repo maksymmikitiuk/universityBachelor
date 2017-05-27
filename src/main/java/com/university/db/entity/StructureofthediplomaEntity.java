@@ -2,16 +2,12 @@ package com.university.db.entity;
 
 import javax.persistence.*;
 
-/**
- * Created by Антон Микитюк on 17.11.2016.
- */
 @Entity
-@Table(name = "structureofthediploma", schema = "university", catalog = "")
-@IdClass(StructureofthediplomaEntityPK.class)
+@Table(name = "structureofthediploma", schema = "university")
 public class StructureofthediplomaEntity {
     private int idstructureOfTheDiploma;
-    private int iddocumentType;
-    private int iddiplomaType;
+    private DocumenttypeEntity iddocumentType;
+    private DiplomatypeEntity iddiplomaType;
 
     @Id
     @Column(name = "idstructureOfTheDiploma")
@@ -23,23 +19,23 @@ public class StructureofthediplomaEntity {
         this.idstructureOfTheDiploma = idstructureOfTheDiploma;
     }
 
-    @Id
-    @Column(name = "iddocumentType")
-    public int getIddocumentType() {
+    @ManyToOne
+    @JoinColumn(name = "iddocumentType")
+    public DocumenttypeEntity getIddocumentType() {
         return iddocumentType;
     }
 
-    public void setIddocumentType(int iddocumentType) {
+    public void setIddocumentType(DocumenttypeEntity iddocumentType) {
         this.iddocumentType = iddocumentType;
     }
 
-    @Id
-    @Column(name = "iddiplomaType")
-    public int getIddiplomaType() {
+    @ManyToOne
+    @JoinColumn(name = "iddiplomaType")
+    public DiplomatypeEntity getIddiplomaType() {
         return iddiplomaType;
     }
 
-    public void setIddiplomaType(int iddiplomaType) {
+    public void setIddiplomaType(DiplomatypeEntity iddiplomaType) {
         this.iddiplomaType = iddiplomaType;
     }
 
@@ -60,8 +56,6 @@ public class StructureofthediplomaEntity {
     @Override
     public int hashCode() {
         int result = idstructureOfTheDiploma;
-        result = 31 * result + iddocumentType;
-        result = 31 * result + iddiplomaType;
         return result;
     }
 }

@@ -9,7 +9,6 @@ import java.util.List;
  */
 @Entity
 @Table(name = "groups", schema = "university")
-//@IdClass(GroupsEntityPK.class)
 public class GroupsEntity {
     @Id
     @Column(name = "idgroups")

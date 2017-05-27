@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by Антон Микитюк on 17.11.2016.
  */
 @Entity
-@Table(name = "documenttype", schema = "university", catalog = "")
+@Table(name = "documenttype", schema = "university")
 public class DocumenttypeEntity {
     private int iddocumentType;
     private String typename;
@@ -49,5 +49,10 @@ public class DocumenttypeEntity {
         int result = iddocumentType;
         result = 31 * result + (typename != null ? typename.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return typename;
     }
 }

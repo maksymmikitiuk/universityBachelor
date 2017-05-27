@@ -72,7 +72,7 @@
                      <children>
                         <TableView fx:id="marksTable" layoutX="14.0" layoutY="44.0" prefHeight="236.0" prefWidth="713.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="44.0">
                           <columns>
-                            <TableColumn fx:id="marksTableOwner" prefWidth="75.0" />
+                            <TableColumn fx:id="marksTableOwner" prefWidth="75.0" text="ПІБ" />
                             <TableColumn fx:id="marksTableTypeOwner" prefWidth="75.0" text="Тип" />
                               <TableColumn fx:id="marksTablePoint" prefWidth="75.0" text="Кількість балів" />
                               <TableColumn fx:id="marksTableScale" prefWidth="172.0" text="Національна шкала" />
@@ -114,20 +114,18 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="student1" editable="false" layoutX="103.0" layoutY="17.0" prefHeight="40.0" prefWidth="630.0" styleClass="field" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="20.0" />
-                        <Button fx:id="selectStudent1" layoutX="644.0" layoutY="21.0" mnemonicParsing="false" text="Обрати" AnchorPane.rightAnchor="24.0" />
-                        <Label layoutX="23.0" layoutY="28.0" prefHeight="20.0" prefWidth="78.0" text="Титулка" textFill="WHITE">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="22.0" layoutY="80.0" prefHeight="20.0" prefWidth="201.0" text="Пояснювальна записка" textFill="WHITE">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="student11" editable="false" layoutX="225.0" layoutY="69.0" prefHeight="40.0" prefWidth="508.0" styleClass="field" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="20.0" />
-                        <Button fx:id="selectStudent11" layoutX="630.0" layoutY="73.0" mnemonicParsing="false" text="Обрати" AnchorPane.rightAnchor="24.0" />
+                        <TableView fx:id="fileTable" layoutX="16.0" layoutY="14.0" prefHeight="267.0" prefWidth="385.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                          <columns>
+                            <TableColumn fx:id="fileTableType" editable="false" prefWidth="75.0" text="Тип документу" />
+                            <TableColumn fx:id="fileTablePath" editable="false" prefWidth="75.0" text="Шлях" />
+                              <TableColumn fx:id="fileTableDate" editable="false" prefWidth="75.0" text="Дата" />
+                              <TableColumn fx:id="fileTableUser" editable="false" prefWidth="75.0" text="Користувач" />
+                              <TableColumn fx:id="fileTableAD" prefWidth="75.0" sortable="false" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
                      </children>
                   </AnchorPane>
               </content>

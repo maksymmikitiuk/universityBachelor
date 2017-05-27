@@ -29,6 +29,8 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -55,11 +57,33 @@ public class SubjectActivityController implements Initializable {
     @FXML
     TableColumn<DiplomamarksEntity, String> marksTableEcts;
 
+    @FXML
+    TableView<DocumentregistrationEntity> fileTable;
+    @FXML
+    TableColumn<DocumentregistrationEntity, String> fileTableType;
+    @FXML
+    TableColumn<DocumentregistrationEntity, String> fileTablePath;
+    @FXML
+    TableColumn<DocumentregistrationEntity, String> fileTableDate;
+    @FXML
+    TableColumn<DocumentregistrationEntity, String> fileTableUser;
+    @FXML
+    TableColumn<DocumentregistrationEntity, String> fileTableAD;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initMarksTable();
+        initFileTable();
+        updateFileTable();
 
         diplomasubjects.setSubject("");
+
+        diplomaType.valueProperty().addListener(new ChangeListener<DiplomatypeEntity>() {
+            @Override
+            public void changed(ObservableValue<? extends DiplomatypeEntity> observable, DiplomatypeEntity oldValue, DiplomatypeEntity newValue) {
+                updateFileTable();
+            }
+        });
 
         create.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, new EventHandler<javafx.scene.input.MouseEvent>() {
             @Override
@@ -313,8 +337,6 @@ public class SubjectActivityController implements Initializable {
     public void fillForm(DiplomasubjectsEntity diploma) {
         diplomasubjects = diploma;
 
-        updateMarksTable();
-
         fillFinish();
 
         newStudent = diploma.getStudent();
@@ -332,21 +354,25 @@ public class SubjectActivityController implements Initializable {
         diplomaType.setDisable(false);
 
         create.setText("Зберегти");
+
+        updateMarksTable();
+        updateFileTable();
     }
 
     private void fillFinish() {
         DiplomamarksEntity diplomamarks = new DiplomaMarksController().getFinish(diplomasubjects);
-        if(diplomamarks.getPoint() != null){
-        points.setText(diplomamarks.getPoint().toString());
-        MarksEntity m = new MarksController().getMarksByPoints(Integer.valueOf(points.getText()));
-        ects.setText(m.getEcts());
-        nationalScale.setText(m.getNationalscale() + " (" + m.getNationalscalenumber() + ")");
-        totalMarks = diplomamarks;}
+        if (diplomamarks.getPoint() != null) {
+            points.setText(diplomamarks.getPoint().toString());
+            MarksEntity m = new MarksController().getMarksByPoints(Integer.valueOf(points.getText()));
+            ects.setText(m.getEcts());
+            nationalScale.setText(m.getNationalscale() + " (" + m.getNationalscalenumber() + ")");
+            totalMarks = diplomamarks;
+        }
     }
 
     private void createSubject() {
         //add subject
-        diplomasubjects.setPlag((diplomasubjects.getPlag() == null)? BigDecimal.valueOf(0.00) :diplomasubjects.getPlag());
+        diplomasubjects.setPlag((diplomasubjects.getPlag() == null) ? BigDecimal.valueOf(0.00) : diplomasubjects.getPlag());
 
         diplomasubjects.setType((DiplomatypeEntity) diplomaType.getSelectionModel().getSelectedItem());
         if (create.getText().equals("Зберегти"))
@@ -357,7 +383,7 @@ public class SubjectActivityController implements Initializable {
         //add mark
         for (DiplomamarksEntity mark : marksTable.getItems()) {
             mark.setId_diploma(diplomasubjects);
-            if(new DiplomaMarksController().isFind(mark.getIddiplomaMarks()))
+            if (new DiplomaMarksController().isFind(mark.getIddiplomaMarks()))
                 new dbController().update(mark);
             else
                 new dbController().create(mark);
@@ -366,7 +392,7 @@ public class SubjectActivityController implements Initializable {
         //add total mark
         if (totalMarks.getPoint() != null) {
             totalMarks.setId_diploma(diplomasubjects);
-            if(new DiplomaMarksController().isFind(totalMarks.getIddiplomaMarks()))
+            if (new DiplomaMarksController().isFind(totalMarks.getIddiplomaMarks()))
                 new dbController().update(totalMarks);
             else
                 new dbController().create(totalMarks);
@@ -377,6 +403,40 @@ public class SubjectActivityController implements Initializable {
 
         create.getScene().getWindow().hide();
     }
+
+    private void updateFileTable() {
+        fileTable.getItems().clear();
+        ObservableList<DocumentregistrationEntity> document = FXCollections.observableArrayList(new DocumentRegistrationController().getFileByDiploma(diplomasubjects));
+        List<StructureofthediplomaEntity> structure = new ArrayList<>();
+
+        for (StructureofthediplomaEntity s : new StructureOfTheDiplomaController().getStructure((DiplomatypeEntity) diplomaType.getSelectionModel().getSelectedItem()))
+            if (document.size() != 0) {
+                for (DocumentregistrationEntity dr : document)
+                    if (!dr.getId_type().equals(s.getIddocumentType()))
+                        structure.add(s);
+            } else
+                structure.add(s);
+
+        for (StructureofthediplomaEntity s : structure) {
+            DocumentregistrationEntity d = new DocumentregistrationEntity();
+            d.setId_type(s.getIddocumentType());
+            document.add(d);
+        }
+
+        fileTable.getItems().addAll(document);
+    }
+
+
+    private void initFileTable() {
+        fileTable.setEditable(true);
+
+        fileTableType.setCellValueFactory(new PropertyValueFactory("id_type"));
+        fileTableAD.setCellValueFactory(new PropertyValueFactory(""));
+        fileTableDate.setCellValueFactory(new PropertyValueFactory("documentregistration"));
+        fileTablePath.setCellValueFactory(new PropertyValueFactory("path"));
+        fileTableUser.setCellValueFactory(new PropertyValueFactory("idusers"));
+    }
+
 }
 
 class EditingCell extends TableCell<MarksEntity, Integer> {

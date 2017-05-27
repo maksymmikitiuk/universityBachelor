@@ -7,14 +7,24 @@ import java.sql.Date;
  * Created by Антон Микитюк on 17.11.2016.
  */
 @Entity
-@Table(name = "documentregistration", schema = "university", catalog = "")
-@IdClass(DocumentregistrationEntityPK.class)
+@Table(name = "documentregistration", schema = "university")
 public class DocumentregistrationEntity {
     private int iddocumentRegistration;
     private Date documentregistration;
-    private int idusers;
-    private int iddiplomaSubjects;
+    private UsersEntity idusers;
+    private DiplomasubjectsEntity iddiplomaSubjects;
     private String path;
+    private DocumenttypeEntity id_type;
+
+    @ManyToOne
+    @JoinColumn(name = "id_type")
+    public DocumenttypeEntity getId_type() {
+        return id_type;
+    }
+
+    public void setId_type(DocumenttypeEntity id_type) {
+        this.id_type = id_type;
+    }
 
     @Id
     @Column(name = "iddocumentRegistration")
@@ -36,23 +46,23 @@ public class DocumentregistrationEntity {
         this.documentregistration = documentregistration;
     }
 
-    @Id
-    @Column(name = "idusers")
-    public int getIdusers() {
+    @ManyToOne
+    @JoinColumn(name = "idusers")
+    public UsersEntity getIdusers() {
         return idusers;
     }
 
-    public void setIdusers(int idusers) {
+    public void setIdusers(UsersEntity idusers) {
         this.idusers = idusers;
     }
 
-    @Id
-    @Column(name = "iddiplomaSubjects")
-    public int getIddiplomaSubjects() {
+    @ManyToOne
+    @JoinColumn(name = "iddiplomaSubjects")
+    public DiplomasubjectsEntity getIddiplomaSubjects() {
         return iddiplomaSubjects;
     }
 
-    public void setIddiplomaSubjects(int iddiplomaSubjects) {
+    public void setIddiplomaSubjects(DiplomasubjectsEntity iddiplomaSubjects) {
         this.iddiplomaSubjects = iddiplomaSubjects;
     }
 
@@ -87,8 +97,6 @@ public class DocumentregistrationEntity {
     public int hashCode() {
         int result = iddocumentRegistration;
         result = 31 * result + (documentregistration != null ? documentregistration.hashCode() : 0);
-        result = 31 * result + idusers;
-        result = 31 * result + iddiplomaSubjects;
         result = 31 * result + (path != null ? path.hashCode() : 0);
         return result;
     }
