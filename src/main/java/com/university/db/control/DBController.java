@@ -8,13 +8,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class dbController {
+public class DBController {
 
     private static SessionFactory factory;
     public static Stage mainStage;
     public static UsersEntity currentUser;
 
-    public dbController() {
+    public DBController() {
     }
 
     public static SessionFactory getFactory() {
