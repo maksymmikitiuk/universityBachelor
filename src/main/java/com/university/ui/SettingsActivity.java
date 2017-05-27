@@ -1,13 +1,13 @@
 package com.university.ui;
 
-import com.university.db.control.dbController;
+import com.university.db.control.DBController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class settingsActivity extends Application {
+public class SettingsActivity extends Application {
 
 
     public static void main(String[] args) {
@@ -17,10 +17,10 @@ public class settingsActivity extends Application {
 
     @Override
     public void start(final Stage stage) throws Exception {
-        dbController.getSession();
-        dbController.setStage(stage);
+        DBController.getSession();
+        DBController.setStage(stage);
 
-        Parent root = (Parent) FXMLLoader.load(rootActivity.class.getResource("/ui/view/settingsActivity.fxml"));
+        Parent root = (Parent) FXMLLoader.load(RootActivity.class.getResource("/ui/view/settingsActivity.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);

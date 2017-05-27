@@ -10,8 +10,8 @@ import javafx.util.Duration;
 /**
  * Created by maksy on 12-Jul-16.
  */
-public class animation {
-    public animation() {
+public class Animation {
+    public Animation() {
     }
 
     public void showFilter(AnchorPane anchorPane, Label show, Label hide, AnchorPane work, boolean isShow){
