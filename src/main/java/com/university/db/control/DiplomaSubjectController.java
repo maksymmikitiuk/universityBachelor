@@ -9,10 +9,10 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
-import static com.university.db.control.dbController.getFactory;
+import static com.university.db.control.DBController.getFactory;
 
-public class diplomaSubjectController {
-    public diplomaSubjectController() {
+public class DiplomaSubjectController {
+    public DiplomaSubjectController() {
     }
 
     public DiplomasubjectsEntity getDiplomaSubjectById(int id) {

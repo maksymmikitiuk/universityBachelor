@@ -9,12 +9,12 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
-import static com.university.db.control.dbController.currentUser;
-import static com.university.db.control.dbController.getFactory;
+import static com.university.db.control.DBController.currentUser;
+import static com.university.db.control.DBController.getFactory;
 
-public class userController {
+public class UserController {
 
-    public userController() {
+    public UserController() {
     }
 
     public UsersEntity getCurrentUserInformation(String username) {

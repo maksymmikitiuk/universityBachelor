@@ -9,13 +9,13 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
-import static com.university.db.control.dbController.getFactory;
+import static com.university.db.control.DBController.getFactory;
 
 /**
  * Created by maksymmikitiuk on 3/28/17.
  */
-public class groupController {
-    public groupController() {
+public class GroupController {
+    public GroupController() {
     }
 
     public List<GroupsEntity> getAllGroup(){
