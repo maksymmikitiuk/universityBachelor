@@ -1,6 +1,6 @@
 package com.university.externalFile;
 
-import com.university.db.control.groupController;
+import com.university.db.control.GroupController;
 import com.university.db.entity.StudentsEntity;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class workWithExcel {
+public class WorkWithExcel {
     private String pathToFile;
     private FileInputStream inputStream;
     private Workbook workbook;
     private List<StudentsEntity> columnList = new ArrayList<StudentsEntity>();
 
-    public workWithExcel(String pathToFile) {
+    public WorkWithExcel(String pathToFile) {
         this.pathToFile = pathToFile;
 
         if (openFile()) {
@@ -68,7 +68,7 @@ public class workWithExcel {
                         break;
                     case 4:
                         Double d = cell.getNumericCellValue();
-                        student.setIdgroups(new groupController().getGroupById(d.intValue()));
+                        student.setIdgroups(new GroupController().getGroupById(d.intValue()));
                         break;
                     case 5:
                         student.setPhone(cell.getStringCellValue());

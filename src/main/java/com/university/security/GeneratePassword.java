@@ -3,8 +3,8 @@ package com.university.security;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class generatePassword {
-    public generatePassword() {
+public class GeneratePassword {
+    public GeneratePassword() {
     }
 
     public String generatedSecuredPasswordHash(String originalPassword, String username){

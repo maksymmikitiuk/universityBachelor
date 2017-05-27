@@ -4,11 +4,11 @@ import com.university.db.entity.StudentsEntity;
 
 import java.util.List;
 
-public class upLoadToDB {
-    public upLoadToDB() {
+public class UpLoadToDB {
+    public UpLoadToDB() {
     }
 
     public List<StudentsEntity> upLoadToUser(String path){
-        return new workWithExcel(path).getColumnList();
+        return new WorkWithExcel(path).getColumnList();
     }
 }
