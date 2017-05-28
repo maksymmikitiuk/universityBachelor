@@ -180,7 +180,7 @@
                     <children>
                         <Button fx:id="STUDENT_P_LOAD" mnemonicParsing="false" text="Завантажити з файлу" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                         <Button fx:id="STUDENT_P_CREATE" mnemonicParsing="false" style="-fx-background-color: green;" text="Створити" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
-                        <TableView fx:id="tableStudents" layoutX="20.0" layoutY="25.0" prefHeight="200.0" prefWidth="220.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
+                        <TableView fx:id="tableStudents" layoutX="20.0" layoutY="25.0" prefHeight="200.0" prefWidth="220.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
                             <columns>
                                 <TableColumn fx:id="tableStudentsLName" prefWidth="75.0" text="Прізвище" />
                                 <TableColumn fx:id="tableStudentsFName" prefWidth="127.4000244140625" text="Ім'я" />
@@ -235,17 +235,14 @@
                 <AnchorPane fx:id="SUBJECT_P_MAIN" layoutX="10.0" layoutY="60.0" prefHeight="786.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Button fx:id="SUBJECT_P_CREATE" mnemonicParsing="false" style="-fx-background-color: green;" text="Створити" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
-                        <TableView fx:id="tableSubject" layoutX="20.0" layoutY="25.0" prefHeight="200.0" prefWidth="220.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
+                        <TableView fx:id="tableSubject" layoutX="20.0" layoutY="25.0" prefHeight="200.0" prefWidth="220.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
                             <columnResizePolicy>
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                             <columns>
                                 <TableColumn fx:id="tableSubjectSubject" prefWidth="75.0" text="Тема" />
-                                <TableColumn fx:id="tableSubjectDefenceDiploma" prefWidth="75.0" text="ХЗ" visible="false" />
                                 <TableColumn fx:id="tableSubjectStudent" prefWidth="75.0" text="Студент" />
                                 <TableColumn fx:id="tableSubjectCurator" prefWidth="75.0" text="Керівник" />
-                                <TableColumn fx:id="tableSubjectReviewr" prefWidth="75.0" text="ХЗ2" visible="false" />
-                                <TableColumn fx:id="tableSubjectMarks" prefWidth="75.0" text="Оцінки" visible="false" />
                                 <TableColumn fx:id="tableSubjectType" prefWidth="75.0" text="Тип" />
                         <TableColumn fx:id="tableSubjectForm" prefWidth="75.0" text="Форма" />
                             </columns>
@@ -293,7 +290,7 @@
                     <children>
                         <Button fx:id="PROFESSOR_P_LOAD" mnemonicParsing="false" text="Завантажити з файлу" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                         <Button fx:id="PROFESSOR_P_CREATE" mnemonicParsing="false" style="-fx-background-color: green;" text="Створити" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
-                        <TableView fx:id="tableProfessor" layoutX="20.0" layoutY="25.0" prefHeight="200.0" prefWidth="220.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
+                        <TableView fx:id="tableProfessor" layoutX="20.0" layoutY="25.0" prefHeight="200.0" prefWidth="220.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
                             <columnResizePolicy>
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>

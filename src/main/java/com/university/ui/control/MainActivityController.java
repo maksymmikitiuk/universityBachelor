@@ -785,9 +785,9 @@ public class MainActivityController implements Initializable {
     private void initSubjectTable() {
         tableSubjectSubject.setCellValueFactory(new PropertyValueFactory("subject"));
         tableSubjectCurator.setCellValueFactory(new PropertyValueFactory("curator"));
-        tableSubjectDefenceDiploma.setCellValueFactory(new PropertyValueFactory("defencediploma"));
-        tableSubjectMarks.setCellValueFactory(new PropertyValueFactory("mark"));
-        tableSubjectReviewr.setCellValueFactory(new PropertyValueFactory("reviewer"));
+//        tableSubjectDefenceDiploma.setCellValueFactory(new PropertyValueFactory("defencediploma"));
+//        tableSubjectMarks.setCellValueFactory(new PropertyValueFactory("mark"));
+//        tableSubjectReviewr.setCellValueFactory(new PropertyValueFactory("reviewer"));
         tableSubjectStudent.setCellValueFactory(new PropertyValueFactory("student"));
         tableSubjectType.setCellValueFactory(new PropertyValueFactory("type"));
         tableSubjectForm.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DiplomasubjectsEntity, String>, ObservableValue<String>>() {

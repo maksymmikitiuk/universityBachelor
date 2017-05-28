@@ -46,6 +46,7 @@ public class SubjectActivityController implements Initializable {
     private StudentsEntity newStudent;
     private DiplomamarksEntity totalMarks = new DiplomamarksEntity();
     private ObservableList<DiplomamarksEntity> diplomamarks;
+    private ObservableList<DocumentregistrationEntity> document;
 
     @FXML
     TableView<DiplomamarksEntity> marksTable;
@@ -418,7 +419,7 @@ public class SubjectActivityController implements Initializable {
 
     private void updateFileTable() {
         fileTable.getItems().clear();
-        ObservableList<DocumentregistrationEntity> document = FXCollections.observableArrayList(new DocumentRegistrationController().getFileByDiploma(diplomasubjects));
+        document = FXCollections.observableArrayList(new DocumentRegistrationController().getFileByDiploma(diplomasubjects));
         List<DocumenttypeEntity> structure = new StructureOfTheDiplomaController().getStructure((DiplomatypeEntity) diplomaType.getSelectionModel().getSelectedItem());
 
         if (document.size() != 0) {
