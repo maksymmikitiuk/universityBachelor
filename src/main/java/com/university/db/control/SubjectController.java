@@ -1,8 +1,6 @@
 package com.university.db.control;
 
 import com.university.db.entity.DiplomasubjectsEntity;
-import com.university.db.entity.StudentsEntity;
-import javafx.scene.control.ComboBox;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -13,7 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.university.db.control.dbController.getFactory;
+import static com.university.db.control.DBController.getFactory;
 
 /**
  * Created by maksymmikitiuk on 4/23/17.

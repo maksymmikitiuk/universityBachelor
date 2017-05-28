@@ -1,7 +1,7 @@
 package com.university.ui.control;
 
+import com.university.db.control.DBController;
 import com.university.db.control.MarksController;
-import com.university.db.control.dbController;
 import com.university.db.entity.MarksEntity;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -126,7 +126,7 @@ public class SettingsController implements Initializable {
             marksEntity.setPointsto(Integer.valueOf(col.get(i).get(5).getText()));
             marksEntity.setIdmarks(Integer.valueOf(col.get(i).get(0).getText()));
 
-            new dbController().update(marksEntity);
+            new DBController().update(marksEntity);
         }
 
         fillMarks();

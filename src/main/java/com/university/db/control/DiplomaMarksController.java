@@ -10,7 +10,7 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
-import static com.university.db.control.dbController.getFactory;
+import static com.university.db.control.DBController.getFactory;
 
 /**
  * Created by maksymmikitiuk on 5/14/17.

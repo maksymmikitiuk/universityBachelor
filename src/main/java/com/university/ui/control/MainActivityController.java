@@ -3,7 +3,7 @@ package com.university.ui.control;
 import com.university.comboBox.FillComboBox;
 import com.university.db.control.*;
 import com.university.db.entity.*;
-import com.university.ui.animation.animation;
+import com.university.ui.animation.Animation;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -67,14 +67,14 @@ public class MainActivityController implements Initializable {
         STUDENT_P_FILTER_HIDE.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                new animation().showFilter(STUDENT_P_FILTER, STUDENT_P_FILTER_SHOW, STUDENT_P_FILTER_HIDE, STUDENT_P_MAIN, false);
+                new Animation().showFilter(STUDENT_P_FILTER, STUDENT_P_FILTER_SHOW, STUDENT_P_FILTER_HIDE, STUDENT_P_MAIN, false);
             }
         });
 
         STUDENT_P_FILTER_SHOW.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                new animation().showFilter(STUDENT_P_FILTER, STUDENT_P_FILTER_SHOW, STUDENT_P_FILTER_HIDE, STUDENT_P_MAIN, true);
+                new Animation().showFilter(STUDENT_P_FILTER, STUDENT_P_FILTER_SHOW, STUDENT_P_FILTER_HIDE, STUDENT_P_MAIN, true);
             }
         });
 
@@ -251,7 +251,7 @@ public class MainActivityController implements Initializable {
 
     private void deleteStudent(StudentsEntity student) {
         if (deleteDialog())
-            new dbController().delete(student);
+            new DBController().delete(student);
 
         if (STUDENT_P_IS_FILTER)
             updateStudentTableByParameter();
@@ -397,14 +397,14 @@ public class MainActivityController implements Initializable {
         PROFESSOR_P_FILTER_HIDE.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                new animation().showFilter(PROFESSOR_P_FILTER, PROFESSOR_P_FILTER_SHOW, PROFESSOR_P_FILTER_HIDE, PROFESSOR_P_MAIN, false);
+                new Animation().showFilter(PROFESSOR_P_FILTER, PROFESSOR_P_FILTER_SHOW, PROFESSOR_P_FILTER_HIDE, PROFESSOR_P_MAIN, false);
             }
         });
 
         PROFESSOR_P_FILTER_SHOW.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                new animation().showFilter(PROFESSOR_P_FILTER, PROFESSOR_P_FILTER_SHOW, PROFESSOR_P_FILTER_HIDE, PROFESSOR_P_MAIN, true);
+                new Animation().showFilter(PROFESSOR_P_FILTER, PROFESSOR_P_FILTER_SHOW, PROFESSOR_P_FILTER_HIDE, PROFESSOR_P_MAIN, true);
             }
         });
 
@@ -534,7 +534,7 @@ public class MainActivityController implements Initializable {
 
     private void deleteProfessor(TeachersEntity teacher) {
         if (deleteDialog())
-            new dbController().delete(teacher);
+            new DBController().delete(teacher);
 
         if (PROFESSOR_P_IS_FILTER)
             updateProfessorTableByParameter();
@@ -641,14 +641,14 @@ public class MainActivityController implements Initializable {
 //        SUBJECT_P_FILTER_HIDE.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 //            @Override
 //            public void handle(MouseEvent event) {
-//                new animation().showFilter(SUBJECT_P_FILTER, SUBJECT_P_FILTER_SHOW, SUBJECT_P_FILTER_HIDE, SUBJECT_P_MAIN, false);
+//                new Animation().showFilter(SUBJECT_P_FILTER, SUBJECT_P_FILTER_SHOW, SUBJECT_P_FILTER_HIDE, SUBJECT_P_MAIN, false);
 //            }
 //        });
 //
 //        SUBJECT_P_FILTER_SHOW.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 //            @Override
 //            public void handle(MouseEvent event) {
-//                new animation().showFilter(SUBJECT_P_FILTER, SUBJECT_P_FILTER_SHOW, SUBJECT_P_FILTER_HIDE, SUBJECT_P_MAIN, true);
+//                new Animation().showFilter(SUBJECT_P_FILTER, SUBJECT_P_FILTER_SHOW, SUBJECT_P_FILTER_HIDE, SUBJECT_P_MAIN, true);
 //            }
 //        });
 
@@ -770,7 +770,7 @@ public class MainActivityController implements Initializable {
 
     private void deleteSubject(DiplomasubjectsEntity subject) {
         if (deleteDialog())
-            new dbController().delete(subject);
+            new DBController().delete(subject);
 
         if (SUBJECT_P_IS_FILTER)
             updateSubjectTableByParameter();
@@ -917,8 +917,8 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            new userController().updateCurrentUser();
-            currentUser_username.setText(dbController.currentUser.toString());
+            new UserController().updateCurrentUser();
+            currentUser_username.setText(DBController.currentUser.toString());
         }
     }
 
@@ -994,12 +994,12 @@ public class MainActivityController implements Initializable {
     }
 
     private void initCurrentUser() {
-        currentUser_username.setText(dbController.currentUser.toString());
+        currentUser_username.setText(DBController.currentUser.toString());
 
         currentUserSettings.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                openSettingsUser(dbController.currentUser.getIdusers());
+                openSettingsUser(DBController.currentUser.getIdusers());
             }
         });
     }

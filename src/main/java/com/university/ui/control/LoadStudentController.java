@@ -1,11 +1,11 @@
 package com.university.ui.control;
 
+import com.university.db.control.DBController;
+import com.university.db.control.GroupController;
 import com.university.db.control.StudentController;
-import com.university.db.control.dbController;
-import com.university.db.control.groupController;
 import com.university.db.entity.GroupsEntity;
 import com.university.db.entity.StudentsEntity;
-import com.university.externalFile.upLoadToDB;
+import com.university.externalFile.UpLoadToDB;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -87,7 +87,7 @@ public class LoadStudentController implements Initializable {
             }
         });
         tableStudentsGroup.setCellValueFactory(new PropertyValueFactory("idgroups"));
-        tableStudentsGroup.setCellFactory(ComboBoxTableCell.<StudentsEntity, GroupsEntity>forTableColumn(FXCollections.<GroupsEntity>observableArrayList(new groupController().getAllGroup())));
+        tableStudentsGroup.setCellFactory(ComboBoxTableCell.<StudentsEntity, GroupsEntity>forTableColumn(FXCollections.<GroupsEntity>observableArrayList(new GroupController().getAllGroup())));
         tableStudentsGroup.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<StudentsEntity, GroupsEntity>>() {
             @Override
             public void handle(TableColumn.CellEditEvent<StudentsEntity, GroupsEntity> event) {
@@ -135,7 +135,7 @@ public class LoadStudentController implements Initializable {
             public void handle(ActionEvent event) {
                 File file = new FileChooser().showOpenDialog(open_file.getScene().getWindow());
                 if (file != null) {
-                    list = new upLoadToDB().upLoadToUser(file.getPath());
+                    list = new UpLoadToDB().upLoadToUser(file.getPath());
                     path_field.setText(file.getPath());
                     tableStudents.getItems().clear();
                     tableStudents.getItems().addAll(FXCollections.observableArrayList(
@@ -164,6 +164,6 @@ public class LoadStudentController implements Initializable {
     private void loadStudent() {
         for (StudentsEntity entity:list)
             if(new StudentController().checkStudent(entity))
-                new dbController().create(entity);
+                new DBController().create(entity);
     }
 }

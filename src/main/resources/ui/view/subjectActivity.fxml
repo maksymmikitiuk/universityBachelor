@@ -70,7 +70,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="marksTable" layoutX="14.0" layoutY="44.0" prefHeight="236.0" prefWidth="713.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="44.0">
+                        <TableView fx:id="marksTable" layoutX="14.0" layoutY="44.0" prefHeight="236.0" prefWidth="713.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="44.0">
                           <columns>
                             <TableColumn fx:id="marksTableOwner" prefWidth="75.0" text="ПІБ" />
                             <TableColumn fx:id="marksTableTypeOwner" prefWidth="75.0" text="Тип" />
@@ -114,13 +114,13 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="fileTable" layoutX="16.0" layoutY="14.0" prefHeight="267.0" prefWidth="385.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                        <TableView fx:id="fileTable" layoutX="16.0" layoutY="14.0" prefHeight="267.0" prefWidth="385.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                           <columns>
                             <TableColumn fx:id="fileTableType" editable="false" prefWidth="75.0" text="Тип документу" />
                             <TableColumn fx:id="fileTablePath" editable="false" prefWidth="75.0" text="Шлях" />
                               <TableColumn fx:id="fileTableDate" editable="false" prefWidth="75.0" text="Дата" />
                               <TableColumn fx:id="fileTableUser" editable="false" prefWidth="75.0" text="Користувач" />
-                              <TableColumn fx:id="fileTableAD" prefWidth="75.0" sortable="false" />
+                              <TableColumn fx:id="fileTableAD" prefWidth="75.0" sortable="false" text="Дія" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

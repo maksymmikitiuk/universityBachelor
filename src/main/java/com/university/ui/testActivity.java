@@ -1,6 +1,6 @@
 package com.university.ui;
 
-import com.university.db.control.dbController;
+import com.university.db.control.DBController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,8 +15,8 @@ public class testActivity extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //getSession();
-        dbController.setStage(stage);
-        Parent root = (Parent) FXMLLoader.load(rootActivity.class.getResource("/ui/view/createSubjectActivity.fxml"));
+        DBController.setStage(stage);
+        Parent root = (Parent) FXMLLoader.load(RootActivity.class.getResource("/ui/view/createSubjectActivity.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         //stage.initStyle(StageStyle.UNDECORATED);

@@ -1,7 +1,7 @@
 package com.university.db.control;
 
 import com.university.db.entity.UsersEntity;
-import com.university.security.generatePassword;
+import com.university.security.GeneratePassword;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -54,7 +54,7 @@ public class UserController {
     }
 
     public boolean passwordAuthentication(String iPassword, String login) {
-        generatePassword generatePassword = new generatePassword();
+        GeneratePassword generatePassword = new GeneratePassword();
         return generatePassword.comparePassword(generatePassword.generatedSecuredPasswordHash(iPassword, login), getUserPassword(login));
     }
 

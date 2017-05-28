@@ -1,8 +1,8 @@
 package com.university.ui.control;
 
 import com.university.comboBox.FillComboBox;
-import com.university.db.control.dbController;
-import com.university.db.control.groupController;
+import com.university.db.control.DBController;
+import com.university.db.control.GroupController;
 import com.university.db.control.StudentController;
 import com.university.db.entity.GroupsEntity;
 import com.university.db.entity.StudentsEntity;
@@ -121,7 +121,7 @@ public class StudentActivityController implements Initializable {
         student.setEmail(email.getText());
         student.setPhone(phone.getPlainText());
 
-        if(!new dbController().update(student)){
+        if(!new DBController().update(student)){
 
         }
     }
@@ -141,7 +141,7 @@ public class StudentActivityController implements Initializable {
         email.setText(student.getEmail());
         studentId.setPlainText(student.getStudentidcard());
         phone.setPlainText(student.getPhone());
-        groupList.getSelectionModel().select(new groupController().getGroupById(student.getIdgroups().getIdgroups()));
+        groupList.getSelectionModel().select(new GroupController().getGroupById(student.getIdgroups().getIdgroups()));
     }
 
     private boolean checkFill() {
@@ -189,7 +189,7 @@ public class StudentActivityController implements Initializable {
         student.setEmail(email.getText());
         student.setPhone(phone.getPlainText());
 
-        if (!new dbController().create(student)) {
+        if (!new DBController().create(student)) {
 
         }
     }

@@ -19,7 +19,7 @@ public class FillComboBox {
     }
 
     public void fillGroup() {
-        comboBox.setItems(FXCollections.observableArrayList(new groupController().getAllGroup()));
+        comboBox.setItems(FXCollections.observableArrayList(new GroupController().getAllGroup()));
         comboBox.setCellFactory(new Callback<ListView<GroupsEntity>, ListCell<GroupsEntity>>() {
 
             @Override

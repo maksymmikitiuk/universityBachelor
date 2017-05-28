@@ -5,6 +5,7 @@ import com.university.Antiplagiarism.CheckAntiplagiarism;
 import com.university.comboBox.FillComboBox;
 import com.university.db.control.*;
 import com.university.db.entity.*;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,14 +23,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -68,7 +71,7 @@ public class SubjectActivityController implements Initializable {
     @FXML
     TableColumn<DocumentregistrationEntity, String> fileTableUser;
     @FXML
-    TableColumn<DocumentregistrationEntity, String> fileTableAD;
+    TableColumn<DocumentregistrationEntity, Boolean> fileTableAD;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -376,30 +379,39 @@ public class SubjectActivityController implements Initializable {
 
         diplomasubjects.setType((DiplomatypeEntity) diplomaType.getSelectionModel().getSelectedItem());
         if (create.getText().equals("Зберегти"))
-            new dbController().update(diplomasubjects);
+            new DBController().update(diplomasubjects);
         else
-            new dbController().create(diplomasubjects);
+            new DBController().create(diplomasubjects);
 
         //add mark
         for (DiplomamarksEntity mark : marksTable.getItems()) {
             mark.setId_diploma(diplomasubjects);
             if (new DiplomaMarksController().isFind(mark.getIddiplomaMarks()))
-                new dbController().update(mark);
+                new DBController().update(mark);
             else
-                new dbController().create(mark);
+                new DBController().create(mark);
         }
 
         //add total mark
         if (totalMarks.getPoint() != null) {
             totalMarks.setId_diploma(diplomasubjects);
             if (new DiplomaMarksController().isFind(totalMarks.getIddiplomaMarks()))
-                new dbController().update(totalMarks);
+                new DBController().update(totalMarks);
             else
-                new dbController().create(totalMarks);
+                new DBController().create(totalMarks);
         }
 
         //add file
-
+        List<DocumentregistrationEntity> list = fileTable.getItems();
+        for (DocumentregistrationEntity d : list) {
+            if (d.getPath() != null) {
+                d.setIddiplomaSubjects(diplomasubjects);
+                if (d.getIddocumentRegistration() == 0)
+                    new DBController().create(d);
+                else
+                    new DBController().update(d);
+            }
+        }
 
         create.getScene().getWindow().hide();
     }
@@ -407,21 +419,25 @@ public class SubjectActivityController implements Initializable {
     private void updateFileTable() {
         fileTable.getItems().clear();
         ObservableList<DocumentregistrationEntity> document = FXCollections.observableArrayList(new DocumentRegistrationController().getFileByDiploma(diplomasubjects));
-        List<StructureofthediplomaEntity> structure = new ArrayList<>();
+        List<DocumenttypeEntity> structure = new StructureOfTheDiplomaController().getStructure((DiplomatypeEntity) diplomaType.getSelectionModel().getSelectedItem());
 
-        for (StructureofthediplomaEntity s : new StructureOfTheDiplomaController().getStructure((DiplomatypeEntity) diplomaType.getSelectionModel().getSelectedItem()))
-            if (document.size() != 0) {
-                for (DocumentregistrationEntity dr : document)
-                    if (!dr.getId_type().equals(s.getIddocumentType()))
-                        structure.add(s);
-            } else
-                structure.add(s);
+        if (document.size() != 0) {
+            for (DocumentregistrationEntity d : document) {
+                if (structure.contains(d.getId_type()))
+                    structure.remove(d.getId_type());
+            }
 
-        for (StructureofthediplomaEntity s : structure) {
-            DocumentregistrationEntity d = new DocumentregistrationEntity();
-            d.setId_type(s.getIddocumentType());
-            document.add(d);
-        }
+            for (DocumenttypeEntity s : structure) {
+                DocumentregistrationEntity d = new DocumentregistrationEntity();
+                d.setId_type(s);
+                document.add(d);
+            }
+        } else
+            for (DocumenttypeEntity s : structure) {
+                DocumentregistrationEntity d = new DocumentregistrationEntity();
+                d.setId_type(s);
+                document.add(d);
+            }
 
         fileTable.getItems().addAll(document);
     }
@@ -431,12 +447,24 @@ public class SubjectActivityController implements Initializable {
         fileTable.setEditable(true);
 
         fileTableType.setCellValueFactory(new PropertyValueFactory("id_type"));
-        fileTableAD.setCellValueFactory(new PropertyValueFactory(""));
+        fileTableAD.setSortable(false);
+        fileTableAD.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DocumentregistrationEntity, Boolean>, ObservableValue<Boolean>>() {
+            @Override
+            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<DocumentregistrationEntity, Boolean> p) {
+                return new SimpleBooleanProperty(p.getValue() != null);
+            }
+        });
+        fileTableAD.setCellFactory(
+                new Callback<TableColumn<DocumentregistrationEntity, Boolean>, TableCell<DocumentregistrationEntity, Boolean>>() {
+                    @Override
+                    public TableCell<DocumentregistrationEntity, Boolean> call(TableColumn<DocumentregistrationEntity, Boolean> param) {
+                        return new ButtonCell(fileTable);
+                    }
+                });
         fileTableDate.setCellValueFactory(new PropertyValueFactory("documentregistration"));
         fileTablePath.setCellValueFactory(new PropertyValueFactory("path"));
         fileTableUser.setCellValueFactory(new PropertyValueFactory("idusers"));
     }
-
 }
 
 class EditingCell extends TableCell<MarksEntity, Integer> {
@@ -506,5 +534,66 @@ class EditingCell extends TableCell<MarksEntity, Integer> {
 
     private String getString() {
         return getItem() == null ? "" : getItem().toString();
+    }
+}
+
+class ButtonCell extends TableCell<DocumentregistrationEntity, Boolean> {
+    final Button cellButton = new Button();
+
+    ButtonCell(final TableView tblView) {
+        cellButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) {
+                int selectdIndex = getTableRow().getIndex();
+
+                DocumentregistrationEntity selectedRecord = (DocumentregistrationEntity) tblView.getItems().get(selectdIndex);
+
+                if (selectedRecord.getPath() != null) {
+                    if (selectedRecord.getIddocumentRegistration() == 0) {
+                        selectedRecord.setDocumentregistration(null);
+                        selectedRecord.setPath(null);
+                        selectedRecord.setIdusers(null);
+                    } else {
+                        new DBController().delete(selectedRecord);
+                        selectedRecord.setDocumentregistration(null);
+                        selectedRecord.setPath(null);
+                        selectedRecord.setIdusers(null);
+                    }
+
+                    tblView.refresh();
+                } else {
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.getExtensionFilters().addAll(
+                            new FileChooser.ExtensionFilter("All Files", "*.*"),
+                            new FileChooser.ExtensionFilter("DOC", "*.doc"),
+                            new FileChooser.ExtensionFilter("ODT", "*.odt"),
+                            new FileChooser.ExtensionFilter("DOCX", "*.docx")
+                    );
+                    File file = fileChooser.showOpenDialog(tblView.getScene().getWindow());
+                    ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setPath(file.getAbsolutePath());
+                    ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setIdusers(DBController.currentUser);
+                    ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setDocumentregistration(new Date(System.currentTimeMillis()));
+                    tblView.refresh();
+                }
+            }
+        });
+    }
+
+    //Display button if the row is not empty
+    @Override
+    protected void updateItem(Boolean t, boolean empty) {
+        super.updateItem(t, empty);
+        if (!empty) {
+            cellButton.setPrefWidth(200);
+            DocumentregistrationEntity d = (DocumentregistrationEntity) getTableRow().getItem();
+            if (d != null)
+                if (d.getPath() == null)
+                    cellButton.setText("Додати");
+                else
+                    cellButton.setText("Видалити");
+
+            setGraphic(cellButton);
+        }
     }
 }

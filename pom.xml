@@ -17,7 +17,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>2.0</version>
                 <configuration>
-                    <mainClass>com.university.ui.rootActivity</mainClass>
+                    <mainClass>com.university.ui.RootActivity</mainClass>
                 </configuration>
             </plugin>
             <plugin>
@@ -37,7 +37,7 @@
         <hibernate.version>4.1.11.Final</hibernate.version>
         <mysql.version>5.1.24</mysql.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>com.university.ui.rootActivity</mainClass>
+        <mainClass>com.university.ui.RootActivity</mainClass>
     </properties>
 
     <organization>

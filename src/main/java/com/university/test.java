@@ -1,7 +1,7 @@
 package com.university;
 
 
-import com.university.db.control.dbController;
+import com.university.db.control.DBController;
 import com.university.db.entity.DictionaryEntity;
 
 import java.io.*;
@@ -11,7 +11,7 @@ import java.util.List;
 public class test {
 
     public static void main(String[] args) throws IOException {
-        dbController.getSession();
+        DBController.getSession();
         List<DictionaryEntity> dictionaryEntities = new ArrayList<>();
         try {
             File file = new File("/home/maksymmikitiuk/Desktop/wrd.txt");
@@ -34,7 +34,7 @@ public class test {
 
         for (DictionaryEntity entity:dictionaryEntities){
             System.out.println("Осталось " + col);
-            new dbController().create(entity);
+            new DBController().create(entity);
             col--;
         }
     }

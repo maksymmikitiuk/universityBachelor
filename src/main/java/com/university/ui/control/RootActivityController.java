@@ -1,11 +1,11 @@
 package com.university.ui.control;
 
-import com.university.db.control.dbController;
-import com.university.db.control.userController;
+import com.university.db.control.DBController;
+import com.university.db.control.UserController;
 import com.university.db.entity.UsersEntity;
-import com.university.security.generatePassword;
-import com.university.ui.animation.animation;
-import com.university.ui.mainActivity;
+import com.university.security.GeneratePassword;
+import com.university.ui.MainActivity;
+import com.university.ui.animation.Animation;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -63,7 +63,7 @@ public class RootActivityController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (event.getButton() == MouseButton.PRIMARY) {
-                    new animation().showCreateUser(loginPane);
+                    new Animation().showCreateUser(loginPane);
                     cleatFields();
                 }
             }
@@ -73,7 +73,7 @@ public class RootActivityController implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (event.getButton() == MouseButton.PRIMARY) {
-                    new animation().showCreateUser(loginPane);
+                    new Animation().showCreateUser(loginPane);
                     cleatFields();
                 }
             }
@@ -103,14 +103,14 @@ public class RootActivityController implements Initializable {
                         if (newusernamevalid && newrepasswordvalid) {
                             UsersEntity user = new UsersEntity();
                             user.setUsername(newusername.getText().trim());
-                            user.setPassword(new generatePassword().generatedSecuredPasswordHash(newpassword.getText().trim(), user.getUsername()));
+                            user.setPassword(new GeneratePassword().generatedSecuredPasswordHash(newpassword.getText().trim(), user.getUsername()));
                             user.setfName(newfname.getText().trim());
                             user.setmName(newmname.getText().trim());
                             user.setlName(newlname.getText().trim());
 
-                            if (new dbController().create(user)) {
+                            if (new DBController().create(user)) {
                                 cleatFields();
-                                new animation().showCreateUser(loginPane);
+                                new Animation().showCreateUser(loginPane);
                             } else {
                                 System.err.println("Пользователь не создан");
                             }
@@ -139,7 +139,7 @@ public class RootActivityController implements Initializable {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 newusername.getStyleClass().clear();
                 newusername.getStyleClass().addAll("text-input", "text-field", "field");
-                if (userController.validationUser(newValue)) {
+                if (UserController.validationUser(newValue)) {
                     newusername.getStyleClass().add("true_field");
                     newusernamevalid = true;
                 } else {
@@ -282,20 +282,20 @@ public class RootActivityController implements Initializable {
     }
 
     private void login() {
-        if (new userController().passwordAuthentication(password.getText().trim(), username.getText().trim())) {
-            dbController.currentUser = new userController().getCurrentUserInformation(username.getText());
+        if (new UserController().passwordAuthentication(password.getText().trim(), username.getText().trim())) {
+            DBController.currentUser = new UserController().getCurrentUserInformation(username.getText());
             cleatFields();
             Parent root = null;
             try {
-                root = (Parent) FXMLLoader.load(mainActivity.class.getResource("/ui/view/mainActivity.fxml"));
+                root = (Parent) FXMLLoader.load(MainActivity.class.getResource("/ui/view/mainActivity.fxml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
             Scene scene = new Scene(root);
-            dbController.mainStage.setScene(scene);
-            dbController.mainStage.centerOnScreen();
-            dbController.mainStage.setResizable(true);
-            dbController.mainStage.show();
+            DBController.mainStage.setScene(scene);
+            DBController.mainStage.centerOnScreen();
+            DBController.mainStage.setResizable(true);
+            DBController.mainStage.show();
         } else {
             error.setVisible(true);
         }

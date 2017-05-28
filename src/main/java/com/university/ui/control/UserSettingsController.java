@@ -1,9 +1,9 @@
 package com.university.ui.control;
 
-import com.university.db.control.dbController;
-import com.university.db.control.userController;
+import com.university.db.control.DBController;
+import com.university.db.control.UserController;
 import com.university.db.entity.UsersEntity;
-import com.university.security.generatePassword;
+import com.university.security.GeneratePassword;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -31,7 +31,7 @@ public class UserSettingsController implements Initializable {
         oldPassword.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (user.getPassword().equals(new generatePassword().generatedSecuredPasswordHash(newValue, user.getUsername()))) {
+                if (user.getPassword().equals(new GeneratePassword().generatedSecuredPasswordHash(newValue, user.getUsername()))) {
                     oldPassword.getStyleClass().removeAll("false_field");
                     oldPassword.getStyleClass().add("true_field");
                     vOldPassword = true;
@@ -79,7 +79,7 @@ public class UserSettingsController implements Initializable {
                 user.setmName(middleName.getText());
                 user.setlName(lastName.getText());
 
-                new dbController().update(user);
+                new DBController().update(user);
 
                 OK.getScene().getWindow().hide();
             }
@@ -89,8 +89,8 @@ public class UserSettingsController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 if (vPassword && vOldPassword) {
-                    user.setPassword(new generatePassword().generatedSecuredPasswordHash(newPassword.getText().trim(), user.getUsername()));
-                    new dbController().update(user);
+                    user.setPassword(new GeneratePassword().generatedSecuredPasswordHash(newPassword.getText().trim(), user.getUsername()));
+                    new DBController().update(user);
                     clearFields();
                     reNewPassword.getStyleClass().remove("false_field");
                     reNewPassword.getStyleClass().add("true_field");
@@ -105,7 +105,7 @@ public class UserSettingsController implements Initializable {
             public void handle(ActionEvent event) {
                 if (vUsername&&vOldUsername) {
                     user.setUsername(newUsername.getText());
-                    new dbController().update(user);
+                    new DBController().update(user);
                     clearFields();
                     reNewUsername.getStyleClass().remove("false_field");
                     reNewUsername.getStyleClass().add("true_field");
@@ -117,7 +117,7 @@ public class UserSettingsController implements Initializable {
     }
 
     public void fillForm(int id) {
-        user = new userController().getUserById(id);
+        user = new UserController().getUserById(id);
 
         firstName.setText(user.getfName());
         lastName.setText(user.getlName());
