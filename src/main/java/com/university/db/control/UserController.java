@@ -2,11 +2,14 @@ package com.university.db.control;
 
 import com.university.db.entity.UsersEntity;
 import com.university.security.GeneratePassword;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.university.db.control.DBController.currentUser;
@@ -53,6 +56,61 @@ public class UserController {
         return new UsersEntity();
     }
 
+    public List<UsersEntity> getAllUser() {
+        Session session = getFactory().openSession();
+        Transaction tx = null;
+        List<UsersEntity> list = new ArrayList<>();
+        try {
+            tx = session.beginTransaction();
+            list = session.createCriteria(UsersEntity.class).list();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return list;
+    }
+
+    public List<UsersEntity> getAllUserByParameter(String parameter) {
+        String[] arg = parameter.trim().split(" ");
+        Session session = getFactory().openSession();
+        Transaction tx = null;
+        Criteria criteria = session.createCriteria(UsersEntity.class);
+        List<UsersEntity> list = new ArrayList<>();
+
+        try {
+            tx = session.beginTransaction();
+
+            //Фильтр по номеру
+            if (!parameter.isEmpty()) {
+                switch (arg.length) {
+                    case 1:
+                        criteria.add(Restrictions.or(Restrictions.like("lastName", '%' + arg[0] + '%', MatchMode.ANYWHERE),
+                                Restrictions.like("firstName", '%' + arg[0] + '%', MatchMode.ANYWHERE)));
+                        break;
+                    default:
+                        criteria.add(Restrictions.or(Restrictions.and(Restrictions.like("firstName", '%' + arg[0] + '%'),
+                                Restrictions.like("lastName", '%' + arg[1] + '%')),
+                                Restrictions.and(Restrictions.like("firstName", '%' + arg[1] + '%'),
+                                        Restrictions.like("lastName", '%' + arg[0] + '%'))));
+                }
+            }
+        } catch (
+                HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally
+
+        {
+            list = criteria.list();
+            session.close();
+        }
+
+        return list;
+    }
+
     public boolean passwordAuthentication(String iPassword, String login) {
         GeneratePassword generatePassword = new GeneratePassword();
         return generatePassword.comparePassword(generatePassword.generatedSecuredPasswordHash(iPassword, login), getUserPassword(login));
@@ -96,7 +154,7 @@ public class UserController {
         return true;
     }
 
-    public void updateCurrentUser(){
+    public void updateCurrentUser() {
         currentUser = getUserById(currentUser.getIdusers());
     }
 }

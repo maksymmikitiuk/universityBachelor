@@ -75,9 +75,9 @@ public class UserSettingsController implements Initializable {
         OK.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                user.setfName(firstName.getText());
-                user.setmName(middleName.getText());
-                user.setlName(lastName.getText());
+                user.setFirstName(firstName.getText());
+                user.setMiddleName(middleName.getText());
+                user.setLastName(lastName.getText());
 
                 new DBController().update(user);
 
@@ -119,9 +119,9 @@ public class UserSettingsController implements Initializable {
     public void fillForm(int id) {
         user = new UserController().getUserById(id);
 
-        firstName.setText(user.getfName());
-        lastName.setText(user.getlName());
-        middleName.setText(user.getmName());
+        firstName.setText(user.getFirstName());
+        lastName.setText(user.getLastName());
+        middleName.setText(user.getMiddleName());
     }
 
     private void clearFields() {

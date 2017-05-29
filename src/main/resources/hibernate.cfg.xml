@@ -10,6 +10,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="connection.username">root</property>
         <property name="show_sql">true</property>
+        <property name="connection.isolation">2</property>
         <mapping class="com.university.db.entity.ChairsEntity"/>
         <mapping class="com.university.db.entity.DiplomaformEntity"/>
         <mapping class="com.university.db.entity.DiplomasubjectsEntity"/>
@@ -29,5 +30,6 @@
         <mapping class="com.university.db.entity.ЕxceptionsEntity"/>
         <mapping class="com.university.db.entity.TypeOwnerMarkEntity"/>
         <mapping class="com.university.db.entity.DictionaryEntity"/>
+        <mapping class="com.university.db.entity.UserroleEntity"/>
     </session-factory>
 </hibernate-configuration>

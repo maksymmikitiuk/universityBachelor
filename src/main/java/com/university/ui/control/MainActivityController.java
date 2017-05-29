@@ -271,10 +271,6 @@ public class MainActivityController implements Initializable {
         STUDENT_P_IS_FILTER = false;
     }
 
-    private void initUserPane() {
-
-    }
-
     private void updateStudentTableByParameter() {
         tableStudents.getItems().clear();
         ObservableList<StudentsEntity> students = FXCollections.observableArrayList(
@@ -843,12 +839,77 @@ public class MainActivityController implements Initializable {
         tableSubject.getItems().addAll(FXCollections.<DiplomasubjectsEntity>observableArrayList(new SubjectController()
                 .getSubjectByParameter(SEARCH.getText())));
     }
-    /**
-     *\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-     *                           Панель пользователи                 \\
-     *\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-     */
 
+    /**
+     * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     * Панель пользователи                 \\
+     * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     */
+    private Boolean USER_P_IS_FILTER;
+    @FXML
+    TableView<UsersEntity> userTable;
+    @FXML
+    TableColumn<UsersEntity, String> userTableFirstName;
+    @FXML
+    TableColumn<UsersEntity, String> userTableLastName;
+    @FXML
+    TableColumn<UsersEntity, String> userTableMiddleName;
+    @FXML
+    TableColumn<UsersEntity, String> userTableLogin;
+    @FXML
+    TableColumn<UsersEntity, String> userTableRole;
+    @FXML
+    TableColumn<UsersEntity, String> userTableAdmin;
+
+    private void initUserPane() {
+        initUserTable();
+        updateUserTable();
+
+        SEARCH.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.length() > 0) {
+                    updateUserTableByParameter();
+                    USER_P_IS_FILTER = true;
+                } else {
+                    updateUserTable();
+                    USER_P_IS_FILTER  = false;
+                }
+            }
+        });
+    }
+
+    private void updateUserTableByParameter() {
+        userTable.getItems().clear();
+        userTable.getItems().addAll(new UserController().getAllUserByParameter(SEARCH.getText().trim()));
+    }
+
+    private void initUserTable() {
+        userTableAdmin.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<UsersEntity, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<UsersEntity, String> p) {
+                if (p.getValue().getAdmin() != 0)
+                    return new SimpleStringProperty("Так");
+                else
+                    return new SimpleStringProperty("Ні");
+            }
+        });
+        userTableFirstName.setCellValueFactory(new PropertyValueFactory("firstName"));
+        userTableRole.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<UsersEntity, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<UsersEntity, String> p) {
+                    return new SimpleStringProperty(p.getValue().getIdUserrole().getName());
+            }
+        });
+        userTableMiddleName.setCellValueFactory(new PropertyValueFactory("middleName"));
+        userTableLastName.setCellValueFactory(new PropertyValueFactory("lastName"));
+        userTableLogin.setCellValueFactory(new PropertyValueFactory("username"));
+    }
+
+    private void updateUserTable() {
+        userTable.getItems().clear();
+        userTable.getItems().addAll(FXCollections.observableArrayList(new UserController().getAllUser()));
+    }
 
     /**
      * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

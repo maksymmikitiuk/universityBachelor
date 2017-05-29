@@ -104,9 +104,10 @@ public class RootActivityController implements Initializable {
                             UsersEntity user = new UsersEntity();
                             user.setUsername(newusername.getText().trim());
                             user.setPassword(new GeneratePassword().generatedSecuredPasswordHash(newpassword.getText().trim(), user.getUsername()));
-                            user.setfName(newfname.getText().trim());
-                            user.setmName(newmname.getText().trim());
-                            user.setlName(newlname.getText().trim());
+                            user.setFirstName(newfname.getText().trim());
+                            user.setMiddleName(newmname.getText().trim());
+                            user.setLastName(newlname.getText().trim());
+                            user.setAdmin((byte) 0);
 
                             if (new DBController().create(user)) {
                                 cleatFields();

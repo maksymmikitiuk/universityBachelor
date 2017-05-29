@@ -7,7 +7,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "students", schema = "university", catalog = "")
-//@IdClass(StudentsEntityPK.class)
 public class StudentsEntity {
 
     @Id
