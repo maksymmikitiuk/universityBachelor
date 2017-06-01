@@ -29,6 +29,10 @@ public class DBController {
         mainStage = s;
     }
 
+    public static Stage getMainStage() {
+        return mainStage;
+    }
+
     public static void getSession() {
         try {
             factory = new Configuration().configure().buildSessionFactory();

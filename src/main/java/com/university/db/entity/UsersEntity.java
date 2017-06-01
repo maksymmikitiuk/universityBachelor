@@ -16,6 +16,17 @@ public class UsersEntity {
     private String lastName;
     private byte admin;
     private UserroleEntity idUserrole;
+    private int active;
+
+    @Basic
+    @Column(name = "active")
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
 
     @Id
     @Column(name = "idusers")

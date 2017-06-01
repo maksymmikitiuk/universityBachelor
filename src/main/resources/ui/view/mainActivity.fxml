@@ -55,7 +55,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane layoutY="355.0" prefHeight="58.0" prefWidth="251.0" styleClass="main-menu-item">
+                        <Pane fx:id="DOCUMENT" layoutY="355.0" prefHeight="58.0" prefWidth="251.0" styleClass="main-menu-item">
                             <children>
                                 <Label layoutX="14.0" layoutY="17.0" maxHeight="24.0" maxWidth="24.0" minHeight="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="24.0" styleClass="main-menu-item-document-icon" />
                                 <Label layoutX="46.0" layoutY="17.0" maxHeight="24.0" maxWidth="196.0" minHeight="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="196.0" text="Документи" textFill="WHITE">
@@ -65,7 +65,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane layoutY="413.0" prefHeight="58.0" prefWidth="251.0" styleClass="main-menu-item">
+                        <Pane fx:id="GROUP" layoutY="413.0" prefHeight="58.0" prefWidth="251.0" styleClass="main-menu-item">
                             <children>
                                 <Label layoutX="14.0" layoutY="17.0" maxHeight="24.0" maxWidth="24.0" minHeight="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="24.0" styleClass="main-menu-item-group-icon" />
                                 <Label layoutX="48.0" layoutY="17.0" maxHeight="24.0" maxWidth="196.0" minHeight="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="196.0" text="Групи" textFill="WHITE">
@@ -75,7 +75,7 @@
                                 </Label>
                             </children>
                         </Pane>
-                        <Pane layoutY="471.0" prefHeight="58.0" prefWidth="251.0" styleClass="main-menu-item">
+                        <Pane fx:id="CHAIRS" layoutY="471.0" prefHeight="58.0" prefWidth="251.0" styleClass="main-menu-item">
                             <children>
                                 <Label layoutX="14.0" layoutY="17.0" maxHeight="24.0" maxWidth="24.0" minHeight="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="24.0" styleClass="main-menu-item-chair-icon" />
                                 <Label layoutX="47.0" layoutY="17.0" maxHeight="24.0" maxWidth="196.0" minHeight="24.0" minWidth="24.0" prefHeight="24.0" prefWidth="196.0" text="Кафедри" textFill="WHITE">
@@ -137,7 +137,7 @@
                         </AnchorPane>
                         <AnchorPane layoutX="5.0" layoutY="282.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane">
                             <children>
-                                <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Т" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
+                                <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Тип" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -148,7 +148,7 @@
                         </AnchorPane>
                         <AnchorPane layoutX="6.0" layoutY="397.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane">
                             <children>
-                                <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="К" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
+                                <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Рівень кваліфікації" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
@@ -205,7 +205,7 @@
                   <TableColumn fx:id="userTableFirstName" minWidth="0.0" prefWidth="4.0" text="Імʼя" />
                   <TableColumn fx:id="userTableMiddleName" minWidth="0.0" prefWidth="56.0" text="По батькові" />
                   <TableColumn fx:id="userTableRole" prefWidth="19.0" text="Роль" />
-                  <TableColumn fx:id="userTableAdmin" prefWidth="75.0" text="Адмін" />
+                  <TableColumn fx:id="userTableAdmin" prefWidth="75.0" text="Адмін" visible="false" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -279,7 +279,7 @@
                                     </font>
                                 </Label>
                                 <ComboBox fx:id="PROFESSOR_P_FILTER_CHAIRS" layoutX="13.0" layoutY="58.0" prefHeight="25.0" prefWidth="168.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="58.0" />
-                                <Label fx:id="PROFESSOR_P_FILTER_CHAIRS_CLEAR" layoutX="179.0" layoutY="65.0" prefHeight="20.0" prefWidth="20.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="64.0" />
+                                <Label fx:id="PROFESSOR_P_FILTER_CHAIRS_CLEAR" layoutX="179.0" layoutY="65.0" prefHeight="22.0" prefWidth="20.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="64.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane layoutX="5.0" layoutY="167.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane" visible="false">
@@ -320,5 +320,8 @@
                 </AnchorPane>
             </children>
         </AnchorPane>
+      <AnchorPane fx:id="DOCUMENT_P" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0" />
+      <AnchorPane fx:id="GROUP_P" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0" />
+      <AnchorPane fx:id="CHAIRS_P" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0" />
     </children>
 </AnchorPane>

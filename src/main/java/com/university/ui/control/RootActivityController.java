@@ -1,6 +1,7 @@
 package com.university.ui.control;
 
 import com.university.db.control.DBController;
+import com.university.db.control.RoleController;
 import com.university.db.control.UserController;
 import com.university.db.entity.UsersEntity;
 import com.university.security.GeneratePassword;
@@ -107,6 +108,8 @@ public class RootActivityController implements Initializable {
                             user.setFirstName(newfname.getText().trim());
                             user.setMiddleName(newmname.getText().trim());
                             user.setLastName(newlname.getText().trim());
+                            user.setIdUserrole(new RoleController().getUser());
+                            user.setActive(1);
                             user.setAdmin((byte) 0);
 
                             if (new DBController().create(user)) {

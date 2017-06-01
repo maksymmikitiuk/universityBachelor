@@ -44,7 +44,8 @@ public class UserController {
         try {
             tx = session.beginTransaction();
             List<UsersEntity> list = session.createCriteria(UsersEntity.class)
-                    .add(Restrictions.eq("idusers", id)).list();
+                    .add(Restrictions.eq("idusers", id))
+                    .add(Restrictions.ne("active", 0)).list();
             return list.get(0);
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -62,7 +63,8 @@ public class UserController {
         List<UsersEntity> list = new ArrayList<>();
         try {
             tx = session.beginTransaction();
-            list = session.createCriteria(UsersEntity.class).list();
+            list = session.createCriteria(UsersEntity.class)
+                    .add(Restrictions.ne("active", 0)).list();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
@@ -88,13 +90,15 @@ public class UserController {
                 switch (arg.length) {
                     case 1:
                         criteria.add(Restrictions.or(Restrictions.like("lastName", '%' + arg[0] + '%', MatchMode.ANYWHERE),
-                                Restrictions.like("firstName", '%' + arg[0] + '%', MatchMode.ANYWHERE)));
+                                Restrictions.like("firstName", '%' + arg[0] + '%', MatchMode.ANYWHERE)))
+                                .add(Restrictions.ne("active", 0));
                         break;
                     default:
                         criteria.add(Restrictions.or(Restrictions.and(Restrictions.like("firstName", '%' + arg[0] + '%'),
                                 Restrictions.like("lastName", '%' + arg[1] + '%')),
                                 Restrictions.and(Restrictions.like("firstName", '%' + arg[1] + '%'),
-                                        Restrictions.like("lastName", '%' + arg[0] + '%'))));
+                                        Restrictions.like("lastName", '%' + arg[0] + '%'))))
+                                .add(Restrictions.ne("active", 0));
                 }
             }
         } catch (
@@ -121,7 +125,7 @@ public class UserController {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            List<String> userEntityList = session.createQuery("select password from UsersEntity where username = ?").setParameter(0, username).list();
+            List<String> userEntityList = session.createQuery("select password from UsersEntity where username = ? AND active = 1").setParameter(0, username).list();
             for (String user : userEntityList) {
                 tx.commit();
                 return user.trim();

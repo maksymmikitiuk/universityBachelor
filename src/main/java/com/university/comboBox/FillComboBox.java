@@ -169,4 +169,26 @@ public class FillComboBox {
             }
         });
     }
+
+    public void fillRole() {
+        comboBox.setItems(FXCollections.observableArrayList(new RoleController().getAllRole()));
+        comboBox.setCellFactory(new Callback<ListView<UserroleEntity>, ListCell<UserroleEntity>>() {
+
+            @Override
+            public ListCell<UserroleEntity> call(ListView<UserroleEntity> param) {
+                return new ListCell<UserroleEntity>() {
+                    @Override
+                    public void updateItem(UserroleEntity item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty) {
+                            setText(item.getName());
+                            setGraphic(null);
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
+    }
 }

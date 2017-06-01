@@ -5,6 +5,7 @@ import com.university.Antiplagiarism.CheckAntiplagiarism;
 import com.university.comboBox.FillComboBox;
 import com.university.db.control.*;
 import com.university.db.entity.*;
+import com.university.externalFile.WorkWithFile;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -73,6 +74,10 @@ public class SubjectActivityController implements Initializable {
     TableColumn<DocumentregistrationEntity, String> fileTableUser;
     @FXML
     TableColumn<DocumentregistrationEntity, Boolean> fileTableAD;
+
+    public DiplomasubjectsEntity getDiplomasubjects() {
+        return diplomasubjects;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -459,7 +464,7 @@ public class SubjectActivityController implements Initializable {
                 new Callback<TableColumn<DocumentregistrationEntity, Boolean>, TableCell<DocumentregistrationEntity, Boolean>>() {
                     @Override
                     public TableCell<DocumentregistrationEntity, Boolean> call(TableColumn<DocumentregistrationEntity, Boolean> param) {
-                        return new ButtonCell(fileTable);
+                        return new ButtonCell(fileTable, diplomasubjects.getStudent());
                     }
                 });
         fileTableDate.setCellValueFactory(new PropertyValueFactory("documentregistration"));
@@ -541,7 +546,7 @@ class EditingCell extends TableCell<MarksEntity, Integer> {
 class ButtonCell extends TableCell<DocumentregistrationEntity, Boolean> {
     final Button cellButton = new Button();
 
-    ButtonCell(final TableView tblView) {
+    ButtonCell(final TableView tblView, StudentsEntity student) {
         cellButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -572,7 +577,10 @@ class ButtonCell extends TableCell<DocumentregistrationEntity, Boolean> {
                             new FileChooser.ExtensionFilter("DOCX", "*.docx")
                     );
                     File file = fileChooser.showOpenDialog(tblView.getScene().getWindow());
-                    ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setPath(file.getAbsolutePath());
+
+                    String path = new WorkWithFile().copyFile(file, student);
+
+                    ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setPath(path);
                     ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setIdusers(DBController.currentUser);
                     ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setDocumentregistration(new Date(System.currentTimeMillis()));
                     tblView.refresh();

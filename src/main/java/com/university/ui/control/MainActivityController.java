@@ -24,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -677,23 +678,6 @@ public class MainActivityController implements Initializable {
             }
         });
 
-//        SUBJECT_P_FILTER_TYPE.valueProperty().addListener(new ChangeListener<ChairsEntity>() {
-//            @Override
-//            public void changed(ObservableValue<? extends ChairsEntity> observable, ChairsEntity oldValue, ChairsEntity newValue) {
-//                updateSubjectTableByParameter();
-//            }
-//        });
-//
-//        SUBJECT_P_FILTER_FORM.valueProperty().addListener(new ChangeListener<ChairsEntity>() {
-//            @Override
-//            public void changed(ObservableValue<? extends ChairsEntity> observable, ChairsEntity oldValue, ChairsEntity newValue) {
-//                updateSubjectTableByParameter();
-//            }
-//        });
-
-//        new FillComboBox(SUBJECT_P_FILTER_FORM).fillDiplomaForm();
-//        new FillComboBox(SUBJECT_P_FILTER_TYPE).fillDiplomaType();
-
         tableSubject.setRowFactory(new Callback<TableView<DiplomasubjectsEntity>, TableRow<DiplomasubjectsEntity>>() {
             @Override
             public TableRow<DiplomasubjectsEntity> call(TableView<DiplomasubjectsEntity> param) {
@@ -745,14 +729,6 @@ public class MainActivityController implements Initializable {
             }
         });
 
-//        SUBJECT_P_FILTER_CHAIRS_CLEAR.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                SUBJECT_P_FILTER_CHAIRS.getSelectionModel().clearSelection();
-//                isClearAllFilterSubject();
-//            }
-//        });
-
         updateSubjectTable();
     }
 
@@ -781,9 +757,6 @@ public class MainActivityController implements Initializable {
     private void initSubjectTable() {
         tableSubjectSubject.setCellValueFactory(new PropertyValueFactory("subject"));
         tableSubjectCurator.setCellValueFactory(new PropertyValueFactory("curator"));
-//        tableSubjectDefenceDiploma.setCellValueFactory(new PropertyValueFactory("defencediploma"));
-//        tableSubjectMarks.setCellValueFactory(new PropertyValueFactory("mark"));
-//        tableSubjectReviewr.setCellValueFactory(new PropertyValueFactory("reviewer"));
         tableSubjectStudent.setCellValueFactory(new PropertyValueFactory("student"));
         tableSubjectType.setCellValueFactory(new PropertyValueFactory("type"));
         tableSubjectForm.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<DiplomasubjectsEntity, String>, ObservableValue<String>>() {
@@ -873,10 +846,91 @@ public class MainActivityController implements Initializable {
                     USER_P_IS_FILTER = true;
                 } else {
                     updateUserTable();
-                    USER_P_IS_FILTER  = false;
+                    USER_P_IS_FILTER = false;
                 }
             }
         });
+
+        userTable.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    openUser(userTable.getSelectionModel().getSelectedItem());
+                }
+            }
+        });
+
+        userTable.setRowFactory(new Callback<TableView<UsersEntity>, TableRow<UsersEntity>>() {
+            @Override
+            public TableRow<UsersEntity> call(TableView<UsersEntity> param) {
+                final TableRow<UsersEntity> row = new TableRow<>();
+                final ContextMenu rowMenu = new ContextMenu();
+                final ContextMenu tableMenu = userTable.getContextMenu();
+                if (tableMenu != null) {
+                    rowMenu.getItems().addAll(tableMenu.getItems());
+                    rowMenu.getItems().add(new SeparatorMenuItem());
+                }
+
+                final MenuItem editItem = new MenuItem("Редагувати");
+                editItem.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        openUser(userTable.getSelectionModel().getSelectedItem());
+                    }
+                });
+
+                final MenuItem removeItem = new MenuItem("Видалити");
+                removeItem.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        deleteUser(userTable.getSelectionModel().getSelectedItem());
+                    }
+                });
+
+                rowMenu.getItems().addAll(editItem, removeItem);
+                row.contextMenuProperty().bind(
+                        Bindings.when(Bindings.isNotNull(row.itemProperty()))
+                                .then(rowMenu)
+                                .otherwise(new ContextMenu()));
+                return row;
+            }
+        });
+    }
+
+    private void openUser(UsersEntity selectedItem) {
+        Stage stage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/adminUserSettings.fxml"));
+            stage.setScene(new Scene((Pane) loader.load()));
+            AdminUserSettingsController controller = loader.<AdminUserSettingsController>getController();
+            controller.setStage(stage);
+            controller.setUser(selectedItem);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(SEARCH.getScene().getWindow());
+            stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.showAndWait();
+        } catch (IOException e) {
+            //e.printStackTrace();
+        } finally {
+            if (USER_P_IS_FILTER)
+                updateUserTableByParameter();
+            else
+                updateUserTable();
+        }
+    }
+
+    private void deleteUser(UsersEntity selectedItem) {
+        UsersEntity user = selectedItem;
+        user.setActive(0);
+
+        if (deleteDialog())
+            new DBController().update(user);
+
+        if (USER_P_IS_FILTER)
+            updateUserTableByParameter();
+        else
+            updateUserTable();
     }
 
     private void updateUserTableByParameter() {
@@ -898,7 +952,7 @@ public class MainActivityController implements Initializable {
         userTableRole.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<UsersEntity, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<UsersEntity, String> p) {
-                    return new SimpleStringProperty(p.getValue().getIdUserrole().getName());
+                return new SimpleStringProperty(p.getValue().getIdUserrole().getName());
             }
         });
         userTableMiddleName.setCellValueFactory(new PropertyValueFactory("middleName"));
@@ -916,7 +970,7 @@ public class MainActivityController implements Initializable {
      * Основное окно                                                  \\
      * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      */
-    public static boolean DELETE;
+    public static boolean DELETE, EXIT;
     public AnchorPane HEADER;
 
     public Label settings;
@@ -926,9 +980,9 @@ public class MainActivityController implements Initializable {
     public Pane currentUserSettings;
 
     //Элементы меню
-    public Pane PROFESSOR, USER, STUDENT, SUBJECT;
+    public Pane PROFESSOR, USER, STUDENT, SUBJECT, GROUP, DOCUMENT, CHAIRS;
     //Панели
-    public AnchorPane STUDENT_P, USER_P, PROFESSOR_P, SUBJECT_P;
+    public AnchorPane STUDENT_P, USER_P, PROFESSOR_P, SUBJECT_P, GROUP_P, DOCUMENT_P, CHAIRS_P;
 
     //Строка поиска
     public TextField SEARCH;
@@ -943,6 +997,15 @@ public class MainActivityController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        DBController.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                if (exitDialog())
+                    event.consume();
+            }
+        });
+
+        currentRole();
 
         prefPane = SUBJECT_P;
         prefMenu = SUBJECT;
@@ -961,6 +1024,42 @@ public class MainActivityController implements Initializable {
         initMenu();
 
         initSubjectPane();
+    }
+
+    private boolean exitDialog() {
+        try {
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.DECORATED);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/exitDialog.fxml"));
+            Scene scene = new Scene((Pane) loader.load());
+            stage.setScene(scene);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(SEARCH.getScene().getWindow());
+            stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            return EXIT;
+        }
+    }
+
+    private void currentRole() {
+        switch (DBController.currentUser.getIdUserrole().getRole()) {
+            case "admin":
+                break;
+            case "user":
+                USER.setDisable(true);
+                break;
+            case "curator":
+                USER.setDisable(true);
+                STUDENT.setDisable(true);
+                DOCUMENT.setDisable(true);
+                GROUP.setDisable(true);
+                CHAIRS.setDisable(true);
+                break;
+        }
     }
 
     private void openSettingsUser(int id) {
@@ -988,11 +1087,17 @@ public class MainActivityController implements Initializable {
         menu.put(USER, "Користувачі");
         menu.put(STUDENT, "Студенти");
         menu.put(SUBJECT, "Теми");
+        menu.put(DOCUMENT, "Документи");
+        menu.put(CHAIRS, "Кафедри");
+        menu.put(GROUP, "Групи");
 
         pane.put(STUDENT, STUDENT_P);
         pane.put(USER, USER_P);
         pane.put(PROFESSOR, PROFESSOR_P);
         pane.put(SUBJECT, SUBJECT_P);
+        pane.put(DOCUMENT, DOCUMENT_P);
+        pane.put(CHAIRS, CHAIRS_P);
+        pane.put(GROUP, GROUP_P);
 
         for (final Map.Entry<Pane, String> entry : menu.entrySet())
             entry.getKey().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -1031,6 +1136,11 @@ public class MainActivityController implements Initializable {
                 break;
             case "SUBJECT":
                 initSubjectPane();
+            case "DOCUMENT":
+                break;
+            case "GROUP":
+                break;
+            case "CHAIRS":
                 break;
         }
     }

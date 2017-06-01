@@ -31,5 +31,6 @@
         <mapping class="com.university.db.entity.TypeOwnerMarkEntity"/>
         <mapping class="com.university.db.entity.DictionaryEntity"/>
         <mapping class="com.university.db.entity.UserroleEntity"/>
+        <mapping class="com.university.db.entity.SettingsEntity"/>
     </session-factory>
 </hibernate-configuration>

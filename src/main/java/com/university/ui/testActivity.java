@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import static com.university.db.control.DBController.getSession;
+
 public class testActivity extends Application {
     public static void main(String[] args) {
         launch();
@@ -14,9 +16,9 @@ public class testActivity extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        //getSession();
+        getSession();
         DBController.setStage(stage);
-        Parent root = (Parent) FXMLLoader.load(RootActivity.class.getResource("/ui/view/createSubjectActivity.fxml"));
+        Parent root = (Parent) FXMLLoader.load(RootActivity.class.getResource("/ui/view/adminUserSettings.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         //stage.initStyle(StageStyle.UNDECORATED);
