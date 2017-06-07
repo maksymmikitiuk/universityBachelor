@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="664.0" minWidth="965.0" prefHeight="860.0" prefWidth="1135.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.MainActivityController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="664.0" minWidth="965.0" prefHeight="860.0" prefWidth="1135.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.MainActivityController">
     <children>
         <AnchorPane fx:id="HEADER" layoutX="-26.0" layoutY="-31.0" maxHeight="55.0" minHeight="24.0" prefHeight="24.0" prefWidth="991.0" styleClass="shadow" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -262,6 +262,7 @@
                         <TableColumn fx:id="tableSubjectForm" prefWidth="75.0" text="Форма" />
                             </columns>
                         </TableView>
+                  <Button fx:id="SUBJECT_P_PRINT" layoutX="791.0" layoutY="14.0" mnemonicParsing="false" text="Друкувати" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                     </children>
                 </AnchorPane>
             </children>

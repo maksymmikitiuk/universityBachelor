@@ -3,6 +3,7 @@ package com.university.ui.control;
 import com.university.comboBox.FillComboBox;
 import com.university.db.control.*;
 import com.university.db.entity.*;
+import com.university.externalFile.PDF;
 import com.university.ui.animation.Animation;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
@@ -610,7 +611,7 @@ public class MainActivityController implements Initializable {
     public AnchorPane SUBJECT_P_FILTER, SUBJECT_P_MAIN;
     public Label SUBJECT_P_FILTER_HIDE, SUBJECT_P_FILTER_SHOW, SUBJECT_P_FILTER_CLEAR;
     public ComboBox SUBJECT_P_FILTER_FORM, SUBJECT_P_FILTER_TYPE;
-    public Button SUBJECT_P_CREATE;
+    public Button SUBJECT_P_CREATE, SUBJECT_P_PRINT;
     private boolean SUBJECT_P_IS_FILTER;
     public Label SUBJECT_P_FILTER_FORM_CLEAR, SUBJECT_P_FILTER_TYPE_CLEAR;
     @FXML
@@ -678,6 +679,13 @@ public class MainActivityController implements Initializable {
             }
         });
 
+        SUBJECT_P_PRINT.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                printSubjects();
+            }
+        });
+
         tableSubject.setRowFactory(new Callback<TableView<DiplomasubjectsEntity>, TableRow<DiplomasubjectsEntity>>() {
             @Override
             public TableRow<DiplomasubjectsEntity> call(TableView<DiplomasubjectsEntity> param) {
@@ -730,6 +738,10 @@ public class MainActivityController implements Initializable {
         });
 
         updateSubjectTable();
+    }
+
+    private void printSubjects() {
+        new PDF().createPDFSubjects(tableSubject);
     }
 
     private void updateSubjectTable() {
@@ -1000,8 +1012,8 @@ public class MainActivityController implements Initializable {
         DBController.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
-                if (exitDialog())
-                    event.consume();
+//                if (exitDialog())
+//                    event.consume();
             }
         });
 
