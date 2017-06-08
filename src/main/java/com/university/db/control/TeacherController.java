@@ -1,5 +1,6 @@
 package com.university.db.control;
 
+import com.university.db.entity.DiplomasubjectsEntity;
 import com.university.db.entity.TeachersEntity;
 import javafx.scene.control.ComboBox;
 import org.hibernate.Criteria;
@@ -8,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Conjunction;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -50,6 +52,26 @@ public class TeacherController {
         try {
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(TeachersEntity.class);
+            list = criteria.list();
+            return list;
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return list;
+    }
+
+    public List<TeachersEntity> getCurator() {
+        Session session = getFactory().openSession();
+        Transaction tx = null;
+        List<TeachersEntity> list = null;
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(DiplomasubjectsEntity.class)
+                    .setProjection(Projections.property("curator"))
+                    .setProjection(Projections.distinct(Projections.property("curator")));
             list = criteria.list();
             return list;
         } catch (HibernateException e) {

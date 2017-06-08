@@ -45,10 +45,10 @@ public class SubjectController {
 
         try {
             Criteria criteria = session.createCriteria(DiplomasubjectsEntity.class);
-            if (!parameter.isEmpty()) {
+            if (!parameter.isEmpty())
                 criteria.add(Restrictions.like("subject", '%' + parameter + '%', MatchMode.ANYWHERE));
-                list = criteria.list();
-            }
+
+            list = criteria.list();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();

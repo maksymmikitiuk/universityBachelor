@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.text.DecimalFormat;
 
 /**
  * Created by maksymmikitiuk on 6/7/17.
@@ -25,8 +24,6 @@ public class PDF {
     public void createPDFSubjects(TableView<DiplomasubjectsEntity> tableSubject) {
         Document doc = new Document();
         PdfWriter docWriter = null;
-
-        DecimalFormat df = new DecimalFormat("0.00");
 
         try {
 
@@ -45,7 +42,7 @@ public class PDF {
             doc.addProducer();
             doc.addCreator("ot.vntu.edu.ua");
             doc.addTitle("Теми");
-            doc.setPageSize(PageSize.A4);
+            doc.setPageSize(PageSize.A4.rotate());
 
             //open document
             doc.open();

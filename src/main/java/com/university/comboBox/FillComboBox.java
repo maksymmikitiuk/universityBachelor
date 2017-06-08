@@ -191,4 +191,28 @@ public class FillComboBox {
             }
         });
     }
+
+    public void fillCurator() {
+        comboBox.setItems(FXCollections.observableArrayList(new TeacherController().getCurator()));
+        comboBox.setCellFactory(new Callback<ListView<TeachersEntity>, ListCell<TeachersEntity>>() {
+
+            @Override
+            public ListCell<TeachersEntity> call(ListView<TeachersEntity> param) {
+                return new ListCell<TeachersEntity>() {
+                    @Override
+                    public void updateItem(TeachersEntity item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty) {
+                            setText(item.getLastName() + " "
+                                    + item.getFirstName().charAt(0)
+                                    + ". " + item.getMiddleName().charAt(0) + ".");
+                            setGraphic(null);
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
+    }
 }

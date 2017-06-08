@@ -131,7 +131,7 @@
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="STUDENT_P_FILTER_CHAIRS" layoutX="13.0" layoutY="58.0" prefHeight="43.0" prefWidth="156.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="58.0" />
+                                <ComboBox fx:id="STUDENT_P_FILTER_CHAIRS" layoutX="13.0" layoutY="58.0" prefHeight="25.0" prefWidth="168.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="58.0" />
                                 <Label fx:id="STUDENT_P_FILTER_CHAIRS_CLEAR" layoutX="167.0" layoutY="58.0" prefHeight="30.0" prefWidth="12.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="64.0" />
                             </children>
                         </AnchorPane>
@@ -215,6 +215,60 @@
         <AnchorPane fx:id="SUBJECT_P" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="836.0" prefWidth="884.0" stylesheets="@../style/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
             <children>
                 <Label fx:id="SUBJECT_P_FILTER_SHOW" layoutX="853.0" layoutY="14.0" opacity="0.0" prefHeight="25.0" prefWidth="25.0" styleClass="show" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0" />
+            <AnchorPane fx:id="SUBJECT_P_FILTER" prefHeight="836.0" prefWidth="232.0" styleClass="filer" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane layoutX="6.0" layoutY="52.0" prefHeight="124.0" prefWidth="220.0" styleClass="filter-pane">
+                     <children>
+                        <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Група" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="SUBJECT_P_FILTER_GROUP" layoutX="13.0" layoutY="58.0" prefHeight="25.0" prefWidth="168.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="58.0" />
+                        <Label fx:id="SUBJECT_P_FILTER_GROUP_CLEAR" layoutX="179.0" layoutY="65.0" prefHeight="20.0" prefWidth="20.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="64.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="5.0" layoutY="167.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane">
+                     <children>
+                        <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Кафедра" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="SUBJECT_P_FILTER_CHAIRS" layoutX="13.0" layoutY="58.0" prefHeight="43.0" prefWidth="156.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="58.0" />
+                        <Label fx:id="SUBJECT_P_FILTER_CHAIRS_CLEAR" layoutX="167.0" layoutY="58.0" prefHeight="30.0" prefWidth="12.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="64.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="6.0" layoutY="282.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane">
+                     <children>
+                        <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Форма навчання" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="SUBJECT_P_FILTER_FORM" layoutX="13.0" layoutY="58.0" prefHeight="25.0" prefWidth="168.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="58.0" />
+                        <Label fx:id="SUBJECT_P_FILTER_FORM_CLEAR" layoutX="188.0" layoutY="58.0" prefHeight="20.0" prefWidth="20.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="64.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="5.0" layoutY="397.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane">
+                     <children>
+                        <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Керівник" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="SUBJECT_P_FILTER_CURATOR" layoutX="13.0" layoutY="58.0" prefHeight="25.0" prefWidth="168.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="58.0" />
+                        <Label fx:id="SUBJECT_P_FILTER_CURATOR_CLEAR" layoutX="183.0" layoutY="60.0" prefHeight="20.0" prefWidth="20.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="38.0" AnchorPane.topAnchor="64.0" />
+                     </children>
+                  </AnchorPane>
+                  <Label fx:id="SUBJECT_P_FILTER_HIDE" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="25.0" styleClass="hide" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="193.0" AnchorPane.topAnchor="14.0" />
+                  <Label contentDisplay="RIGHT" prefHeight="30.0" prefWidth="188.0" styleClass="clear-filter" text="Скасувати усі фільтри" textAlignment="RIGHT" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <graphic>
+                        <Label fx:id="SUBJECT_P_FILTER_CLEAR" alignment="CENTER_RIGHT" contentDisplay="TOP" prefHeight="26.0" prefWidth="28.0" textAlignment="RIGHT" textFill="TRANSPARENT" />
+                     </graphic>
+                  </Label>
+               </children>
+            </AnchorPane>
                 <!--<AnchorPane fx:id="SUBJECT_P_FILTER" layoutX="652.0" layoutY="4.0" prefHeight="836.0" prefWidth="232.0" styleClass="filer" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">-->
                     <!--<children>-->
                         <!--<AnchorPane layoutX="6.0" layoutY="52.0" prefHeight="115.0" prefWidth="220.0" styleClass="filter-pane">-->
@@ -247,7 +301,7 @@
                         <!--</Label>-->
                     <!--</children>-->
                 <!--</AnchorPane>-->
-                <AnchorPane fx:id="SUBJECT_P_MAIN" layoutX="10.0" layoutY="60.0" prefHeight="786.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane fx:id="SUBJECT_P_MAIN" layoutX="10.0" layoutY="60.0" prefHeight="786.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="232.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Button fx:id="SUBJECT_P_CREATE" mnemonicParsing="false" style="-fx-background-color: green;" text="Створити" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
                         <TableView fx:id="tableSubject" layoutX="20.0" layoutY="25.0" prefHeight="200.0" prefWidth="220.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
@@ -258,8 +312,8 @@
                                 <TableColumn fx:id="tableSubjectSubject" prefWidth="75.0" text="Тема" />
                                 <TableColumn fx:id="tableSubjectStudent" prefWidth="75.0" text="Студент" />
                                 <TableColumn fx:id="tableSubjectCurator" prefWidth="75.0" text="Керівник" />
-                                <TableColumn fx:id="tableSubjectType" prefWidth="75.0" text="Тип" />
-                        <TableColumn fx:id="tableSubjectForm" prefWidth="75.0" text="Форма" />
+                                <TableColumn fx:id="tableSubjectType" prefWidth="75.0" text="Тип" visible="false" />
+                        <TableColumn fx:id="tableSubjectForm" prefWidth="75.0" text="Форма навчання" />
                             </columns>
                         </TableView>
                   <Button fx:id="SUBJECT_P_PRINT" layoutX="791.0" layoutY="14.0" mnemonicParsing="false" text="Друкувати" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />

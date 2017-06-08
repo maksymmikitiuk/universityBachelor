@@ -610,10 +610,10 @@ public class MainActivityController implements Initializable {
      */
     public AnchorPane SUBJECT_P_FILTER, SUBJECT_P_MAIN;
     public Label SUBJECT_P_FILTER_HIDE, SUBJECT_P_FILTER_SHOW, SUBJECT_P_FILTER_CLEAR;
-    public ComboBox SUBJECT_P_FILTER_FORM, SUBJECT_P_FILTER_TYPE;
+    public ComboBox SUBJECT_P_FILTER_GROUP, SUBJECT_P_FILTER_CHAIRS, SUBJECT_P_FILTER_FORM, SUBJECT_P_FILTER_CURATOR;
     public Button SUBJECT_P_CREATE, SUBJECT_P_PRINT;
     private boolean SUBJECT_P_IS_FILTER;
-    public Label SUBJECT_P_FILTER_FORM_CLEAR, SUBJECT_P_FILTER_TYPE_CLEAR;
+    public Label SUBJECT_P_FILTER_GROUP_CLEAR, SUBJECT_P_FILTER_CHAIRS_CLEAR, SUBJECT_P_FILTER_FORM_CLEAR, SUBJECT_P_FILTER_CURATOR_CLEAR;
     @FXML
     TableView<DiplomasubjectsEntity> tableSubject;
     @FXML
@@ -636,19 +636,87 @@ public class MainActivityController implements Initializable {
     private void initSubjectPane() {
         initSubjectTable();
 
-//        SUBJECT_P_FILTER_HIDE.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                new Animation().showFilter(SUBJECT_P_FILTER, SUBJECT_P_FILTER_SHOW, SUBJECT_P_FILTER_HIDE, SUBJECT_P_MAIN, false);
-//            }
-//        });
-//
-//        SUBJECT_P_FILTER_SHOW.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                new Animation().showFilter(SUBJECT_P_FILTER, SUBJECT_P_FILTER_SHOW, SUBJECT_P_FILTER_HIDE, SUBJECT_P_MAIN, true);
-//            }
-//        });
+        new FillComboBox(SUBJECT_P_FILTER_GROUP).fillGroup();
+
+        SUBJECT_P_FILTER_GROUP_CLEAR.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                SUBJECT_P_FILTER_GROUP.getSelectionModel().clearSelection();
+                isClearAllFilterSubject();
+            }
+        });
+
+        SUBJECT_P_FILTER_GROUP.valueProperty().addListener(new ChangeListener<GroupsEntity>() {
+            @Override
+            public void changed(ObservableValue<? extends GroupsEntity> observable, GroupsEntity oldValue, GroupsEntity newValue) {
+                updateSubjectTableByParameter();
+            }
+        });
+
+        new FillComboBox(SUBJECT_P_FILTER_FORM).fillQualificationLevel();
+
+        SUBJECT_P_FILTER_FORM_CLEAR.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                SUBJECT_P_FILTER_FORM.getSelectionModel().clearSelection();
+                isClearAllFilterSubject();
+            }
+        });
+
+        SUBJECT_P_FILTER_FORM.valueProperty().addListener(new ChangeListener<QualificationlevelEntity>() {
+            @Override
+            public void changed(ObservableValue<? extends QualificationlevelEntity> observable, QualificationlevelEntity oldValue, QualificationlevelEntity newValue) {
+                updateSubjectTableByParameter();
+            }
+        });
+
+        new FillComboBox(SUBJECT_P_FILTER_CHAIRS).fillChair();
+
+        SUBJECT_P_FILTER_CHAIRS_CLEAR.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                SUBJECT_P_FILTER_CHAIRS.getSelectionModel().clearSelection();
+                isClearAllFilterSubject();
+            }
+        });
+
+        SUBJECT_P_FILTER_CHAIRS.valueProperty().addListener(new ChangeListener<ChairsEntity>() {
+            @Override
+            public void changed(ObservableValue<? extends ChairsEntity> observable, ChairsEntity oldValue, ChairsEntity newValue) {
+                updateSubjectTableByParameter();
+            }
+        });
+
+        new FillComboBox(SUBJECT_P_FILTER_CURATOR).fillCurator();
+
+        SUBJECT_P_FILTER_CURATOR_CLEAR.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                SUBJECT_P_FILTER_CURATOR.getSelectionModel().clearSelection();
+                isClearAllFilterSubject();
+            }
+        });
+
+        SUBJECT_P_FILTER_CURATOR.valueProperty().addListener(new ChangeListener<TeachersEntity>() {
+            @Override
+            public void changed(ObservableValue<? extends TeachersEntity> observable, TeachersEntity oldValue, TeachersEntity newValue) {
+                updateSubjectTableByParameter();
+            }
+        });
+
+        SUBJECT_P_FILTER_HIDE.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                new Animation().showFilter(SUBJECT_P_FILTER, SUBJECT_P_FILTER_SHOW, SUBJECT_P_FILTER_HIDE, SUBJECT_P_MAIN, false);
+            }
+        });
+
+        SUBJECT_P_FILTER_SHOW.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                new Animation().showFilter(SUBJECT_P_FILTER, SUBJECT_P_FILTER_SHOW, SUBJECT_P_FILTER_HIDE, SUBJECT_P_MAIN, true);
+            }
+        });
 
         tableSubject.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -659,12 +727,12 @@ public class MainActivityController implements Initializable {
             }
         });
 
-//        SUBJECT_P_FILTER_CLEAR.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                clearSubjectFilter();
-//            }
-//        });
+        SUBJECT_P_FILTER_CLEAR.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                clearSubjectFilter();
+            }
+        });
 
         SEARCH.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -750,6 +818,17 @@ public class MainActivityController implements Initializable {
     }
 
     private void isClearAllFilterSubject() {
+        if (SUBJECT_P_FILTER_GROUP.getValue() == null &&
+                SUBJECT_P_FILTER_CURATOR.getValue() == null &&
+                SUBJECT_P_FILTER_FORM.getValue() == null &&
+                SUBJECT_P_FILTER_CHAIRS.getValue() == null &&
+                SEARCH.getText().isEmpty()) {
+            SUBJECT_P_IS_FILTER = false;
+            updateSubjectTable();
+        } else {
+            SUBJECT_P_IS_FILTER = true;
+            updateSubjectTableByParameter();
+        }
     }
 
     private void deleteSubject(DiplomasubjectsEntity subject) {
@@ -764,6 +843,14 @@ public class MainActivityController implements Initializable {
     }
 
     private void clearSubjectFilter() {
+        SUBJECT_P_FILTER_CHAIRS.getSelectionModel().clearSelection();
+        SUBJECT_P_FILTER_FORM.getSelectionModel().clearSelection();
+        SUBJECT_P_FILTER_CURATOR.getSelectionModel().clearSelection();
+        SUBJECT_P_FILTER_GROUP.getSelectionModel().clearSelection();
+        SEARCH.clear();
+
+        updateSubjectTable();
+        SUBJECT_P_IS_FILTER = false;
     }
 
     private void initSubjectTable() {
@@ -821,8 +908,26 @@ public class MainActivityController implements Initializable {
 
     private void updateSubjectTableByParameter() {
         tableSubject.getItems().clear();
-        tableSubject.getItems().addAll(FXCollections.<DiplomasubjectsEntity>observableArrayList(new SubjectController()
-                .getSubjectByParameter(SEARCH.getText())));
+        ObservableList<DiplomasubjectsEntity> diploma = FXCollections.observableArrayList(
+                new SubjectController().getSubjectByParameter(SEARCH.getText()));
+
+        for (Iterator<DiplomasubjectsEntity> iterator = diploma.iterator(); iterator.hasNext(); ) {
+            DiplomasubjectsEntity px = iterator.next();
+
+            if (SUBJECT_P_FILTER_GROUP.getValue() != null
+                    && px.getStudent().getIdgroups().getIdgroups() != ((GroupsEntity) SUBJECT_P_FILTER_GROUP.getValue()).getIdgroups()
+                    || SUBJECT_P_FILTER_CHAIRS.getValue() != null
+                    && px.getStudent().getIdgroups().getIdchairs().getIdchairs() != ((ChairsEntity) SUBJECT_P_FILTER_CHAIRS.getValue()).getIdchairs()
+                    || SUBJECT_P_FILTER_FORM.getValue() != null
+                    && px.getStudent().getIdgroups().getIdqualificationLevel().getIdqualificationLevel() != ((QualificationlevelEntity) SUBJECT_P_FILTER_FORM.getValue()).getIdqualificationLevel()
+                    || SUBJECT_P_FILTER_CURATOR.getValue() != null
+                    && px.getCurator().getIdteachers() != ((TeachersEntity) SUBJECT_P_FILTER_CURATOR.getValue()).getIdteachers())
+                iterator.remove();
+        }
+
+
+        tableSubject.getItems().addAll(diploma);
+        SUBJECT_P_IS_FILTER = true;
     }
 
     /**

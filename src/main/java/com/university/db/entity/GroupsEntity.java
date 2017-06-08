@@ -2,7 +2,6 @@ package com.university.db.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
 
 /**
  * Created by Антон Микитюк on 17.11.2016.
@@ -18,8 +17,8 @@ public class GroupsEntity {
     private Date yearofentering;
 
 
-    @OneToMany(mappedBy = "idgroups")
-    private List<StudentsEntity> students;
+//    @OneToMany(mappedBy = "idgroups")
+//    private List<StudentsEntity> students;
 
     public int getIdgroups() {
         return idgroups;
