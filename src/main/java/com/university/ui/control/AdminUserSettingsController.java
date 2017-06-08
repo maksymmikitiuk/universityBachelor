@@ -27,6 +27,7 @@ public class AdminUserSettingsController implements Initializable {
     public ComboBox role;
     public Button save, cancel;
     private Stage stage;
+    private UsersEntity user;
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -96,13 +97,12 @@ public class AdminUserSettingsController implements Initializable {
     }
 
     private void save() {
-        UsersEntity user = new UsersEntity();
         user.setActive((active.isSelected()) ? 1 : 0);
-        user.setIdUserrole((UserroleEntity) role.getItems());
+        user.setIdUserrole((UserroleEntity) role.getValue());
         user.setLastName(lastName.getText());
         user.setMiddleName(middleName.getText());
         user.setFirstName(firstName.getText());
-        if (password.getText().isEmpty())
+        if (!password.getText().isEmpty())
             user.setPassword(new GeneratePassword().generatedSecuredPasswordHash(password.getText().trim(), username.getText()));
 
         new DBController().update(user);
@@ -123,10 +123,6 @@ public class AdminUserSettingsController implements Initializable {
             lastName.getStyleClass().add("false_field");
             check = false;
         }
-        if (password.getText().isEmpty()) {
-            password.getStyleClass().add("false_field");
-            check = false;
-        }
         if (username.getText().isEmpty()) {
             username.getStyleClass().add("false_field");
             check = false;
@@ -136,6 +132,7 @@ public class AdminUserSettingsController implements Initializable {
     }
 
     public void fillForm(UsersEntity user) {
+        this.user = user;
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
         middleName.setText(user.getMiddleName());

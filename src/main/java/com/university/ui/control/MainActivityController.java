@@ -781,6 +781,7 @@ public class MainActivityController implements Initializable {
                     }
                 });
 
+
                 final MenuItem createItem = new MenuItem("Створити");
                 createItem.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -935,7 +936,7 @@ public class MainActivityController implements Initializable {
      * Панель пользователи                 \\
      * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      */
-    private Boolean USER_P_IS_FILTER;
+    private Boolean USER_P_IS_FILTER = false;
     @FXML
     TableView<UsersEntity> userTable;
     @FXML
@@ -950,6 +951,8 @@ public class MainActivityController implements Initializable {
     TableColumn<UsersEntity, String> userTableRole;
     @FXML
     TableColumn<UsersEntity, String> userTableAdmin;
+    @FXML
+    TableColumn<UsersEntity, String> userTableActive;
 
     private void initUserPane() {
         initUserTable();
@@ -1075,6 +1078,12 @@ public class MainActivityController implements Initializable {
         userTableMiddleName.setCellValueFactory(new PropertyValueFactory("middleName"));
         userTableLastName.setCellValueFactory(new PropertyValueFactory("lastName"));
         userTableLogin.setCellValueFactory(new PropertyValueFactory("username"));
+        userTableActive.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<UsersEntity, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<UsersEntity, String> p) {
+                return new SimpleStringProperty((p.getValue().getActive() == 1)?"Так":"Ні");
+            }
+        });
     }
 
     private void updateUserTable() {

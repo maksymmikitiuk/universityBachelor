@@ -63,8 +63,7 @@ public class UserController {
         List<UsersEntity> list = new ArrayList<>();
         try {
             tx = session.beginTransaction();
-            list = session.createCriteria(UsersEntity.class)
-                    .add(Restrictions.ne("active", 0)).list();
+            list = session.createCriteria(UsersEntity.class).list();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
@@ -160,5 +159,24 @@ public class UserController {
 
     public void updateCurrentUser() {
         currentUser = getUserById(currentUser.getIdusers());
+    }
+
+    public boolean isActive(String username) {
+        Session session = getFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            List<UsersEntity> list = session.createQuery("from UsersEntity as u where u.username = :username and u.active = 1").setParameter("username", username).list();
+            for (UsersEntity userEntity : list) {
+                tx.commit();
+                return true;
+            }
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return false;
     }
 }

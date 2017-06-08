@@ -206,6 +206,7 @@
                   <TableColumn fx:id="userTableMiddleName" minWidth="0.0" prefWidth="56.0" text="По батькові" />
                   <TableColumn fx:id="userTableRole" prefWidth="19.0" text="Роль" />
                   <TableColumn fx:id="userTableAdmin" prefWidth="75.0" text="Адмін" visible="false" />
+                  <TableColumn fx:id="userTableActive" prefWidth="75.0" text="Активний" visible="true" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -32,12 +32,12 @@ import java.util.ResourceBundle;
 public class RootActivityController implements Initializable {
     public AnchorPane loginPane;
     public Button login;
-    public Label createUserLabel, backToLogin, createUser, closewindow, ok;
+    public Label createUserLabel, backToLogin, createUser, closewindow, ok, ok1;
     public TextField username, newfname, newmname, newlname, newusername, passwordtext, newpasswordtext,
             newrepasswordtext;
     private Boolean newrepasswordvalid, newusernamevalid;
     public PasswordField password, newpassword, newrepassword;
-    public Pane draggablepanel, setvisiblepassword, setvisiblenewpassword, setvisiblenewrepassword, error;
+    public Pane draggablepanel, setvisiblepassword, setvisiblenewpassword, setvisiblenewrepassword, error, notactive;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -96,6 +96,14 @@ public class RootActivityController implements Initializable {
             }
         });
 
+        ok1.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton() == MouseButton.PRIMARY)
+                    notactive.setVisible(false);
+            }
+        });
+
         createUser.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -109,7 +117,7 @@ public class RootActivityController implements Initializable {
                             user.setMiddleName(newmname.getText().trim());
                             user.setLastName(newlname.getText().trim());
                             user.setIdUserrole(new RoleController().getUser());
-                            user.setActive(1);
+                            user.setActive(0);
                             user.setAdmin((byte) 0);
 
                             if (new DBController().create(user)) {
@@ -286,22 +294,26 @@ public class RootActivityController implements Initializable {
     }
 
     private void login() {
-        if (new UserController().passwordAuthentication(password.getText().trim(), username.getText().trim())) {
-            DBController.currentUser = new UserController().getCurrentUserInformation(username.getText());
-            cleatFields();
-            Parent root = null;
-            try {
-                root = (Parent) FXMLLoader.load(MainActivity.class.getResource("/ui/view/mainActivity.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (new UserController().isActive(username.getText().trim())) {
+            if (new UserController().passwordAuthentication(password.getText().trim(), username.getText().trim())) {
+                DBController.currentUser = new UserController().getCurrentUserInformation(username.getText());
+                cleatFields();
+                Parent root = null;
+                try {
+                    root = (Parent) FXMLLoader.load(MainActivity.class.getResource("/ui/view/mainActivity.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Scene scene = new Scene(root);
+                DBController.mainStage.setScene(scene);
+                DBController.mainStage.centerOnScreen();
+                DBController.mainStage.setResizable(true);
+                DBController.mainStage.show();
+            } else {
+                error.setVisible(true);
             }
-            Scene scene = new Scene(root);
-            DBController.mainStage.setScene(scene);
-            DBController.mainStage.centerOnScreen();
-            DBController.mainStage.setResizable(true);
-            DBController.mainStage.show();
         } else {
-            error.setVisible(true);
+            notactive.setVisible(true);
         }
     }
 
