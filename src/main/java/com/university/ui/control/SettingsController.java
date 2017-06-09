@@ -1,13 +1,19 @@
 package com.university.ui.control;
 
-import com.university.db.control.DBController;
-import com.university.db.control.MarksController;
+import com.university.db.control.*;
+import com.university.db.entity.DiplomatypeEntity;
+import com.university.db.entity.DocumenttypeEntity;
 import com.university.db.entity.MarksEntity;
+import com.university.db.entity.StructureofthediplomaEntity;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,7 +30,8 @@ public class SettingsController implements Initializable {
             t0, t1, t2, t3, t4, t5, t6,
             f0, f1, f2, f3, f4, f5, f6,
             id0, id1, id2, id3, id4, id5, id6;
-    public Button save_mark;
+    public Button save_mark, savetype;
+    public GridPane type;
     private List<List<TextField>> col = new ArrayList<>();
 
     @Override
@@ -33,6 +40,13 @@ public class SettingsController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 saveMark();
+            }
+        });
+
+        savetype.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                saveType();
             }
         });
 
@@ -100,6 +114,32 @@ public class SettingsController implements Initializable {
         col.add(r6);
 
         fillMarks();
+        fillType();
+    }
+
+    private void saveType() {
+        ObservableList<Node> childrens = type.getChildren();
+
+        for (Node node : childrens) {
+            if (node instanceof CheckBox) {
+                DiplomatypeEntity diType = new TypeController().getTypeByID(type.getColumnIndex(node));
+                DocumenttypeEntity doType = new DocumentTypeController().getDocumentByID(type.getRowIndex(node));
+                StructureofthediplomaEntity st = new StructureOfTheDiplomaController().getStructure(diType, doType);
+
+                if (((CheckBox) node).isSelected()) {
+                    if (st == null) {
+                        StructureofthediplomaEntity s = new StructureofthediplomaEntity();
+                        s.setIddocumentType(doType);
+                        s.setIddiplomaType(diType);
+                        new DBController().create(s);
+                    }
+                } else {
+                    if (st != null) {
+                        new DBController().delete(st);
+                    }
+                }
+            }
+        }
     }
 
     private void fillMarks() {
@@ -132,5 +172,26 @@ public class SettingsController implements Initializable {
         fillMarks();
     }
 
+    private void fillType() {
+        List<StructureofthediplomaEntity> list = new StructureOfTheDiplomaController().getStructure();
+
+        for (StructureofthediplomaEntity st : list) {
+            getNodeByRowColumnIndex(st.getIddiplomaType().getIddiplomaType(), st.getIddocumentType().getIddocumentType(), type);
+        }
+    }
+
+    public void getNodeByRowColumnIndex(final int column, final int row, GridPane gridPane) {
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if (gridPane.getColumnIndex(node) != null && gridPane.getRowIndex(node) != null) {
+                if (gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+                    CheckBox checkBox = (CheckBox) node;
+                    checkBox.setSelected(true);
+                    break;
+                }
+            }
+        }
+    }
 }
 

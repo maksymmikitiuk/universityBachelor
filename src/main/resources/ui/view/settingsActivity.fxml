@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="441.0" minWidth="486.0" prefHeight="482.0" prefWidth="588.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.SettingsController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="441.0" minWidth="486.0" prefHeight="482.0" prefWidth="588.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.SettingsController">
     <children>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
@@ -103,7 +103,128 @@
                      </children></AnchorPane>
                </content>
                 </Tab>
-                <Tab text="Файли" />
+                <Tab text="Файли">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <GridPane fx:id="type" layoutX="94.0" layoutY="135.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="145.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="75.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="20.0" prefWidth="111.0" text="Титулка" textFill="WHITE" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="20.0" prefWidth="113.0" text="Завдання " textFill="WHITE" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="План-графік" textFill="WHITE" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Анотації" textFill="WHITE" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Відомість проекту" textFill="WHITE" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="ТЗ" textFill="WHITE" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Записка" textFill="WHITE" GridPane.rowIndex="7">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Презентація" textFill="WHITE" GridPane.rowIndex="8">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="БДР" textAlignment="CENTER" wrappingWidth="84.6806640625" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="БДП" textAlignment="CENTER" wrappingWidth="111.859375" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="МДР" textAlignment="CENTER" wrappingWidth="108.28125" GridPane.columnIndex="3">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="МДП" textAlignment="CENTER" wrappingWidth="110.9765625" GridPane.columnIndex="4">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Text>
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <CheckBox mnemonicParsing="false" prefWidth="24.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                              <CheckBox mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                           </children>
+                        </GridPane>
+                        <Button fx:id="savetype" layoutX="470.0" layoutY="395.0" mnemonicParsing="false" text="Зберегти" />
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
             </tabs>
         </TabPane>
     </children>

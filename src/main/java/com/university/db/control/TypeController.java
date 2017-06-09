@@ -57,4 +57,22 @@ public class TypeController {
         }
         return list;
     }
+
+    public DiplomatypeEntity getTypeByID(int id) {
+        Session session = getFactory().openSession();
+        Transaction tx = null;
+        List<DiplomatypeEntity> list = null;
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(DiplomatypeEntity.class)
+                    .add(Restrictions.eq("iddiplomaType", id));
+            list = criteria.list();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return (list.size() > 0)?list.get(0):null;
+    }
 }

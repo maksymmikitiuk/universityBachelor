@@ -46,7 +46,7 @@ public class SubjectActivityController implements Initializable {
     private DiplomasubjectsEntity diplomasubjects = new DiplomasubjectsEntity();
     private StudentsEntity newStudent;
     private DiplomamarksEntity totalMarks = new DiplomamarksEntity();
-    private ObservableList<DiplomamarksEntity> diplomamarks;
+    private ObservableList<DiplomamarksEntity> diplomamarks = FXCollections.observableArrayList();
     private ObservableList<DocumentregistrationEntity> document;
 
     @FXML

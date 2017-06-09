@@ -39,4 +39,40 @@ public class StructureOfTheDiplomaController {
         }
         return list;
     }
+
+    public List<StructureofthediplomaEntity> getStructure(){
+        Session session = getFactory().openSession();
+        Transaction tx = null;
+        List<StructureofthediplomaEntity> list = new ArrayList<>();
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(StructureofthediplomaEntity.class);
+            list = criteria.list();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return list;
+    }
+
+    public StructureofthediplomaEntity getStructure(DiplomatypeEntity dit, DocumenttypeEntity dot){
+        Session session = getFactory().openSession();
+        Transaction tx = null;
+        List<StructureofthediplomaEntity> list = new ArrayList<>();
+        try {
+            tx = session.beginTransaction();
+            Criteria criteria = session.createCriteria(StructureofthediplomaEntity.class)
+                    .add(Restrictions.and(Restrictions.eq("iddocumentType", dot),
+                            Restrictions.eq("iddiplomaType", dit)));
+            list = criteria.list();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return (list.size() > 0)?list.get(0):null;
+    }
 }
