@@ -3,6 +3,7 @@ package com.university.externalFile;
 import com.university.db.control.SettingsController;
 import com.university.db.entity.StudentsEntity;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,5 +43,18 @@ public class WorkWithFile {
         Date today = Calendar.getInstance().getTime();
         String reportDate = df.format(today);
         return reportDate;
+    }
+
+    public void openFile(String path) throws IOException {
+        File file = new File(path);
+
+        //first check if Desktop is supported by Platform or not
+        if(!Desktop.isDesktopSupported()){
+            System.out.println("Desktop is not supported");
+            return;
+        }
+
+        Desktop desktop = Desktop.getDesktop();
+        if(file.exists()) desktop.open(file);
     }
 }

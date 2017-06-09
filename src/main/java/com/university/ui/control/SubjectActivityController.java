@@ -33,7 +33,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -582,7 +582,7 @@ class ButtonCell extends TableCell<DocumentregistrationEntity, Boolean> {
 
                     ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setPath(path);
                     ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setIdusers(DBController.currentUser);
-                    ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setDocumentregistration(new Date(System.currentTimeMillis()));
+                    ((DocumentregistrationEntity) tblView.getItems().get(selectdIndex)).setDocumentregistration(new Timestamp(System.currentTimeMillis()));
                     tblView.refresh();
                 }
             }

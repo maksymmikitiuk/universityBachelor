@@ -1,7 +1,7 @@
 package com.university.db.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by Антон Микитюк on 17.11.2016.
@@ -10,7 +10,7 @@ import java.sql.Date;
 @Table(name = "documentregistration", schema = "university")
 public class DocumentregistrationEntity {
     private int iddocumentRegistration;
-    private Date documentregistration;
+    private Timestamp documentregistration;
     private UsersEntity idusers;
     private DiplomasubjectsEntity iddiplomaSubjects;
     private String path;
@@ -38,11 +38,11 @@ public class DocumentregistrationEntity {
 
     @Basic
     @Column(name = "documentregistration")
-    public Date getDocumentregistration() {
+    public Timestamp getDocumentregistration() {
         return documentregistration;
     }
 
-    public void setDocumentregistration(Date documentregistration) {
+    public void setDocumentregistration(Timestamp documentregistration) {
         this.documentregistration = documentregistration;
     }
 

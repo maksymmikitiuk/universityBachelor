@@ -4,6 +4,7 @@ import com.university.comboBox.FillComboBox;
 import com.university.db.control.*;
 import com.university.db.entity.*;
 import com.university.externalFile.PDF;
+import com.university.externalFile.WorkWithFile;
 import com.university.ui.animation.Animation;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
@@ -1031,7 +1032,7 @@ public class MainActivityController implements Initializable {
             stage.setResizable(false);
             stage.showAndWait();
         } catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         } finally {
             if (USER_P_IS_FILTER)
                 updateUserTableByParameter();
@@ -1081,7 +1082,7 @@ public class MainActivityController implements Initializable {
         userTableActive.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<UsersEntity, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<UsersEntity, String> p) {
-                return new SimpleStringProperty((p.getValue().getActive() == 1)?"Так":"Ні");
+                return new SimpleStringProperty((p.getValue().getActive() == 1) ? "Так" : "Ні");
             }
         });
     }
@@ -1089,6 +1090,55 @@ public class MainActivityController implements Initializable {
     private void updateUserTable() {
         userTable.getItems().clear();
         userTable.getItems().addAll(FXCollections.observableArrayList(new UserController().getAllUser()));
+    }
+
+    /**
+     * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     * Панель документы                                               \\
+     * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     */
+    @FXML
+    TableView<DocumentregistrationEntity> tableDocument;
+    @FXML
+    TableColumn<DocumentregistrationEntity, String> tableDocumentPath;
+    @FXML
+    TableColumn<DocumentregistrationEntity, String> tableDocumentDate;
+    @FXML
+    TableColumn<DocumentregistrationEntity, String> tableDocumentUser;
+    @FXML
+    TableColumn<DocumentregistrationEntity, String> tableDocumentSubject;
+    @FXML
+    TableColumn<DocumentregistrationEntity, String> tableDocumentType;
+
+    private void initDocumentPane() {
+        initTableDocument();
+        updateTableDocument();
+
+        tableDocument.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    try {
+                        new WorkWithFile().openFile(tableDocument.getSelectionModel().getSelectedItem().getPath());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    private void initTableDocument() {
+        tableDocumentPath.setCellValueFactory(new PropertyValueFactory("path"));
+        tableDocumentDate.setCellValueFactory(new PropertyValueFactory("documentregistration"));
+        tableDocumentUser.setCellValueFactory(new PropertyValueFactory("idusers"));
+        tableDocumentSubject.setCellValueFactory(new PropertyValueFactory("iddiplomaSubjects"));
+        tableDocumentType.setCellValueFactory(new PropertyValueFactory("id_type"));
+    }
+
+    private void updateTableDocument() {
+        tableDocument.getItems().clear();
+        tableDocument.getItems().addAll(FXCollections.observableList(new DocumentRegistrationController().getFile()));
     }
 
     /**
@@ -1184,6 +1234,7 @@ public class MainActivityController implements Initializable {
                 DOCUMENT.setDisable(true);
                 GROUP.setDisable(true);
                 CHAIRS.setDisable(true);
+                settings.setDisable(true);
                 break;
         }
     }
@@ -1263,6 +1314,7 @@ public class MainActivityController implements Initializable {
             case "SUBJECT":
                 initSubjectPane();
             case "DOCUMENT":
+                initDocumentPane();
                 break;
             case "GROUP":
                 break;

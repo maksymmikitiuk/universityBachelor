@@ -137,4 +137,9 @@ public class DiplomasubjectsEntity {
         result = 31 * result + (plag != null ? plag.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return subject;
+    }
 }
