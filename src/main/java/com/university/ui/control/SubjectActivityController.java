@@ -98,6 +98,7 @@ public class SubjectActivityController implements Initializable {
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
                 createSubject();
+                create.getScene().getWindow().hide();
             }
         });
 
@@ -418,8 +419,6 @@ public class SubjectActivityController implements Initializable {
                     new DBController().update(d);
             }
         }
-
-        create.getScene().getWindow().hide();
     }
 
     private void updateFileTable() {

@@ -359,7 +359,7 @@
                 </AnchorPane>
                 <AnchorPane fx:id="PROFESSOR_P_MAIN" layoutX="10.0" layoutY="60.0" prefHeight="786.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="232.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Button fx:id="PROFESSOR_P_LOAD" mnemonicParsing="false" text="Завантажити з файлу" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                        <Button fx:id="PROFESSOR_P_LOAD" mnemonicParsing="false" text="Завантажити з файлу" visible="false" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                         <Button fx:id="PROFESSOR_P_CREATE" mnemonicParsing="false" style="-fx-background-color: green;" text="Створити" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
                         <TableView fx:id="tableProfessor" layoutX="20.0" layoutY="25.0" prefHeight="200.0" prefWidth="220.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
                             <columnResizePolicy>
@@ -392,6 +392,18 @@
             </TableView>
          </children></AnchorPane>
       <AnchorPane fx:id="GROUP_P" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0" />
-      <AnchorPane fx:id="CHAIRS_P" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0" />
+      <AnchorPane fx:id="CHAIRS_P" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+         <children>
+            <TableView fx:id="tableChairs" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
+              <columns>
+                <TableColumn fx:id="tableChairsAbbreviation" prefWidth="75.0" text="Абревіатура" />
+                <TableColumn fx:id="tableChairsName" prefWidth="75.0" text="Повна назва" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <Button fx:id="createChairs" layoutX="766.0" layoutY="6.0" mnemonicParsing="false" text="Стоврити" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="6.0" />
+         </children></AnchorPane>
     </children>
 </AnchorPane>

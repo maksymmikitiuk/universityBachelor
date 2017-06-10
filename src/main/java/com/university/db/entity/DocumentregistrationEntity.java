@@ -57,7 +57,7 @@ public class DocumentregistrationEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "iddiplomaSubjects")
+    @JoinColumn(name = "iddiplomaSubjects", columnDefinition = "INT(11) default null")
     public DiplomasubjectsEntity getIddiplomaSubjects() {
         return iddiplomaSubjects;
     }

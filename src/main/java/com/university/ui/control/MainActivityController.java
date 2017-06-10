@@ -319,6 +319,8 @@ public class MainActivityController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.setTitle("Налаштування студента");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -338,6 +340,8 @@ public class MainActivityController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.setTitle("Створення студента");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -357,6 +361,7 @@ public class MainActivityController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
+            stage.setTitle("Завантаження студентів");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -520,6 +525,8 @@ public class MainActivityController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.setTitle("Створення викладача");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -569,6 +576,8 @@ public class MainActivityController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.setTitle("Налаштування викладача");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -835,7 +844,11 @@ public class MainActivityController implements Initializable {
 
     private void deleteSubject(DiplomasubjectsEntity subject) {
         if (deleteDialog())
-            new DBController().delete(subject);
+            for (DocumentregistrationEntity doc : new DocumentRegistrationController().getFileByDiploma(subject)) {
+                doc.setIddiplomaSubjects(null);
+                new DBController().update(doc);
+            }
+        new DBController().delete(subject);
 
         if (SUBJECT_P_IS_FILTER)
             updateSubjectTableByParameter();
@@ -878,6 +891,8 @@ public class MainActivityController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.setTitle("Налаштування теми");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -897,6 +912,8 @@ public class MainActivityController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.setTitle("Створення теми");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -1029,6 +1046,7 @@ public class MainActivityController implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
+            stage.setTitle("Налаштування користувача");
             stage.setResizable(false);
             stage.showAndWait();
         } catch (IOException e) {
@@ -1143,6 +1161,113 @@ public class MainActivityController implements Initializable {
 
     /**
      * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     * Панель пользователи                 \\
+     * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     */
+    public Button createChairs;
+    @FXML
+    TableView<ChairsEntity> tableChairs;
+    @FXML
+    TableColumn<ChairsEntity, String> tableChairsAbbreviation;
+    @FXML
+    TableColumn<ChairsEntity, String> tableChairsName;
+
+    private void initChairsPane() {
+        initTableChairs();
+        updateTableChairs();
+
+        tableChairs.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    openChair(tableChairs.getSelectionModel().getSelectedItem());
+                }
+            }
+        });
+        createChairs.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                openChair(new ChairsEntity());
+            }
+        });
+
+        tableChairs.setRowFactory(new Callback<TableView<ChairsEntity>, TableRow<ChairsEntity>>() {
+            @Override
+            public TableRow<ChairsEntity> call(TableView<ChairsEntity> param) {
+                final TableRow<ChairsEntity> row = new TableRow<>();
+                final ContextMenu rowMenu = new ContextMenu();
+                final ContextMenu tableMenu = tableChairs.getContextMenu();
+                if (tableMenu != null) {
+                    rowMenu.getItems().addAll(tableMenu.getItems());
+                    rowMenu.getItems().add(new SeparatorMenuItem());
+                }
+
+                final MenuItem editItem = new MenuItem("Редагувати");
+                editItem.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        openChair(tableChairs.getSelectionModel().getSelectedItem());
+                    }
+                });
+
+                final MenuItem removeItem = new MenuItem("Видалити");
+                removeItem.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        deleteChair(tableChairs.getSelectionModel().getSelectedItem());
+                    }
+                });
+
+                rowMenu.getItems().addAll(editItem, removeItem);
+                row.contextMenuProperty().bind(
+                        Bindings.when(Bindings.isNotNull(row.itemProperty()))
+                                .then(rowMenu)
+                                .otherwise(new ContextMenu()));
+                return row;
+            }
+        });
+    }
+
+    private void deleteChair(ChairsEntity selectedItem) {
+        if (deleteDialog())
+            new DBController().delete(selectedItem);
+
+        updateTableChairs();
+    }
+
+
+    private void openChair(ChairsEntity selectedItem) {
+        Stage stage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/chairsActivity.fxml"));
+            stage.setScene(new Scene((Pane) loader.load()));
+            ChairsController controller = loader.<ChairsController>getController();
+            controller.setChairs(selectedItem);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(SEARCH.getScene().getWindow());
+            stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.setTitle("Налаштування кафедри");
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            updateTableChairs();
+        }
+    }
+
+    private void initTableChairs() {
+        tableChairsAbbreviation.setCellValueFactory(new PropertyValueFactory("abbreviation"));
+        tableChairsName.setCellValueFactory(new PropertyValueFactory("name"));
+    }
+
+    private void updateTableChairs() {
+        tableChairs.getItems().clear();
+        tableChairs.getItems().addAll(FXCollections.observableList(new ChairController().getAllChair()));
+    }
+
+    /**
+     * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      * Основное окно                                                  \\
      * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      */
@@ -1185,6 +1310,7 @@ public class MainActivityController implements Initializable {
 
         prefPane = SUBJECT_P;
         prefMenu = SUBJECT;
+        name_window.setText("Теми");
         SUBJECT_P.setVisible(true);
         prefMenu.getStyleClass().add("hover-menu");
 
@@ -1250,6 +1376,7 @@ public class MainActivityController implements Initializable {
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
             stage.setResizable(false);
+            stage.setTitle("Користувач");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -1319,6 +1446,7 @@ public class MainActivityController implements Initializable {
             case "GROUP":
                 break;
             case "CHAIRS":
+                initChairsPane();
                 break;
         }
     }
@@ -1362,6 +1490,7 @@ public class MainActivityController implements Initializable {
             stage.initOwner(SEARCH.getScene().getWindow());
             stage.centerOnScreen();
             stage.setResizable(false);
+            stage.setTitle("Налаштування");
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
