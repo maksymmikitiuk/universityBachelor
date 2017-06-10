@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="192.0" minWidth="500.0" prefHeight="372.0" prefWidth="505.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.GroupActivityController">
+   <children>
+      <Label layoutX="23.0" layoutY="30.0" text="Абревіатура" textFill="WHITE" AnchorPane.leftAnchor="23.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="85.0" text="Повна назва" textFill="WHITE" AnchorPane.leftAnchor="23.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="abbreviature" layoutX="132.0" layoutY="21.0" prefHeight="40.0" prefWidth="132.0" styleClass="field" />
+      <TextField fx:id="name" layoutX="132.0" layoutY="78.0" prefHeight="40.0" prefWidth="352.0" styleClass="field" />
+      <Button fx:id="cancel" layoutX="36.0" layoutY="239.0" mnemonicParsing="false" styleClass="button_cancel" text="Скасувати" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="33.0" />
+      <Button fx:id="create" layoutX="369.0" layoutY="243.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="103.0" styleClass="button_create" text="Створити" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="33.0" />
+      <Label layoutX="23.0" layoutY="138.0" text="Кафедра" textFill="WHITE" AnchorPane.leftAnchor="23.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="chair" layoutX="119.0" layoutY="136.0" prefWidth="150.0" />
+      <Label layoutX="23.0" layoutY="184.0" text="Рівень кваліфікації" textFill="WHITE" AnchorPane.leftAnchor="23.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="ql" layoutX="182.0" layoutY="182.0" prefWidth="150.0" />
+      <Label layoutX="22.0" layoutY="231.0" text="Форма" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="form" layoutX="96.0" layoutY="229.0" prefWidth="150.0" />
+      <Label layoutX="22.0" layoutY="277.0" text="Тип" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="type" layoutX="73.0" layoutY="275.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

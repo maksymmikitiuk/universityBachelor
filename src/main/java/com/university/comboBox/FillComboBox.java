@@ -63,14 +63,14 @@ public class FillComboBox {
     }
 
     public void fillGroupForm() {
-        comboBox.setItems(FXCollections.observableArrayList(new GroupTypeController().getAllGroupType()));
-        comboBox.setCellFactory(new Callback<ListView<GrouptypeEntity>, ListCell<GrouptypeEntity>>() {
+        comboBox.setItems(FXCollections.observableArrayList(new GroupFormController().getAllGroupForm()));
+        comboBox.setCellFactory(new Callback<ListView<GroupformEntity>, ListCell<GroupformEntity>>() {
 
             @Override
-            public ListCell<GrouptypeEntity> call(ListView<GrouptypeEntity> param) {
-                return new ListCell<GrouptypeEntity>() {
+            public ListCell<GroupformEntity> call(ListView<GroupformEntity> param) {
+                return new ListCell<GroupformEntity>() {
                     @Override
-                    public void updateItem(GrouptypeEntity item, boolean empty) {
+                    public void updateItem(GroupformEntity item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!empty) {
                             setText(item.getName());
@@ -206,6 +206,28 @@ public class FillComboBox {
                             setText(item.getLastName() + " "
                                     + item.getFirstName().charAt(0)
                                     + ". " + item.getMiddleName().charAt(0) + ".");
+                            setGraphic(null);
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+            }
+        });
+    }
+
+    public void fillGroupType() {
+        comboBox.setItems(FXCollections.observableArrayList(new GroupTypeController().getAllGroupType()));
+        comboBox.setCellFactory(new Callback<ListView<GrouptypeEntity>, ListCell<GrouptypeEntity>>() {
+
+            @Override
+            public ListCell<GrouptypeEntity> call(ListView<GrouptypeEntity> param) {
+                return new ListCell<GrouptypeEntity>() {
+                    @Override
+                    public void updateItem(GrouptypeEntity item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty) {
+                            setText(item.getName());
                             setGraphic(null);
                         } else {
                             setText(null);

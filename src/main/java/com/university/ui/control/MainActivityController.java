@@ -1268,6 +1268,153 @@ public class MainActivityController implements Initializable {
 
     /**
      * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     * Панель групы                 \\
+     * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+     */
+    public Button createGroup;
+    @FXML
+    TableView<GroupsEntity> tableGroup;
+    @FXML
+    TableColumn<GroupsEntity, String> tableGroupAbbreviation;
+    @FXML
+    TableColumn<GroupsEntity, String> tableGroupName;
+    @FXML
+    TableColumn<GroupsEntity, String> tableGroupChairs;
+    @FXML
+    TableColumn<GroupsEntity, String> tableGroupQualifacitionLevel;
+    @FXML
+    TableColumn<GroupsEntity, String> tableGroupForm;
+    @FXML
+    TableColumn<GroupsEntity, String> tableGroupType;
+
+    private void initGroupPane() {
+        initTableGroup();
+        updateTableGroup();
+
+        createGroup.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                creatGroup(new GroupsEntity());
+            }
+        });
+
+        tableGroup.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    openGroup(tableGroup.getSelectionModel().getSelectedItem());
+                }
+            }
+        });
+
+        tableGroup.setRowFactory(new Callback<TableView<GroupsEntity>, TableRow<GroupsEntity>>() {
+            @Override
+            public TableRow<GroupsEntity> call(TableView<GroupsEntity> param) {
+                final TableRow<GroupsEntity> row = new TableRow<>();
+                final ContextMenu rowMenu = new ContextMenu();
+                final ContextMenu tableMenu = tableStudents.getContextMenu();
+                if (tableMenu != null) {
+                    rowMenu.getItems().addAll(tableMenu.getItems());
+                    rowMenu.getItems().add(new SeparatorMenuItem());
+                }
+
+                final MenuItem editItem = new MenuItem("Редагувати");
+                editItem.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        openGroup(tableGroup.getSelectionModel().getSelectedItem());
+                    }
+                });
+
+                final MenuItem removeItem = new MenuItem("Видалити");
+                removeItem.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        deleteGroup(tableGroup.getSelectionModel().getSelectedItem());
+                    }
+                });
+
+                final MenuItem createItem = new MenuItem("Створити");
+                createItem.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        creatGroup(new GroupsEntity());
+                    }
+                });
+
+                rowMenu.getItems().addAll(editItem, removeItem);
+                row.contextMenuProperty().bind(
+                        Bindings.when(Bindings.isNotNull(row.itemProperty()))
+                                .then(rowMenu)
+                                .otherwise(new ContextMenu(createItem)));
+                return row;
+            }
+        });
+    }
+
+    private void deleteGroup(GroupsEntity selectedItem) {
+        if (deleteDialog())
+            new DBController().delete(selectedItem);
+
+        updateTableGroup();
+    }
+
+    private void creatGroup(GroupsEntity group) {
+        Stage stage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/groupActivity.fxml"));
+            stage.setScene(new Scene((Pane) loader.load()));
+            GroupActivityController controller = loader.<GroupActivityController>getController();
+            controller.setGroup(group);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(SEARCH.getScene().getWindow());
+            stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.setTitle("Створення групи");
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            updateTableGroup();
+        }
+    }
+
+    private void openGroup(GroupsEntity group) {
+        Stage stage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/groupActivity.fxml"));
+            stage.setScene(new Scene((Pane) loader.load()));
+            GroupActivityController controller = loader.<GroupActivityController>getController();
+            controller.setGroup(group);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(SEARCH.getScene().getWindow());
+            stage.centerOnScreen();
+            stage.setResizable(false);
+            stage.setTitle("Налаштування групи");
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            updateTableGroup();
+        }
+    }
+
+    private void updateTableGroup() {
+        tableGroup.getItems().clear();
+        tableGroup.getItems().addAll(FXCollections.observableList(new GroupController().getAllGroup()));
+    }
+
+    private void initTableGroup() {
+        tableGroupAbbreviation.setCellValueFactory(new PropertyValueFactory("abbreviation"));
+        tableGroupName.setCellValueFactory(new PropertyValueFactory("name"));
+        tableGroupChairs.setCellValueFactory(new PropertyValueFactory("idchairs"));
+        tableGroupForm.setCellValueFactory(new PropertyValueFactory("idgroupForm"));
+        tableGroupQualifacitionLevel.setCellValueFactory(new PropertyValueFactory("idqualificationLevel"));
+        tableGroupType.setCellValueFactory(new PropertyValueFactory("idgroupType"));
+    }
+
+    /**
+     * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      * Основное окно                                                  \\
      * \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      */
@@ -1444,6 +1591,7 @@ public class MainActivityController implements Initializable {
                 initDocumentPane();
                 break;
             case "GROUP":
+                initGroupPane();
                 break;
             case "CHAIRS":
                 initChairsPane();

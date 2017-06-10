@@ -391,7 +391,23 @@
                </columnResizePolicy>
             </TableView>
          </children></AnchorPane>
-      <AnchorPane fx:id="GROUP_P" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0" />
+      <AnchorPane fx:id="GROUP_P" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+         <children>
+            <TableView fx:id="tableGroup" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
+               <columns>
+                  <TableColumn fx:id="tableGroupAbbreviation" prefWidth="75.0" text="Абревіатура" />
+                  <TableColumn fx:id="tableGroupName" prefWidth="75.0" text="Повна назва" />
+                  <TableColumn fx:id="tableGroupChairs" prefWidth="75.0" text="Кафедра" />
+                  <TableColumn fx:id="tableGroupQualifacitionLevel" prefWidth="75.0" text="Рівень кваліфікації" />
+                  <TableColumn fx:id="tableGroupForm" prefWidth="75.0" text="Форма" visible="false" />
+                  <TableColumn fx:id="tableGroupType" prefWidth="75.0" text="Тип" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <Button fx:id="createGroup" mnemonicParsing="false" text="Створити" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="6.0" />
+         </children></AnchorPane>
       <AnchorPane fx:id="CHAIRS_P" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
          <children>
             <TableView fx:id="tableChairs" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">

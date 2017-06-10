@@ -102,6 +102,13 @@ public class SubjectActivityController implements Initializable {
             }
         });
 
+        cancel.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, new EventHandler<javafx.scene.input.MouseEvent>() {
+            @Override
+            public void handle(javafx.scene.input.MouseEvent event) {
+                cancel.getScene().getWindow().hide();
+            }
+        });
+
         selectCurator.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
