@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="441.0" minWidth="486.0" prefHeight="482.0" prefWidth="588.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.SettingsController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="441.0" minWidth="486.0" prefHeight="482.0" prefWidth="588.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.SettingsActivityController">
     <children>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
@@ -98,7 +98,7 @@
                      </children></AnchorPane>
                </content>
                 </Tab>
-                <Tab text="Файли">
+                <Tab text="Склад ВКР">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -220,6 +220,27 @@
                      </children>
                   </AnchorPane>
                </content></Tab>
+            <Tab text="Файли">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="18.0" layoutY="29.0" text="Шлях зберігання файлів" textFill="#e8e8e8">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="path" layoutX="220.0" layoutY="18.0" prefHeight="40.0" prefWidth="359.0" styleClass="field" />
+                        <Button fx:id="saveFile" layoutX="480.0" layoutY="406.0" mnemonicParsing="false" text="Зберегти" />
+                        <Label layoutX="18.0" layoutY="80.0" text="Відсоток плагіату" textFill="#e8e8e8">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="plagiat" layoutX="175.0" layoutY="72.0" prefHeight="40.0" prefWidth="111.0" styleClass="field" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
             </tabs>
         </TabPane>
     </children>

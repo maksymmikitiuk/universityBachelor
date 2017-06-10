@@ -1,5 +1,6 @@
 package com.university.Antiplagiarism;
 
+import com.university.db.control.SettingsController;
 import com.university.db.control.SubjectController;
 import com.university.db.entity.DiplomasubjectsEntity;
 
@@ -11,7 +12,6 @@ import java.util.List;
  * Created by maksymmikitiuk on 5/1/17.
  */
 public class CheckAntiplagiarism {
-    private static final int PERCENT = 60;
     private List<String> newSubject = new ArrayList<>();
 
     public CheckAntiplagiarism(String subject) {
@@ -36,6 +36,6 @@ public class CheckAntiplagiarism {
             if (newSubject.contains(t))
                 cnt++;
 
-        return (cnt * 100 / ((newSubject.size() == 0) ? 1 : newSubject.size()) > PERCENT) ? true : false;
+        return (cnt * 100 / ((newSubject.size() == 0) ? 1 : newSubject.size()) > new SettingsController().getSettings().getPlagiat()) ? true : false;
     }
 }

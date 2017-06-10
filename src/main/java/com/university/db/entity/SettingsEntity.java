@@ -9,6 +9,17 @@ import javax.persistence.*;
 @Table(name = "settings", schema = "university")
 public class SettingsEntity {
     private String path;
+    private int plagiat;
+
+    @Basic
+    @Column(name = "plagiat")
+    public int getPlagiat() {
+        return plagiat;
+    }
+
+    public void setPlagiat(int plagiat) {
+        this.plagiat = plagiat;
+    }
 
     @Basic
     @Column(name = "PATH")

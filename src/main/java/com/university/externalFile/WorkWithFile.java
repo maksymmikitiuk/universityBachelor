@@ -23,7 +23,7 @@ public class WorkWithFile {
     }
 
     public String copyFile(File from, StudentsEntity student) {
-        String path = new SettingsController().getSettings().get(0).getPath()
+        String path = new SettingsController().getSettings().getPath()
                 + "/" + student.getIdstudents() + "/" + getDate();
         File to = new File(path);
 

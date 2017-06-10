@@ -26,9 +26,8 @@ public class PDF {
         PdfWriter docWriter = null;
 
         try {
-
             //special font sizes
-            BaseFont bf = BaseFont.createFont("/mnt/sdb5/f.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            BaseFont bf = BaseFont.createFont("/ui/config/f.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             Font font = new Font(bf, 12);
             Font fontB = new Font(bf, 12, Font.BOLD);
 

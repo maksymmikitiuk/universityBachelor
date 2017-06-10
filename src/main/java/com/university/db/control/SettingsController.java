@@ -17,7 +17,7 @@ public class SettingsController {
     public SettingsController() {
     }
 
-    public List<SettingsEntity> getSettings() {
+    public SettingsEntity getSettings() {
         Session session = getFactory().openSession();
         Transaction tx = null;
         List<SettingsEntity> list = null;
@@ -25,13 +25,12 @@ public class SettingsController {
             tx = session.beginTransaction();
             Criteria criteria = session.createCriteria(SettingsEntity.class);
             list = criteria.list();
-            return list;
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
         } finally {
             session.close();
         }
-        return list;
+        return list.get(0);
     }
 }

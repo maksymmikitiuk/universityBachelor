@@ -194,8 +194,25 @@ public class SubjectActivityController implements Initializable {
 
                     CheckAntiplagiarism checkAntiplagiarism = new CheckAntiplagiarism(tagSubject);
 
-                    if (!checkAntiplagiarism.getSubjects().isEmpty()) {
-                        System.out.println("Plagiat epta!");
+                    List<DiplomasubjectsEntity> l = checkAntiplagiarism.getSubjects();
+
+                    if (!l.isEmpty()) {
+                        Stage stage = new Stage();
+                        try {
+                            stage.setUserData(l);
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/plagiatList.fxml"));
+                            stage.setScene(new Scene((Pane) loader.load()));
+                            PlagiatActivityController controller = loader.<PlagiatActivityController>getController();
+                            controller.setStage(stage);
+                            stage.initModality(Modality.WINDOW_MODAL);
+                            stage.initOwner(selectCurator.getScene().getWindow());
+                            stage.centerOnScreen();
+                            stage.setTitle("Схожі теми");
+                            stage.setResizable(false);
+                            stage.showAndWait();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         create.setDisable(true);
                     } else {
                         create.setDisable(false);
