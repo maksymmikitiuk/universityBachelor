@@ -151,10 +151,10 @@ public class StudentActivityController implements Initializable {
             fName.getStyleClass().add("false_field");
             check = false;
         }
-//        if (mName.getText().isEmpty()) {
-//            mName.getStyleClass().add("false_field");
-//            check = false;
-//        }
+        if (mName.getText().isEmpty()) {
+            mName.getStyleClass().add("false_field");
+            check = false;
+        }
         if (lName.getText().isEmpty()) {
             lName.getStyleClass().add("false_field");
             check = false;
@@ -163,14 +163,14 @@ public class StudentActivityController implements Initializable {
             studentId.getStyleClass().add("false_field");
             check = false;
         }
-        if (phone.getText().isEmpty()) {
-            phone.getStyleClass().add("false_field");
-            check = false;
-        }
-        if (email.getText().isEmpty()) {
-            email.getStyleClass().add("false_field");
-            check = false;
-        }
+//        if (phone.getText().isEmpty()) {
+//            phone.getStyleClass().add("false_field");
+//            check = false;
+//        }
+//        if (email.getText().isEmpty()) {
+//            email.getStyleClass().add("false_field");
+//            check = false;
+//        }
         if (groupList.valueProperty().isNull().getValue()) {
             groupList.getStyleClass().add("false_field");
             check = false;
