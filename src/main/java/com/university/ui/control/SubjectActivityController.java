@@ -98,7 +98,6 @@ public class SubjectActivityController implements Initializable {
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
                 createSubject();
-                create.getScene().getWindow().hide();
             }
         });
 
@@ -126,10 +125,13 @@ public class SubjectActivityController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                    if (stage.getUserData() != null) {
-                        diplomasubjects.setCurator((TeachersEntity) stage.getUserData());
+                if (stage.getUserData() != null) {
+                    TeachersEntity t = (TeachersEntity) stage.getUserData();
+                    if (t.getIdteachers() != 0) {
+                        diplomasubjects.setCurator(t);
                         curator.setText(diplomasubjects.getCurator().getLfmName());
                     }
+                }
 
             }
         });
@@ -151,10 +153,13 @@ public class SubjectActivityController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                    if (stage.getUserData() != null) {
-                        diplomasubjects.setReviewer((TeachersEntity) stage.getUserData());
+                if (stage.getUserData() != null) {
+                    TeachersEntity t = (TeachersEntity) stage.getUserData();
+                    if (t.getIdteachers() != 0) {
+                        diplomasubjects.setReviewer(t);
                         reviewer.setText(diplomasubjects.getReviewer().getLfmName());
                     }
+                }
             }
         });
 
@@ -175,12 +180,15 @@ public class SubjectActivityController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                    if (stage.getUserData() != null) {
-                        diplomasubjects.setStudent((StudentsEntity) stage.getUserData());
+                if (stage.getUserData() != null) {
+                    StudentsEntity s = (StudentsEntity) stage.getUserData();
+                    if (s.getIdstudents() != 0) {
+                        diplomasubjects.setStudent(s);
                         student.setText(diplomasubjects.getStudent().getLfmiddleName());
                         diplomaForm.setDisable(false);
                         new FillComboBox(diplomaForm).fillDiplomaForm(diplomasubjects.getStudent().getIdgroups().getIdqualificationLevel());
                     }
+                }
 
             }
         });
@@ -188,38 +196,7 @@ public class SubjectActivityController implements Initializable {
         subject.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (!diplomasubjects.getSubject().equals(subject.getText().trim())) {
-                    String tagSubject = new Antiplagiarism().getTagSubject(subject.getText().trim());
 
-                    CheckAntiplagiarism checkAntiplagiarism = new CheckAntiplagiarism(tagSubject);
-
-                    List<DiplomasubjectsEntity> l = checkAntiplagiarism.getSubjects();
-
-                    if (!l.isEmpty()) {
-                        Stage stage = new Stage();
-                        try {
-                            stage.setUserData(l);
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/plagiatList.fxml"));
-                            stage.setScene(new Scene((Pane) loader.load()));
-                            PlagiatActivityController controller = loader.<PlagiatActivityController>getController();
-                            controller.setStage(stage);
-                            stage.initModality(Modality.WINDOW_MODAL);
-                            stage.initOwner(selectCurator.getScene().getWindow());
-                            stage.centerOnScreen();
-                            stage.setTitle("Схожі теми");
-                            stage.setResizable(false);
-                            stage.showAndWait();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        create.setDisable(true);
-                    } else {
-                        create.setDisable(false);
-                    }
-
-                    diplomasubjects.setTag(tagSubject);
-                    diplomasubjects.setSubject(subject.getText());
-                }
             }
         });
 
@@ -266,13 +243,49 @@ public class SubjectActivityController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                    if (stage.getUserData() != null) {
-                        marksTable.getItems().add((DiplomamarksEntity) stage.getUserData());
-                        marksTable.refresh();
-                    }
+                if (stage.getUserData() != null) {
+                    marksTable.getItems().add((DiplomamarksEntity) stage.getUserData());
+                    marksTable.refresh();
+                }
 
             }
         });
+    }
+
+
+    private boolean checkSubject() {
+
+        String tagSubject = new Antiplagiarism().getTagSubject(subject.getText().trim());
+
+        CheckAntiplagiarism checkAntiplagiarism = new CheckAntiplagiarism(tagSubject);
+
+        List<DiplomasubjectsEntity> l = checkAntiplagiarism.getSubjects();
+        if (l.contains(diplomasubjects))
+            l.remove(diplomasubjects);
+
+        if (!l.isEmpty()) {
+            Stage stage = new Stage();
+            try {
+                stage.setUserData(l);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/view/plagiatList.fxml"));
+                stage.setScene(new Scene((Pane) loader.load()));
+                PlagiatActivityController controller = loader.<PlagiatActivityController>getController();
+                controller.setStage(stage);
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.initOwner(selectCurator.getScene().getWindow());
+                stage.centerOnScreen();
+                stage.setTitle("Схожі теми");
+                stage.setResizable(false);
+                stage.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        } else {
+            diplomasubjects.setTag(tagSubject);
+            diplomasubjects.setSubject(subject.getText());
+            return true;
+        }
     }
 
     private void updateMarksTable() {
@@ -404,43 +417,47 @@ public class SubjectActivityController implements Initializable {
     }
 
     private void createSubject() {
-        //add subject
-        diplomasubjects.setPlag((diplomasubjects.getPlag() == null) ? BigDecimal.valueOf(0.00) : diplomasubjects.getPlag());
+        if (checkSubject()) {
+            //add subject
+            diplomasubjects.setPlag((diplomasubjects.getPlag() == null) ? BigDecimal.valueOf(0.00) : diplomasubjects.getPlag());
 
-        diplomasubjects.setType((DiplomatypeEntity) diplomaType.getSelectionModel().getSelectedItem());
-        if (create.getText().equals("Зберегти"))
-            new DBController().update(diplomasubjects);
-        else
-            new DBController().create(diplomasubjects);
-
-        //add mark
-        for (DiplomamarksEntity mark : marksTable.getItems()) {
-            mark.setId_diploma(diplomasubjects);
-            if (new DiplomaMarksController().isFind(mark.getIddiplomaMarks()))
-                new DBController().update(mark);
+            diplomasubjects.setType((DiplomatypeEntity) diplomaType.getSelectionModel().getSelectedItem());
+            if (create.getText().equals("Зберегти"))
+                new DBController().update(diplomasubjects);
             else
-                new DBController().create(mark);
-        }
+                new DBController().create(diplomasubjects);
 
-        //add total mark
-        if (totalMarks.getPoint() != null) {
-            totalMarks.setId_diploma(diplomasubjects);
-            if (new DiplomaMarksController().isFind(totalMarks.getIddiplomaMarks()))
-                new DBController().update(totalMarks);
-            else
-                new DBController().create(totalMarks);
-        }
-
-        //add file
-        List<DocumentregistrationEntity> list = fileTable.getItems();
-        for (DocumentregistrationEntity d : list) {
-            if (d.getPath() != null) {
-                d.setIddiplomaSubjects(diplomasubjects);
-                if (d.getIddocumentRegistration() == 0)
-                    new DBController().create(d);
+            //add mark
+            for (DiplomamarksEntity mark : marksTable.getItems()) {
+                mark.setId_diploma(diplomasubjects);
+                if (new DiplomaMarksController().isFind(mark.getIddiplomaMarks()))
+                    new DBController().update(mark);
                 else
-                    new DBController().update(d);
+                    new DBController().create(mark);
             }
+
+            //add total mark
+            if (totalMarks.getPoint() != null) {
+                totalMarks.setId_diploma(diplomasubjects);
+                if (new DiplomaMarksController().isFind(totalMarks.getIddiplomaMarks()))
+                    new DBController().update(totalMarks);
+                else
+                    new DBController().create(totalMarks);
+            }
+
+            //add file
+            List<DocumentregistrationEntity> list = fileTable.getItems();
+            for (DocumentregistrationEntity d : list) {
+                if (d.getPath() != null) {
+                    d.setIddiplomaSubjects(diplomasubjects);
+                    if (d.getIddocumentRegistration() == 0)
+                        new DBController().create(d);
+                    else
+                        new DBController().update(d);
+                }
+            }
+
+            create.getScene().getWindow().hide();
         }
     }
 
