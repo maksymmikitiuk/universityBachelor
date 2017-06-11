@@ -54,13 +54,12 @@ public class AddMarkController implements Initializable {
                     stage.showAndWait();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
-                    if (stage.getUserData() != null) {
-                        diplomamarks.setOwner((TeachersEntity) stage.getUserData());
-                        teacher.setText(diplomamarks.getOwner().getLastName() + " "
-                                + diplomamarks.getOwner().getFirstName().charAt(0) + ". "
-                                + diplomamarks.getOwner().getMiddleName().charAt(0) + ".");
-                    }
+                }
+                if (stage.getUserData() != null) {
+                    diplomamarks.setOwner((TeachersEntity) stage.getUserData());
+                    teacher.setText(diplomamarks.getOwner().getLastName() + " "
+                            + diplomamarks.getOwner().getFirstName().charAt(0) + ". "
+                            + diplomamarks.getOwner().getMiddleName().charAt(0) + ".");
                 }
             }
         });

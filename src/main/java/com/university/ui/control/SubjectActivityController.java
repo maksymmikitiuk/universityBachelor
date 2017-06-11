@@ -125,12 +125,12 @@ public class SubjectActivityController implements Initializable {
                     stage.showAndWait();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
+                }
                     if (stage.getUserData() != null) {
                         diplomasubjects.setCurator((TeachersEntity) stage.getUserData());
                         curator.setText(diplomasubjects.getCurator().getLfmName());
                     }
-                }
+
             }
         });
 
@@ -150,12 +150,11 @@ public class SubjectActivityController implements Initializable {
                     stage.showAndWait();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
+                }
                     if (stage.getUserData() != null) {
                         diplomasubjects.setReviewer((TeachersEntity) stage.getUserData());
                         reviewer.setText(diplomasubjects.getReviewer().getLfmName());
                     }
-                }
             }
         });
 
@@ -175,14 +174,14 @@ public class SubjectActivityController implements Initializable {
                     stage.showAndWait();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
+                }
                     if (stage.getUserData() != null) {
                         diplomasubjects.setStudent((StudentsEntity) stage.getUserData());
                         student.setText(diplomasubjects.getStudent().getLfmiddleName());
                         diplomaForm.setDisable(false);
                         new FillComboBox(diplomaForm).fillDiplomaForm(diplomasubjects.getStudent().getIdgroups().getIdqualificationLevel());
                     }
-                }
+
             }
         });
 
@@ -266,12 +265,12 @@ public class SubjectActivityController implements Initializable {
                     stage.showAndWait();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
+                }
                     if (stage.getUserData() != null) {
                         marksTable.getItems().add((DiplomamarksEntity) stage.getUserData());
                         marksTable.refresh();
                     }
-                }
+
             }
         });
     }

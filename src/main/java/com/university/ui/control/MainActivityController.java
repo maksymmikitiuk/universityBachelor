@@ -188,16 +188,16 @@ public class MainActivityController implements Initializable {
             }
         });
 
-        STUDENT_P_CREATE.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        STUDENT_P_CREATE.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(MouseEvent event) {
+            public void handle(ActionEvent event) {
                 createStudent();
             }
         });
 
-        STUDENT_P_LOAD.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        STUDENT_P_LOAD.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(MouseEvent event) {
+            public void handle(ActionEvent event) {
                 loadStudent();
             }
         });
@@ -324,12 +324,11 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
             if (STUDENT_P_IS_FILTER)
                 updateStudentTableByParameter();
             else
                 updateStudentTable();
-        }
     }
 
     private void createStudent() {
@@ -345,12 +344,12 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (STUDENT_P_IS_FILTER)
-                updateStudentTableByParameter();
-            else
-                updateStudentTable();
         }
+
+        if (STUDENT_P_IS_FILTER)
+            updateStudentTableByParameter();
+        else
+            updateStudentTable();
     }
 
     private void loadStudent() {
@@ -365,12 +364,11 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
             if (STUDENT_P_IS_FILTER)
                 updateStudentTableByParameter();
             else
                 updateStudentTable();
-        }
     }
 
     /**
@@ -488,9 +486,9 @@ public class MainActivityController implements Initializable {
             }
         });
 
-        PROFESSOR_P_CREATE.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        PROFESSOR_P_CREATE.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(MouseEvent event) {
+            public void handle(ActionEvent event) {
                 createProfessor();
             }
         });
@@ -530,12 +528,11 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
             if (PROFESSOR_P_IS_FILTER)
                 updateProfessorTableByParameter();
             else
                 updateProfessorTable();
-        }
     }
 
     private void deleteProfessor(TeachersEntity teacher) {
@@ -581,12 +578,12 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
             if (PROFESSOR_P_IS_FILTER)
                 updateProfessorTableByParameter();
             else
                 updateProfessorTable();
-        }
+
     }
 
     private void updateProfessorTable() {
@@ -809,9 +806,9 @@ public class MainActivityController implements Initializable {
             }
         });
 
-        SUBJECT_P_CREATE.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        SUBJECT_P_CREATE.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(MouseEvent event) {
+            public void handle(ActionEvent event) {
                 createSubject();
             }
         });
@@ -896,12 +893,12 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
             if (STUDENT_P_IS_FILTER)
                 updateSubjectTableByParameter();
             else
                 updateSubjectTable();
-        }
+
     }
 
     private void createSubject() {
@@ -917,12 +914,11 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
             if (STUDENT_P_IS_FILTER)
                 updateSubjectTableByParameter();
             else
                 updateSubjectTable();
-        }
     }
 
     private void updateSubjectTableByParameter() {
@@ -1051,12 +1047,12 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
             if (USER_P_IS_FILTER)
                 updateUserTableByParameter();
             else
                 updateUserTable();
-        }
+
     }
 
     private void deleteUser(UsersEntity selectedItem) {
@@ -1251,9 +1247,9 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            updateTableChairs();
         }
+            updateTableChairs();
+
     }
 
     private void initTableChairs() {
@@ -1374,9 +1370,8 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            updateTableGroup();
         }
+            updateTableGroup();
     }
 
     private void openGroup(GroupsEntity group) {
@@ -1394,9 +1389,8 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            updateTableGroup();
         }
+            updateTableGroup();
     }
 
     private void updateTableGroup() {
@@ -1489,9 +1483,8 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            return EXIT;
         }
+            return EXIT;
     }
 
     private void currentRole() {
@@ -1527,10 +1520,9 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
+        }
             new UserController().updateCurrentUser();
             currentUser_username.setText(DBController.currentUser.toString());
-        }
     }
 
     private void initMenu() {
@@ -1613,9 +1605,8 @@ public class MainActivityController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            return DELETE;
         }
+            return DELETE;
     }
 
     private void initCurrentUser() {

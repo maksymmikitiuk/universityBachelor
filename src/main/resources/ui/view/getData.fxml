@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="500.0" prefHeight="773.0" prefWidth="864.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.GetDataController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="500.0" prefHeight="773.0" prefWidth="864.0" styleClass="background_color" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.university.ui.control.GetDataController">
     <children>
         <AnchorPane prefHeight="60.0" prefWidth="691.0" styleClass="shadow" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -108,7 +108,7 @@
                         <Label fx:id="STUDENT_P_FILTER_CHAIRS_CLEAR" layoutX="167.0" layoutY="58.0" prefHeight="30.0" prefWidth="12.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="64.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="5.0" layoutY="282.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane">
+                  <AnchorPane layoutX="5.0" layoutY="282.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane" visible="false">
                      <children>
                         <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Т" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
                            <font>
@@ -119,9 +119,9 @@
                         <Label fx:id="STUDENT_P_FILTER_GROUPTYPE_CLEAR" layoutX="188.0" layoutY="58.0" prefHeight="30.0" prefWidth="12.0" styleClass="clear-one-filter" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="179.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="64.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="6.0" layoutY="397.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane">
+                  <AnchorPane layoutX="6.0" layoutY="284.0" prefHeight="124.0" prefWidth="221.0" styleClass="filter-pane">
                      <children>
-                        <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="К" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
+                        <Label layoutX="13.0" layoutY="21.0" prefHeight="20.0" prefWidth="200.0" styleClass="white-text" text="Рівень кваліфікації" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="21.0">
                            <font>
                               <Font size="16.0" />
                            </font>

@@ -341,12 +341,11 @@ public class GetDataController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (STUDENT_P_IS_FILTER)
-                updateStudentTableByParameter();
-            else
-                updateStudentTable();
         }
+        if (STUDENT_P_IS_FILTER)
+            updateStudentTableByParameter();
+        else
+            updateStudentTable();
     }
 
     private void createStudent() {
@@ -360,12 +359,11 @@ public class GetDataController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (STUDENT_P_IS_FILTER)
-                updateStudentTableByParameter();
-            else
-                updateStudentTable();
         }
+        if (STUDENT_P_IS_FILTER)
+            updateStudentTableByParameter();
+        else
+            updateStudentTable();
     }
 
     private void loadStudent() {
@@ -379,12 +377,11 @@ public class GetDataController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (STUDENT_P_IS_FILTER)
-                updateStudentTableByParameter();
-            else
-                updateStudentTable();
         }
+        if (STUDENT_P_IS_FILTER)
+            updateStudentTableByParameter();
+        else
+            updateStudentTable();
     }
 
     private void professor() {
@@ -498,12 +495,12 @@ public class GetDataController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (PROFESSOR_P_IS_FILTER)
-                updateProfessorTableByParameter();
-            else
-                updateProfessorTable();
         }
+        if (PROFESSOR_P_IS_FILTER)
+            updateProfessorTableByParameter();
+        else
+            updateProfessorTable();
+
     }
 
     private void updateProfessorTableByParameter() {
@@ -537,12 +534,12 @@ public class GetDataController implements Initializable {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (PROFESSOR_P_IS_FILTER)
-                updateProfessorTableByParameter();
-            else
-                updateProfessorTable();
         }
+        if (PROFESSOR_P_IS_FILTER)
+            updateProfessorTableByParameter();
+        else
+            updateProfessorTable();
+
     }
 
     private void updateProfessorTable() {
