@@ -15,7 +15,7 @@
          <children>
             <AnchorPane fx:id="PROFESSOR_P_MAIN" prefHeight="786.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="232.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="PROFESSOR_P_LOAD" mnemonicParsing="false" text="Завантажити з файлу" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                  <Button fx:id="PROFESSOR_P_LOAD" mnemonicParsing="false" text="Завантажити з файлу" visible="false" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                   <Button fx:id="PROFESSOR_P_CREATE" mnemonicParsing="false" style="-fx-background-color: green;" text="Створити" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
                   <TableView fx:id="tableProfessor" layoutX="20.0" layoutY="25.0" prefHeight="200.0" prefWidth="220.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0">
                      <columnResizePolicy>

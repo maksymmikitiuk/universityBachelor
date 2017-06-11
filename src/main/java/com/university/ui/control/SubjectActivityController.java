@@ -79,8 +79,23 @@ public class SubjectActivityController implements Initializable {
         return diplomasubjects;
     }
 
+    private void userRole() {
+        if (DBController.currentUser.getIdUserrole().getRole().equals("curator")) {
+            create.setDisable(true);
+            selectStudent.setDisable(true);
+            selectCurator.setDisable(true);
+            selectReviewer.setDisable(true);
+            addMarks.setDisable(true);
+            subject.setEditable(false);
+            points.setEditable(false);
+            marksTable.setEditable(false);
+            fileTable.setEditable(false);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        userRole();
         initMarksTable();
         initFileTable();
         updateFileTable();
@@ -295,7 +310,7 @@ public class SubjectActivityController implements Initializable {
     }
 
     private void initMarksTable() {
-        marksTable.setEditable(true);
+        marksTable.setEditable((DBController.currentUser.getIdUserrole().getRole().equals("curator"))?false:true);
 
         marksTableOwner.setCellValueFactory(new PropertyValueFactory("owner"));
         ObservableList<TeachersEntity> teachersList = FXCollections.observableList(new TeacherController().getAllTeacher());
@@ -640,6 +655,9 @@ class ButtonCell extends TableCell<DocumentregistrationEntity, Boolean> {
                     cellButton.setText("Додати");
                 else
                     cellButton.setText("Видалити");
+
+            if (DBController.currentUser.getIdUserrole().getRole().equals("curator"))
+                cellButton.setDisable(true);
 
             setGraphic(cellButton);
         }

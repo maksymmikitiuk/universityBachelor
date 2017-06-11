@@ -325,10 +325,10 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            if (STUDENT_P_IS_FILTER)
-                updateStudentTableByParameter();
-            else
-                updateStudentTable();
+        if (STUDENT_P_IS_FILTER)
+            updateStudentTableByParameter();
+        else
+            updateStudentTable();
     }
 
     private void createStudent() {
@@ -365,10 +365,10 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            if (STUDENT_P_IS_FILTER)
-                updateStudentTableByParameter();
-            else
-                updateStudentTable();
+        if (STUDENT_P_IS_FILTER)
+            updateStudentTableByParameter();
+        else
+            updateStudentTable();
     }
 
     /**
@@ -529,10 +529,10 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            if (PROFESSOR_P_IS_FILTER)
-                updateProfessorTableByParameter();
-            else
-                updateProfessorTable();
+        if (PROFESSOR_P_IS_FILTER)
+            updateProfessorTableByParameter();
+        else
+            updateProfessorTable();
     }
 
     private void deleteProfessor(TeachersEntity teacher) {
@@ -579,10 +579,10 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            if (PROFESSOR_P_IS_FILTER)
-                updateProfessorTableByParameter();
-            else
-                updateProfessorTable();
+        if (PROFESSOR_P_IS_FILTER)
+            updateProfessorTableByParameter();
+        else
+            updateProfessorTable();
 
     }
 
@@ -771,37 +771,38 @@ public class MainActivityController implements Initializable {
                     rowMenu.getItems().addAll(tableMenu.getItems());
                     rowMenu.getItems().add(new SeparatorMenuItem());
                 }
+                if (!DBController.currentUser.getIdUserrole().getRole().equals("curator")) {
+                    final MenuItem editItem = new MenuItem("Редагувати");
+                    editItem.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            openSubject(tableSubject.getSelectionModel().getSelectedItem());
+                        }
+                    });
 
-                final MenuItem editItem = new MenuItem("Редагувати");
-                editItem.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        openSubject(tableSubject.getSelectionModel().getSelectedItem());
-                    }
-                });
-
-                final MenuItem removeItem = new MenuItem("Видалити");
-                removeItem.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        deleteSubject(tableSubject.getSelectionModel().getSelectedItem());
-                    }
-                });
+                    final MenuItem removeItem = new MenuItem("Видалити");
+                    removeItem.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            deleteSubject(tableSubject.getSelectionModel().getSelectedItem());
+                        }
+                    });
 
 
-                final MenuItem createItem = new MenuItem("Створити");
-                createItem.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        createSubject();
-                    }
-                });
+                    final MenuItem createItem = new MenuItem("Створити");
+                    createItem.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            createSubject();
+                        }
+                    });
 
-                rowMenu.getItems().addAll(editItem, removeItem);
-                row.contextMenuProperty().bind(
-                        Bindings.when(Bindings.isNotNull(row.itemProperty()))
-                                .then(rowMenu)
-                                .otherwise(new ContextMenu(createItem)));
+                    rowMenu.getItems().addAll(editItem, removeItem);
+                    row.contextMenuProperty().bind(
+                            Bindings.when(Bindings.isNotNull(row.itemProperty()))
+                                    .then(rowMenu)
+                                    .otherwise(new ContextMenu(createItem)));
+                }
                 return row;
             }
         });
@@ -844,8 +845,8 @@ public class MainActivityController implements Initializable {
             for (DocumentregistrationEntity doc : new DocumentRegistrationController().getFileByDiploma(subject)) {
                 doc.setIddiplomaSubjects(null);
                 new DBController().update(doc);
+                new DBController().delete(subject);
             }
-        new DBController().delete(subject);
 
         if (SUBJECT_P_IS_FILTER)
             updateSubjectTableByParameter();
@@ -894,10 +895,10 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            if (STUDENT_P_IS_FILTER)
-                updateSubjectTableByParameter();
-            else
-                updateSubjectTable();
+        if (STUDENT_P_IS_FILTER)
+            updateSubjectTableByParameter();
+        else
+            updateSubjectTable();
 
     }
 
@@ -915,10 +916,10 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            if (STUDENT_P_IS_FILTER)
-                updateSubjectTableByParameter();
-            else
-                updateSubjectTable();
+        if (STUDENT_P_IS_FILTER)
+            updateSubjectTableByParameter();
+        else
+            updateSubjectTable();
     }
 
     private void updateSubjectTableByParameter() {
@@ -1048,10 +1049,10 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            if (USER_P_IS_FILTER)
-                updateUserTableByParameter();
-            else
-                updateUserTable();
+        if (USER_P_IS_FILTER)
+            updateUserTableByParameter();
+        else
+            updateUserTable();
 
     }
 
@@ -1248,7 +1249,7 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            updateTableChairs();
+        updateTableChairs();
 
     }
 
@@ -1371,7 +1372,7 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            updateTableGroup();
+        updateTableGroup();
     }
 
     private void openGroup(GroupsEntity group) {
@@ -1390,7 +1391,7 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            updateTableGroup();
+        updateTableGroup();
     }
 
     private void updateTableGroup() {
@@ -1484,7 +1485,7 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            return EXIT;
+        return EXIT;
     }
 
     private void currentRole() {
@@ -1501,6 +1502,8 @@ public class MainActivityController implements Initializable {
                 GROUP.setDisable(true);
                 CHAIRS.setDisable(true);
                 settings.setDisable(true);
+                PROFESSOR.setDisable(true);
+                SUBJECT_P_CREATE.setDisable(true);
                 break;
         }
     }
@@ -1521,8 +1524,8 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            new UserController().updateCurrentUser();
-            currentUser_username.setText(DBController.currentUser.toString());
+        new UserController().updateCurrentUser();
+        currentUser_username.setText(DBController.currentUser.toString());
     }
 
     private void initMenu() {
@@ -1606,7 +1609,7 @@ public class MainActivityController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            return DELETE;
+        return DELETE;
     }
 
     private void initCurrentUser() {

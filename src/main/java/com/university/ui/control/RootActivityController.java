@@ -308,6 +308,8 @@ public class RootActivityController implements Initializable {
                 DBController.mainStage.setScene(scene);
                 DBController.mainStage.centerOnScreen();
                 DBController.mainStage.setResizable(true);
+                DBController.mainStage.setMinHeight(700);
+                DBController.mainStage.setMinWidth(1000);
                 DBController.mainStage.setTitle(DBController.currentUser.toString());
                 DBController.mainStage.show();
             } else {
